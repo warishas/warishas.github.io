@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <link rel="icon" href="images/w.jpg">
+  <link rel="icon" href="w.jpg">
   <title>Warisha | Sleepless in Seattle</title>
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="main.css">
@@ -165,7 +165,7 @@
 
   <div class="update">
     <br><br><p style="text-align:center;"><br><br><br>
-      <img src="images/w.jpg" alt="logo" align="center">
+      <img src="w.jpg" alt="logo" align="center">
       <br><br><strong>~</strong> Coded in HTML, CSS, and JavaScript <strong>~</strong>
       <br>Version 4.1 - Updated April 2020
     </p>

@@ -654,49 +654,49 @@ body {
 @media (-webkit-min-device-pixel-ratio: 2), (-moz-min-device-pixel-ratio: 2) {
 
   .projects .project .project-featured-image.abroaden {
-    background-image: url("images/abroaden/shop.jpg");
+    background-image: url("shop.jpg");
   }
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (-moz-min-device-pixel-ratio: 2) {
 
   .projects .project .project-featured-image.pocket {
-    background-image: url("images/poc.jpg");
+    background-image: url("poc.jpg");
   }
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (-moz-min-device-pixel-ratio: 2) {
 
   .projects .project .project-featured-image.pockettour {
-    background-image: url("images/pocket/pocket.jpg");
+    background-image: url("pocket.jpg");
   }
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (-moz-min-device-pixel-ratio: 2) {
 
   .projects .project .project-featured-image.hue {
-    background-image: url("images/hue.jpg");
+    background-image: url("hue.jpg");
   }
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (-moz-min-device-pixel-ratio: 2) {
 
   .projects .project .project-featured-image.ht {
-    background-image: url("images/ht.jpg");
+    background-image: url("ht.jpg");
   }
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (-moz-min-device-pixel-ratio: 2) {
 
   .projects .project .project-featured-image.sofy {
-    background-image: url("images/sofy.jpg");
+    background-image: url("sofy.jpg");
   }
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (-moz-min-device-pixel-ratio: 2) {
 
   .projects .project .project-featured-image.att {
-    background-image: url("images/att.jpg");
+    background-image: url("att.jpg");
   }
 }
 
@@ -821,13 +821,13 @@ body {
 }
 @media (-webkit-min-device-pixel-ratio: 2), (-moz-min-device-pixel-ratio: 2) {
   .about .about-image {
-    background-image: url("images/me.jpg");
+    background-image: url("me.jpg");
   }
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (-moz-min-device-pixel-ratio: 2) {
   .pocket .pocket-image {
-    background-image: url("images/pocket.jpg");
+    background-image: url("pocket.jpg");
   }
 }
 
