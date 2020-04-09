@@ -654,7 +654,7 @@ body {
 @media (-webkit-min-device-pixel-ratio: 2), (-moz-min-device-pixel-ratio: 2) {
 
   .projects .project .project-featured-image.abroaden {
-    background-image: url("shop.jpg");
+    background-image: url("abroaden.jpg");
   }
 }
 
