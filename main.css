@@ -661,14 +661,14 @@ body {
 @media (-webkit-min-device-pixel-ratio: 2), (-moz-min-device-pixel-ratio: 2) {
 
   .projects .project .project-featured-image.pocket {
-    background-image: url("poc.jpg");
+    background-image: url("pocket.jpg");
   }
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (-moz-min-device-pixel-ratio: 2) {
 
   .projects .project .project-featured-image.pockettour {
-    background-image: url("pocket.jpg");
+    background-image: url("pocket(1).jpg");
   }
 }
 
