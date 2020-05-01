@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Muli&display=swap');
+
 /* General CSS*/
 div {
   border: none !important;
@@ -22,7 +24,7 @@ div {
 }
 
 .site-subtitle-attr {
-  font-style: italic;
+  
   font-weight: 300;
   font-size: 18px;
   letter-spacing: 0.02em;
@@ -43,6 +45,7 @@ div {
 }
 
 .section-title {
+  font-family: "muli";
   font-weight: 100;
   font-size: 24px;
   letter-spacing: 0.08em;
