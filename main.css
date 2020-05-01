@@ -261,25 +261,15 @@ a {
   outline: 0;
 }
 
-a:hover,
-a:focus {
-  /* not sure what this does --> color: #000; */
-}
-
 a {
   text-decoration: none;
   color: #f2737a;
   /* underline under links in the about page: border-bottom: 1px solid #f2737a; */
 }
 
-a:visited {
-  color: #f2737a;
-}
-
 /* lighter color for when hoovering over link: #f1a0ac */
 a:hover {
   color: #f1a0ac;
-  
 }
 
 a:active {
