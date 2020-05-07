@@ -658,7 +658,7 @@ body {
 @media (-webkit-min-device-pixel-ratio: 2), (-moz-min-device-pixel-ratio: 2) {
 
   .projects .project .project-featured-image.pockettour {
-    background-image: url("pocket(1).jpg");
+    background-image: url("poc-logo.jpg");
   }
 }
 
