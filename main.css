@@ -690,6 +690,13 @@ body {
   }
 }
 
+@media (-webkit-min-device-pixel-ratio: 2), (-moz-min-device-pixel-ratio: 2) {
+
+  .projects .project .project-featured-image.att2 {
+    background-image: url("att2.png");
+  }
+}
+
 .projects .project .project-details {
   *zoom: 1;
   max-width: 1050px;
