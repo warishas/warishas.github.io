@@ -1,6 +1,18 @@
 /* Inspired by Ben Ashman: http://benashman.me */
 /* #Reset & Basics (Inspired by E. Meyers) */
 
+
+.reveal {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 1.0s ease-out, transform 1.0s ease-out;
+}
+
+    .reveal.reveal-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
 /*menu navigation by section*/
 nav{
 	position: sticky;
