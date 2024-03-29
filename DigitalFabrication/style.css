@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Lato:wght@400;700&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  border-radius: 8px; /* Rounded corners for all images */
+}
+
+body {
+  font-family: "Lato", sans-serif; /* Body font */
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5em;
+  color: #555; /* Gray text color */
+  background: linear-gradient(to bottom right, #edeaf6, #d4d4fc); /* Lavender gradient background */
+}
+
+h1 {
+  font-family: "Cormorant Garamond", serif; /* Header font */
+  font-weight: 600;
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+  text-align: center;
+}
+
+h2 {
+  font-family: "Cormorant Garamond", serif; /* Header font */
+  font-weight: 600;
+  font-size: 1.8em;
+  margin-bottom: 0.5em;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-top: 1em;
+}
+
+.header img {
+  max-width: 50%; /* Adjust the width here */
+  height: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns */
+  gap: 1.5em;
+  margin-top: 2em;
+}
+
+.assignment {
+  max-width: 250px; /* Adjust width if needed */
+}
+
+.assignment a {
+  color: #555;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.assignment a:hover {
+  color: #777;
+}
+
+.assignment img {
+  width: 100%;
+  height: auto; /* Ensure the aspect ratio is maintained */
+  max-height: 150px; /* Adjust the maximum height as needed */
+  object-fit: cover; /* Crop the image while maintaining aspect ratio */
+}
