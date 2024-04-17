@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+  <title>3D Printing Documentation</title>
+  <style>
+    body {
+      font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #e6e4f2; /* Soft pattern background color */
+      background-image: url('soft-pattern.png'); /* Soft pattern background image */
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: 30px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+      background-color: #ffffff; /* Section background color */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow for section */
+    }
+
+    .section img {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px; /* Rounded corners for images */
+      margin-bottom: 10px;
+    }
+
+    .section p {
+      margin: 10px 0;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap; /* Allow images to wrap to next line if necessary */
+    }
+
+    .image-container img {
+      width: calc(33% - 10px); /* Calculate width for each image with space between them */
+      margin-bottom: 10px;
+    }
+
+    @media screen and (max-width: 768px) {
+      /* Adjust image width for smaller screens */
+      .image-container img {
+        width: calc(50% - 10px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>3D Printing Documentation</h1>
+  <p style="text-align: center;">I'm playing around with different styles of web design. Prepare for these to change weekly.</p><br>
+
+  <div class="section">
+    <h2>Cube Setup in Rhino</h2>
+    <p>Let's jump into it. Shoutout to Nathan for the help. Rhino file is a basic cube using cube in the command line and ensuring 
+      it was 2cm by 2cm. File: <a href="a3_cube.3dm" download>Rhino Cube, file type .3dm</a></p>
+    <p>Here's the source design for cubes made on Rhino and exported into UltiMaker Cura</p>
+    <div class="image-container">
+      <img src="a3_rhino_cube.png" alt="Rhino Cube 1">
+      <img src="a3_rhino_cube2.png" alt="Rhino Cube 2">
+    </div>
+
+    <br><br><br>
+
+  </div>
+  <div class="section">
+    <h2>Cubes</h2>
+  <p> File: <a href="Assignment3_Cube.3mf" download>Cura Cube, file type .3dm</a></p>
+  <p>A 2cm cube with the standard "low quality" settings were extra fast, took 8 minutes to print with a height of 20.11mm and width of 20.27 mm</p>
+  <p>A 2cm cube with the standard "standard quality" settings were fine, took 20 minutes to print with a height of 20.03mm and width of 20.03mm</p>
+  <p>A 2cm cube with the standard "super quality" settings took 1 hour 8 minutes to print with a height of 20.04mm and width of 20.05mm</p>
+  <br><div class="image-container">
+    <img src="a3_cube1.png"><img src="a3_cube2.jpg"><img src="a3_cube3.jpg"></div>
+  <br><p>As a side note, I had jumped to the tube before coming back to the second cube so I accidentally printed without walls. The plus side is I caught on to this great UX. Shoutout Cura team for making it easy to manually print via USB.</p>
+  <br><img src="a3_cube_UX.png">
+  <br><p>Finally, a 2 cm cube with a <strong>concentric top and bottom</strong> layer and my favorite print setting from the previous cubes. My favorite 
+    setting at the moment is the one that gets done the fastest since this doesn't need to piece together with anything.
+    The standard "low quality" settings were extra fast, took 14 minutes to print with a height of 19.99mm and width of 20.27 mm.
+  </p><br>
+  <img src="a3_concentriccube.png">
+  <p>Well, I did it. I'm not sure what it means though. Concentric x 1 on the right, left is one of the standard cubes.</p>
+  <img src="a3_lastcube.jpg">
+</div>
+
+
+<div class="section">
+  <h2>Tubes</h2>
+  <p>To make a tube, I used the cylinder command in Rhino, 
+    exported it, opened the file in Cura, and removed the top + bottom walls. The process made me realize Cura's interface is very inviting and easy to use. </p>
+  <p><br>A tube 3cm in diameter and 3cm high with a single extrusion wall thickness<br>
+    Time (min): 8min <br>Height (mm): 29.94<br>Width (mm): 30.16
+  <br></p>
+  <img src="a3_basiccube.jpg">
+  <br><br>
+    <p><br>A tube 3cm in diameter and 3cm high with a double extrusion 
+      wall thickness and random z-seam alignment<br>
+      Time (min): forgot to record <br>Height (mm): 29.63<br>Width (mm): 30.05
+    <br></p>
+  <img src="a3_doublextube.png">
+  <br>
+</div>
+
+  <div class="section">
+    <h2>Cylinder</h2>
+    <p>Here's the documentation for the last two pieces:</p>
+    <p>A cylinder 3cm in diameter with special mode "spiralize outer contour"<br>
+      Time (min): 11 <br>Height (mm): X<br>Width (mm): X
+    </p>
+    <img src="">
+    <p>A cylinder 3cm in diameter printed on its side with supports on.<br>
+      Time (min): X <br>Height (mm): X<br>Width (mm): X</p>
+      <img src="">
+  </div>
+
+  <div class="section">
+    <h2>Clips</h2>
+    <p>I need 15 clips that can hold cardboard.</p>
+    <br><p>Here's a clip from Thingiverse that I printed to test out. It passed the shake test but it is not my design.</p>
+    <img src="a3_thingiverse-clip.png">
+    <img src="a3_thingclip.jpg">
+    <br>
+    <p> My design: <a href="Assignment3_Cube.3mf" download>Design File</a></p>
+    <img src="">
+    <p></p>
+  </div>
+
+
+</body>
+</html>
