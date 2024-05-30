@@ -15,6 +15,7 @@
 
         h1 {
             text-align: center;
+            margin-bottom: 40px;
         }
 
         h2 {
@@ -29,34 +30,45 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow for section */
         }
 
-            .section img {
-                display: block;
-                margin: 0 auto;
-                max-width: 100%;
-                height: auto;
-                border-radius: 8px; /* Rounded corners for images */
-                margin-bottom: 10px;
+            .section h2 {
+                text-align: center;
+                margin-bottom: 20px;
+                color: #4f4f4f;
             }
 
             .section p {
-                margin: 10px 0;
+                text-align: justify;
+                line-height: 1.6;
+                color: #4f4f4f;
             }
+
+            .section ul, .section ol {
+                margin-left: 20px;
+                color: #4f4f4f;
+            }
+
+                .section ul li, .section ol li {
+                    margin-bottom: 10px;
+                }
 
         .image-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             flex-wrap: wrap; /* Allow images to wrap to next line if necessary */
+            margin-top: 20px;
         }
 
             .image-container img {
-                width: calc(33% - 10px); /* Calculate width for each image with space between them */
-                margin-bottom: 10px;
+                width: calc(33% - 20px); /* Calculate width for each image with space between them */
+                margin: 10px;
+                border-radius: 8px; /* Rounded corners for images */
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow for images */
             }
 
         @media screen and (max-width: 768px) {
             /* Adjust image width for smaller screens */
             .image-container img {
-                width: calc(50% - 10px);
+                width: calc(50% - 20px);
             }
         }
     </style>
@@ -123,7 +135,6 @@
             <img src="a8_4.jpg" alt="Finished Coasters">
         </div>
         <p><strong>Files:</strong></p>
-        <p>Here are the code files used for this project:</p>
         <ul>
             <li><a href="a8_basehex.stl">I call it the puck. This is a print of the angled hexagon with full fill.</a></li>
             <li><a href="a8_forplas.stl">This is the mold for the puck. I greased the print very thoroughly before adding plaster but was unable to remove it.</a></li>
@@ -134,20 +145,10 @@
 
     <div class="section">
         <h2>Connector</h2>
-        <p>Here, I originally planned to have connectors to piece the coasters together but because the outcome was more organic in shape, this was not possible for me. Instead, I designed a stand on Rhino for the coasters to rest on inside the box.</p>
+        <p>I originally planned to have connectors to piece the coasters together but because the outcome was more organic in shape, this was not possible for me. Instead, I designed a stand on Rhino for the coasters to rest on inside the box.</p>
         <div class="image-container">
-            <img src="a8_stand.jpg" alt="">
+            <img src="a8_stand.jpg" alt="Coaster Stand">
         </div>
-    </div>
-
-    <div class="section">
-        <h2>Bill of Materials</h2>
-        <ul>
-            <li>Filament for 3D printing</li>
-            <li>Cardboard for the box</li>
-            <li>Plaster of Paris for coasters</li>
-            <li>Oomoo rubber for silicone molds</li>
-        </ul>
     </div>
 </body>
 </html>
