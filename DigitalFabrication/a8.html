@@ -59,70 +59,126 @@
         }
 
             .image-container img {
-                width: calc(33% - 20px); /* Calculate width for each image with space between them */
+                max-width: 100%; /* Ensure the image does not exceed its container */
+                height: auto; /* Maintain aspect ratio */
                 margin: 10px;
                 border-radius: 8px; /* Rounded corners for images */
                 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow for images */
             }
 
+        .large-image {
+            width: 80%; /* Large image width */
+        }
+
         @media screen and (max-width: 768px) {
             /* Adjust image width for smaller screens */
             .image-container img {
-                width: calc(50% - 20px);
+                width: calc(100% - 20px);
             }
         }
     </style>
 </head>
 <body>
     <h1>Digital Fabrication Final</h1>
-    <p style="text-align: center;">
-        For my final project, I have
-        chosen to design and digitally fabricate a versatile and
-        functional open box specifically intended to house coasters
-        and their corresponding connectors. Utilizing the skills and
-        techniques acquired throughout the course, this project will be
-        created through a combination of laser cutting, 3D printing, molding,
-        and Fusion 360 in place of Rhino. The intent is to use this as a
-        testing environment that can be recreated for an open concept
-        kitchen where coasters can be connected to make more sizes.
-    </p><br>
+    <br>
 
     <div class="section">
         <h2>Concept</h2>
-        <p>The concept for this project is to design and fabricate an open box that houses coasters and their connectors. This box is intended for use in a kitchen setting where coasters can be connected to create various sizes. The project combines laser cutting, 3D printing, and molding techniques, with designs created using Fusion 360. Detailed instructions and source files are available on my website for anyone interested in replicating this work.</p>
+        <p>
+            For my final project, I have
+            chosen to design and digitally fabricate a versatile and
+            functional open box specifically intended to house coasters
+            and their corresponding connectors. Utilizing the skills and
+            techniques acquired throughout the course, this project will be
+            created through a combination of laser cutting, 3D printing, molding,
+            and Fusion 360 in place of Rhino. The intent is to use this as a
+            testing environment that can be recreated for an open concept
+            kitchen where coasters can be connected to make more sizes.
+        </p>
+        <p>
+            The concept for this project is to design and fabricate an open
+            box that houses coasters and their connectors. This box is intended
+            for use in a kitchen setting where coasters can be connected to create
+            various sizes. The project combines laser cutting, 3D printing, and
+            molding techniques, with designs created using Fusion 360. Detailed
+            instructions and source files are available on my website for anyone
+            interested in replicating this work.
+        </p>
+        <p>
+            <strong>Deviation: </strong> In my design plan, I intended to create
+            connectors that would attach to the corners of the coaster and allow
+            coasters to be resized by changing the number of coasters and connectors.
+            After I started, however, I realized that this would not be feasible with
+            organic shaped coasters. Instead, I pivoted to 3D print a stand where the
+            coasters would rest in the box.
+        </p>
+
+        <div class="image-container">
+            <img src="a8_final.png" alt="Coaster Stand" class="large-image">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Bill of Materials</h2>
+        <ul>
+            <li>Filament (for 3D printing), $25 </li>
+            <li>Cardboard (for prototyping), $8 </li>
+            <li>Plaster of Paris (for casting coasters), $10</li>
+            <li>Oomoo rubber (for creating silicone molds), $35 </li>
+            <br />
+            Total: $78
+        </ul>
     </div>
 
     <div class="section">
         <h2>Box</h2>
-        <p>For my final project, I designed and laser cut an open box with finger joints, intended to hold coasters and coaster connectors. The box is designed to be easily accessible, making it suitable for a kitchen setting. Initially, I created a larger box with a top, but I revised the design to be more practical for everyday use.</p>
-        <p><strong>Design Specifications:</strong></p>
-        <ul>
-            <li>Width: 8 inches</li>
-            <li>Depth: 8 inches</li>
-            <li>Height: 4 inches</li>
-            <li>Material Thickness: 0.01 inches (measured using calipers)</li>
-        </ul>
-        <p><strong>Design Process:</strong></p>
-        <ol>
-            <li><strong>Initial Concept:</strong> The original design included a top cover and larger dimensions, which proved to be impractical for the intended use in a kitchen.</li>
-            <li><strong>Revised Design:</strong> To enhance accessibility, I removed the top cover and adjusted the size to a more compact and manageable 8x8x4 inches.</li>
-            <li><strong>Finger Joints:</strong> The box features finger joints for strong and durable assembly. The precise fitting of these joints was ensured by measuring the material thickness with calipers.</li>
-            <li><strong>Material Selection:</strong> The material chosen for this project was 0.01 inches thick filament, suitable for laser cutting.</li>
-        </ol>
-        <p><strong>Fabrication Steps:</strong></p>
-        <ol>
-            <li><strong>Designing the Box:</strong> I used a template from Cuttle.xyz to create the 2D design of the box. This platform allowed for easy manipulation of the design, ensuring accurate dimensions and finger joint placement.</li>
-            <li><strong>Laser Cutting:</strong> The design was exported to the laser cutter software, where I adjusted settings for the 0.01-inch thick material. The laser cutter was used to cut the box pieces according to the design. It may or may not have burned in one of the finger joints.</li>
-            <li><strong>Assembly:</strong> The cut pieces were then carefully assembled using the finger joints. The precise cuts ensured a snug fit, eliminating the need for additional adhesives.</li>
-            <li><strong>Final Adjustments:</strong> After assembling the box, I checked for any rough edges or misalignments and made minor adjustments to ensure a smooth finish.</li>
-        </ol>
-        <p><strong>Conclusion:</strong></p>
-        <p>The final product is a sleek, functional open box that fits perfectly in a kitchen setting. The dimensions and open design make it easy to reach in and retrieve items, while the finger joint construction provides durability. This project not only showcases the practical application of laser cutting and precise measurement but also demonstrates the iterative design process necessary for creating a user-friendly product. All source files and detailed instructions for replicating this box are documented on my webpage.</p>
-        <div class="image-container">
-            <img src="a8_6.jpg" alt="Box Image">
-        </div>
-    </div>
+        <p>
+            For my final project, I designed and laser cut an open box with
+            finger joints, intended to hold coasters and coaster connectors. The
+            box is designed to be easily accessible, making it suitable for a kitchen
+            setting. Initially, I created a larger box with a top, but I revised the
+            design to be more practical for everyday use.
+        </p>
 
+        <a href="Cuttle Box.svg"></a>
+
+            <p>
+                I then plastered the edge of my box to make it look more cohesive with the coasters but dropped it.
+                My box broke and I forgot to take process pictures - so no documentation there.
+            </p>
+
+            <strong>original box</strong>
+            <p><strong>Design Specifications:</strong></p>
+            <ul>
+                <li>Width: 8 inches</li>
+                <li>Depth: 8 inches</li>
+                <li>Height: 4 inches</li>
+                <li>Material Thickness: 0.01 inches (measured using calipers)</li>
+            </ul>
+            <p><strong>Design Process:</strong></p>
+            <ol>
+                <li><strong>Initial Concept:</strong> The original design included a top cover and larger dimensions, which proved to be impractical for the intended use in a kitchen.</li>
+                <li><strong>Revised Design:</strong> To enhance accessibility, I removed the top cover and adjusted the size to a more compact and manageable 8x8x4 inches.</li>
+                <li><strong>Finger Joints:</strong> The box features finger joints for strong and durable assembly. The precise fitting of these joints was ensured by measuring the material thickness with calipers.</li>
+                <li><strong>Material Selection:</strong> The material chosen for this project was 0.01 inches thick filament, suitable for laser cutting.</li>
+            </ol>
+            <p><strong>Fabrication Steps:</strong></p>
+            <ol>
+                <li><strong>Designing the Box:</strong> I used a template from Cuttle.xyz to create the 2D design of the box. This platform allowed for easy manipulation of the design, ensuring accurate dimensions and finger joint placement.</li>
+                <li><strong>Laser Cutting:</strong> The design was exported to the laser cutter software, where I adjusted settings for the 0.01-inch thick material. The laser cutter was used to cut the box pieces according to the design. It may or may not have burned in one of the finger joints.</li>
+                <li><strong>Assembly:</strong> The cut pieces were then carefully assembled using the finger joints. The precise cuts ensured a snug fit, eliminating the need for additional adhesives.</li>
+                <li><strong>Final Adjustments:</strong> After assembling the box, I checked for any rough edges or misalignments and made minor adjustments to ensure a smooth finish.</li>
+            </ol>
+            <p><strong>Conclusion:</strong></p>
+            <p>The final product is a sleek, functional open box that fits perfectly in a kitchen setting. The dimensions and open design make it easy to reach in and retrieve items, while the finger joint construction provides durability. This project not only showcases the practical application of laser cutting and precise measurement but also demonstrates the iterative design process necessary for creating a user-friendly product. All source files and detailed instructions for replicating this box are documented on my webpage.</p>
+            <div class="image-container">
+                <img src="a8_6.jpg" alt="Box Image" class="large-image">
+            </div>
+
+            <strong>Redesign</strong>
+            <p>
+                Since my coasters were ready, I designed a new box that was smaller and open top. This is because I wanted, from a usability perspective, to make the coasters the focal point and easy to grab. This is intended to make the coasters easy to grab. In my mind, the coasters were 7 inches wide which is why the box is so wide and if I were to redo this, I would make the box slimmer. Since the height of the box was reduced, the width doesn't need to be the same as the coaster anyway.
+    </div>
     <div class="section">
         <h2>Bill of Materials</h2>
         <ul>
@@ -142,12 +198,15 @@
             <li><strong>Creating the Silicone Mold:</strong> Using the 3D printed mold, I prepared an Oomoo rubber mixture to create a flexible silicone mold. I struggled with the consistency of the silicone mold, so to prevent anything from getting stuck, I added plastic wrap on top of the silicone and made sure to oil my mold base every time I used it. This step required careful mixing and pouring to avoid air bubbles and ensure a smooth finish.</li>
             <li><strong>Making the Coasters:</strong> After the silicone mold cured, I used it to cast the coasters. I mixed plaster of Paris and poured it into the silicone mold, allowing it to set and harden.</li>
         </ol>
-        <p>Initially, I intended for the coasters to connect together seamlessly. However, I discovered that the angled design prevented them from fitting together as planned. Despite this, the individual coasters have a unique and appealing look, making them practical and aesthetically pleasing on their own.</p>
+        <p>
+            Initially, I intended for the coasters to connect together seamlessly. However, I could not get the coaster out of my 3d printed mold of a hexagon so I decided to try again, this time finding an angled hexagon shape on thingiverse (can't find the link again, credit tbd) hoping the angled design would be easier to take out. I realized it would prevent coasters from fitting together as planned.
+            Despite this, the individual coasters have a unique and appealing look, making them practical and aesthetically pleasing on their own.
+        </p>
         <div class="image-container">
-            <img src="a8_1.jpg" alt="Hexagon Coaster Design">
-            <img src="a8_2.jpg" alt="3D Printed Mold">
-            <img src="a8_3.jpg" alt="Silicone Mold">
-            <img src="a8_4.jpg" alt="Finished Coasters">
+            <img src="a8_1.jpg" alt="Hexagon Coaster Design" class="large-image">
+            <img src="a8_2.jpg" alt="3D Printed Mold" class="large-image">
+            <img src="a8_3.jpg" alt="Silicone Mold" class="large-image">
+            <img src="a8_4.jpg" alt="Finished Coasters" class="large-image">
         </div>
         <p><strong>Files:</strong></p>
         <ul>
@@ -160,9 +219,31 @@
 
     <div class="section">
         <h2>Connector</h2>
-        <p>Here, I originally planned to have connectors to piece the coasters together but because the outcome was more organic in shape, this was not possible for me. Instead, I designed a stand on Rhino for the coasters to rest on inside the box.</p>
+        <p>
+            Here, I originally planned to have connectors to piece the coasters together but because the outcome
+            was more organic in shape, this was not possible for me. Instead, I designed a stand on Rhino for
+            the coasters to rest on inside the box.
+        </p>
+        <p>
+            I printed a small version in test, then printed again, this time resizing the x value to be thinner so that by
+            printing two stands, I could manipulate use of the box depending on the size of the coaster placed inside.
+        </p>
         <div class="image-container">
-            <img src="a8_stand.jpg" alt="Coaster Stand">
+            <img src="a8_stand.jpg" alt="Coaster Stand" class="large-image">
+        </div>
+        <a href="Stand.3dm"></a> Stand
+        <a href="a8hex.3dm"></a> Hexagon for sizing
+        <a href="try.3mf"> Trial Stand</a>
+        <a href="print.stl">Printed Stand</a> 
+        <a href=""></a>
+    </div>
+
+    <div class="section">
+        <h2>Process Photoes</h2>
+        <div class="image-container">
+            <img src="a8_group1.png" alt="Coaster Stand" class="large-image">
+            <img src="a8_group2.png" alt="Coaster Stand" class="large-image">
+            <img src="a8_group3.png" alt="Coaster Stand" class="large-image">
         </div>
     </div>
 </body>
