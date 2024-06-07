@@ -29,10 +29,10 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow for section */
         }
 
-            .section img {
+            .section img, .section video {
                 display: block;
                 margin: 0 auto;
-                max-width: 100%;
+                width: 100%;
                 height: auto;
                 border-radius: 8px; /* Rounded corners for images */
                 margin-bottom: 10px;
@@ -49,14 +49,14 @@
         }
 
             .image-container img {
-                width: calc(33% - 10px); /* Calculate width for each image with space between them */
+                width: 100%; /* Full width */
                 margin-bottom: 10px;
             }
 
         @media screen and (max-width: 768px) {
             /* Adjust image width for smaller screens */
             .image-container img {
-                width: calc(50% - 10px);
+                width: 100%;
             }
         }
     </style>
@@ -68,6 +68,8 @@
     <div class="section">
         <h2>Mold of a Mold</h2>
         <p>
+            <a href="a61mold.stl" title="Go to W3Schools HTML section">Rectangle Mold</a><br />
+            <a href="a62mold.stl" title="Go to W3Schools HTML section">Sphere Mold</a><br /><br />
             Origionally, I thought "mold of a mold" meant finding a mold on Thingiverse
             and making a CAD mold of it. I chose a soap mold and ended up printing a brick
             for my test print. While I followed of tutorial of a two part mold, I did not
@@ -105,13 +107,14 @@
         <p>
             I greased up my molds and cast, only to find my plaster stuck into
             the black mold. For the duration of the assingment, this was useless
-            and I ended up throwing it away. <br /> <img src="a6Slide2.png alt=""><br />
+            and I ended up throwing it away. <br /> <br />
 
             <br />
             For the white molds, I cast them, realized I created a brick and a mold.
         </p>
         <div class="image-container">
-            <img src="a6b.png alt="">
+            <img src="a6Slide2.png" alt="">
+            <img src="a6b.png" alt="">
         </div>
         <br><br><br>
     </div>
@@ -136,11 +139,9 @@
         </p>
         <div class="image-container">
             <img src="a6Slide6.png" alt="">
-            <img src="a6Slide5.png" alt="">
-
-            <video width="320" height="240" controls>
+            <video controls>
                 <source src="one.mov" type="video/mp4">
-                <source src="movie.mov" type="video/mp4">
+                <source src="two.mov" type="video/mp4">
             </video>
         </div>
         <br><br><br>
