@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Warisha Soomro — Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Cormorant+Garamond:wght@400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+
+  /* ── MASHRABIYA SVG PATTERN ─────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 2.5rem 5rem;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .hero-lattice {
+    position: absolute; inset: 0;
+    pointer-events: none; z-index: 0;
+    opacity: 0.18;
+  }
+  [data-theme="light"] .hero-lattice { opacity: 0.12; }
+
+  .hero-lattice svg {
+    width: 100%; height: 100%;
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.3rem 0.75rem; margin-bottom: 2.5rem;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-2);
+    opacity: 0; animation: rise .7s cubic-bezier(.16,1,.3,1) .3s both;
+    transition: background .3s, border-color .3s;
+  }
+  .hero-eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); transition: background .3s;
+  }
+
+  .hero-name {
+    font-size: clamp(3.5rem, 8vw, 8.5rem);
+    font-weight: 300; line-height: 0.95;
+    letter-spacing: -0.02em; color: var(--text);
+    margin-bottom: 2rem;
+    opacity: 0; animation: rise .9s cubic-bezier(.16,1,.3,1) .45s both;
+    transition: color .3s;
+  }
+  .hero-name-last {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    color: var(--text-2);
+    letter-spacing: -0.01em;
+    transition: color .3s;
+  }
+
+  .hero-statement {
+    font-size: clamp(0.9rem, 1.3vw, 1rem);
+    font-weight: 400; color: var(--text-2); max-width: 40ch; line-height: 1.7;
+    opacity: 0; animation: rise .8s cubic-bezier(.16,1,.3,1) .65s both;
+    transition: color .3s;
+  }
+
+  .hero-meta {
+    position: absolute; bottom: 5rem; right: 2.5rem; z-index: 1;
+    display: flex; flex-direction: column; gap: 0.4rem; text-align: right;
+    opacity: 0; animation: rise .7s ease 1s both;
+  }
+  .hero-meta-line {
+    font-size: 11px; font-weight: 400; letter-spacing: 0.06em;
+    color: var(--text-3); text-transform: uppercase; transition: color .3s;
+  }
+
+  @keyframes rise {
+    from { opacity:0; transform: translateY(12px); }
+    to   { opacity:1; transform: none; }
+  }
+
+  /* ── STATS ───────────────────────────────── */
+  .stats {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    border-bottom: 1px solid var(--border);
+    transition: border-color .3s;
+  }
+
+  .stat {
+    padding: 3rem 2.5rem;
+    border-right: 1px solid var(--border);
+    position: relative;
+    transition: border-color .3s;
+  }
+  .stat:last-child { border-right: none; }
+  .stat:first-child::after {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: var(--accent); transition: background .3s;
+  }
+
+  .stat-num {
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    font-weight: 300; letter-spacing: -0.02em;
+    line-height: 1; margin-bottom: 0.6rem; color: var(--text);
+    transition: color .3s;
+  }
+  .stat:first-child .stat-num { color: var(--accent-lt); }
+
+  .stat-desc {
+    font-size: 11px; font-weight: 400;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3);
+    transition: color .3s;
+  }
+
+  /* ── WORK ────────────────────────────────── */
+  .work { padding: 5rem 2.5rem; }
+
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-bottom: 2rem; margin-bottom: 3.5rem;
+    border-bottom: 1px solid var(--border); transition: border-color .3s;
+  }
+  .section-count {
+    font-size: 11px; font-weight: 400; color: var(--text-3);
+    letter-spacing: 0.06em; transition: color .3s;
+  }
+
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); transition: background .3s; }
+
+  .card {
+    display: block; text-decoration: none;
+    position: relative; overflow: hidden;
+    aspect-ratio: 16/10; background: var(--surface);
+    transition: background .3s;
+  }
+
+  .card-img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: top left;
+    transition: transform .6s cubic-bezier(.16,1,.3,1), opacity .3s ease;
+    opacity: 0.85;
+  }
+  .card:hover .card-img { transform: scale(1.03); opacity: 1; }
+
+  .card-scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,14,22,.95) 0%, rgba(10,14,22,.3) 50%, transparent 100%);
+  }
+  [data-theme="light"] .card-scrim {
+    background: linear-gradient(to top, rgba(30,20,16,.92) 0%, rgba(30,20,16,.3) 50%, transparent 100%);
+  }
+
+  .card-body {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 2rem;
+    transform: translateY(3px); transition: transform .35s cubic-bezier(.16,1,.3,1);
+  }
+  .card:hover .card-body { transform: none; }
+
+  .card-cat {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent-lt); margin-bottom: 0.5rem;
+    transition: color .3s;
+  }
+
+  .card-title {
+    font-size: clamp(1.3rem, 2vw, 1.8rem);
+    font-weight: 300; line-height: 1.1; color: #f0eee8;
+    margin-bottom: 0.4rem; letter-spacing: -0.01em;
+  }
+
+  .card-meta {
+    font-size: 12px; font-weight: 400;
+    color: rgba(240,238,232,.38); letter-spacing: 0.01em;
+  }
+
+  .card-badge {
+    position: absolute; top: 1.25rem; right: 1.25rem;
+    background: var(--surface); border: 1px solid var(--border-hi);
+    border-radius: var(--radius-sm); padding: 0.25rem 0.6rem;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-3);
+    opacity: 0; transform: translateY(-3px);
+    transition: opacity .25s, transform .25s, background .3s, border-color .3s, color .3s;
+  }
+  .card:hover .card-badge { opacity: 1; transform: none; }
+
+  /* ── ABOUT ───────────────────────────────── */
+  .about {
+    display: grid; grid-template-columns: 5fr 7fr; gap: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    transition: border-color .3s;
+  }
+
+  .about-left {
+    padding: 5rem 2.5rem;
+    border-right: 1px solid var(--border); transition: border-color .3s;
+  }
+
+  .about-hed {
+    font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+    font-weight: 300; line-height: 1.3;
+    letter-spacing: -0.01em; color: var(--text);
+    margin-bottom: 2rem; margin-top: 1.5rem; transition: color .3s;
+  }
+
+  .about-right { padding: 5rem 2.5rem; }
+
+  .about-body {
+    font-size: 14px; font-weight: 400;
+    color: var(--text-2); line-height: 1.8;
+    max-width: 52ch; margin-bottom: 1.5rem; transition: color .3s;
+  }
+  .about-body strong { color: var(--text); font-weight: 500; }
+
+  /* ── TIMELINE ────────────────────────────── */
+  .timeline { padding: 5rem 2.5rem; border-bottom: 1px solid var(--border); transition: border-color .3s; }
+
+  .tl-grid {
+    display: grid; grid-template-columns: 220px 1fr; gap: 0;
+    margin-top: 3rem; border: 1px solid var(--border); transition: border-color .3s;
+  }
+
+  .tl-sidebar {
+    background: var(--surface); border-right: 1px solid var(--border);
+    padding: 2rem 1.75rem;
+    position: sticky; top: 52px; align-self: start;
+    transition: background .3s, border-color .3s;
+  }
+
+  .tl-hed {
+    font-size: 1.4rem; font-weight: 300;
+    line-height: 1.35; letter-spacing: -0.01em;
+    color: var(--text); margin-top: 1rem; transition: color .3s;
+  }
+
+  .tl-item {
+    display: grid; grid-template-columns: 80px 1fr;
+    gap: 0; border-bottom: 1px solid var(--border); transition: border-color .3s;
+  }
+  .tl-item:last-child { border-bottom: none; }
+
+  .tl-date-col {
+    padding: 2rem 1.5rem;
+    border-right: 1px solid var(--border);
+    background: var(--surface); transition: background .3s, border-color .3s;
+  }
+  .tl-date {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-3);
+    writing-mode: vertical-rl; transform: rotate(180deg); transition: color .3s;
+  }
+
+  .tl-content { padding: 2rem 2rem; }
+  .tl-role { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 0.2rem; transition: color .3s; }
+  .tl-org  { font-size: 12px; font-weight: 400; color: var(--accent-lt); margin-bottom: 0.8rem; transition: color .3s; }
+  .tl-desc { font-size: 13px; font-weight: 400; color: var(--text-2); line-height: 1.75; transition: color .3s; }
+
+  .tl-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.8rem; }
+  .tl-tag {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.07em;
+    text-transform: uppercase; color: var(--text-3);
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 0.15rem 0.45rem;
+    transition: background .3s, border-color .3s, color .3s;
+  }
+
+  /* ── CONTACT ─────────────────────────────── */
+  .contact {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border-bottom: 1px solid var(--border); transition: border-color .3s;
+  }
+
+  .contact-left {
+    padding: 5rem 2.5rem;
+    border-right: 1px solid var(--border); transition: border-color .3s;
+  }
+
+  .contact-hed {
+    font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+    font-weight: 300; line-height: 1.35;
+    letter-spacing: -0.01em; color: var(--text);
+    margin-top: 1.5rem; transition: color .3s;
+  }
+
+  .contact-right { padding: 5rem 2.5rem; }
+
+  .contact-links { display: flex; flex-direction: column; }
+  .contact-link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 0.5rem; border-bottom: 1px solid var(--border);
+    text-decoration: none; color: var(--text);
+    border-radius: var(--radius-sm);
+    transition: background .15s, border-color .3s;
+  }
+  .contact-link:first-child { border-top: 1px solid var(--border); }
+  .contact-link:hover { background: var(--surface); }
+
+  .cl-left { display: flex; flex-direction: column; gap: 0.2rem; }
+  .cl-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); transition: color .3s; }
+  .cl-val   { font-size: 13px; font-weight: 400; color: var(--text); transition: color .3s; }
+  .cl-arrow { font-size: 14px; color: var(--text-3); transition: transform .15s, color .3s; }
+  .contact-link:hover .cl-arrow { transform: translate(2px, -2px); color: var(--text-2); }
+
+  /* ── RESPONSIVE ──────────────────────────── */
+  @media (max-width: 900px) {
+    .hero { padding: 0 1.25rem 3.5rem; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stat { padding: 2rem 1.25rem; border-right: none; border-bottom: 1px solid var(--border); }
+    .stat:nth-child(odd) { border-right: 1px solid var(--border); }
+    .stat:nth-child(3), .stat:last-child { border-bottom: none; }
+    .work { padding: 3.5rem 1.25rem; }
+    .cards { grid-template-columns: 1fr; }
+    .about { grid-template-columns: 1fr; }
+    .about-left { border-right: none; border-bottom: 1px solid var(--border); padding: 3rem 1.25rem; }
+    .about-right { padding: 3rem 1.25rem; }
+    .timeline { padding: 3.5rem 1.25rem; }
+    .tl-grid { grid-template-columns: 1fr; }
+    .tl-sidebar { position: static; border-right: none; border-bottom: 1px solid var(--border); }
+    .tl-item { grid-template-columns: 1fr; }
+    .tl-date-col { display: none; }
+    .contact { grid-template-columns: 1fr; }
+    .contact-left { border-right: none; border-bottom: 1px solid var(--border); padding: 3rem 1.25rem; }
+    .contact-right { padding: 3rem 1.25rem; }
+  }
+  </style>
+</head>
+<body>
+
+  <!-- NAV — no borders between links, no contact button -->
+  <nav id="nav">
+    <a href="index.html" class="logo">
+      <span class="logo-first">Warisha&nbsp;</span><span class="logo-last">Soomro</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#exp">Experience</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <!-- Moon icon (shown in dark mode) -->
+      <svg id="icon-moon" class="icon-moon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.5 8.5A5.5 5.5 0 0 1 5.5 1.5a5.5 5.5 0 1 0 7 7z" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <!-- Sun icon (shown in light mode) -->
+      <svg id="icon-sun" class="icon-sun" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none">
+        <circle cx="7" cy="7" r="2.5" stroke="currentColor" stroke-width="1.1"/>
+        <line x1="7" y1="0.5" x2="7" y2="2"   stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+        <line x1="7" y1="12" x2="7" y2="13.5"  stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+        <line x1="0.5" y1="7" x2="2"   y2="7"  stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+        <line x1="12" y1="7" x2="13.5" y2="7"  stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+        <line x1="2.4" y1="2.4" x2="3.4" y2="3.4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+        <line x1="10.6" y1="10.6" x2="11.6" y2="11.6" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+        <line x1="11.6" y1="2.4" x2="10.6" y2="3.4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+        <line x1="3.4" y1="10.6" x2="2.4" y2="11.6" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+      </svg>
+      <span class="theme-toggle-label">Light</span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <!-- Mashrabiya lattice — 10-point star Islamic geometric pattern -->
+    <div class="hero-lattice" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+        <defs>
+          <!--
+            10-point star tessellation.
+            Tile size: 100 × 100. Two stars offset on a brick grid.
+            Each star: 10 outer points at r=38, inner notch at r=22.
+            Connectors link adjacent stars through pentagon/hexagon gaps.
+          -->
+          <pattern id="mash" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+            <g fill="none" stroke="var(--text)" stroke-width="0.55" stroke-linejoin="round">
+
+              <!-- Star at (50, 50) — 10 points, 36° apart, inner radius 22, outer 38 -->
+              <polygon points="
+                50,12   57.6,27.6  74.1,19.8  68.3,36.1  84.5,43.3
+                76.1,57.6 84.5,70.7 66.1,68.2  62.9,86.6  50,77.5
+                37.1,86.6 33.9,68.2 15.5,70.7 23.9,57.6  15.5,43.3
+                31.7,36.1 25.9,19.8 42.4,27.6
+              "/>
+
+              <!-- Inner star ring — connects inner notch points to form nested star -->
+              <polygon points="
+                50,26   56.2,35.1  67.1,31.7  62.8,42.5  73.5,48.3
+                66.1,57.6 70.2,68.2 59.0,65.3  55.4,76.2  50,69.5
+                44.6,76.2 41.0,65.3 29.8,68.2  33.9,57.6  26.5,48.3
+                37.2,42.5 32.9,31.7 43.8,35.1
+              "/>
+
+              <!-- Connector lines from star points to tile edges (link to adjacent stars) -->
+              <!-- Top -->
+              <line x1="50" y1="12" x2="50" y2="0"/>
+              <!-- Top-right -->
+              <line x1="74.1" y1="19.8" x2="100" y2="0"/>
+              <!-- Right -->
+              <line x1="84.5" y1="43.3" x2="100" y2="43.3"/>
+              <line x1="84.5" y1="70.7" x2="100" y2="70.7"/>
+              <!-- Bottom-right -->
+              <line x1="62.9" y1="86.6" x2="75" y2="100"/>
+              <!-- Bottom -->
+              <line x1="50" y1="86.6" x2="50" y2="100"/>
+              <!-- Bottom-left -->
+              <line x1="37.1" y1="86.6" x2="25" y2="100"/>
+              <!-- Left -->
+              <line x1="15.5" y1="43.3" x2="0" y2="43.3"/>
+              <line x1="15.5" y1="70.7" x2="0" y2="70.7"/>
+              <!-- Top-left -->
+              <line x1="25.9" y1="19.8" x2="0" y2="0"/>
+
+              <!-- Pentagon fill lines between star tips -->
+              <polyline points="57.6,27.6 74.1,19.8"/>
+              <polyline points="68.3,36.1 84.5,43.3"/>
+              <polyline points="76.1,57.6 84.5,70.7"/>
+              <polyline points="66.1,68.2 62.9,86.6"/>
+              <polyline points="37.1,86.6 33.9,68.2"/>
+              <polyline points="15.5,70.7 23.9,57.6"/>
+              <polyline points="15.5,43.3 31.7,36.1"/>
+              <polyline points="25.9,19.8 42.4,27.6"/>
+
+            </g>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#mash)"/>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot"></span>
+        Product Designer · Seattle, WA
+      </div>
+      <h1 class="hero-name">
+        Warisha
+        <span class="hero-name-last">Soomro</span>
+      </h1>
+      <p class="hero-statement">Designing with intent, judgment, and restraint.</p>
+    </div>
+    <div class="hero-meta">
+      <span class="hero-meta-line">MS HCDE</span>
+      <span class="hero-meta-line">University of Washington</span>
+    </div>
+  </section>
+
+  <!-- STATS — updated: 200+ students, 2 side projects shipped -->
+  <section class="stats">
+    <div class="stat r"><div class="stat-num">$137M</div><div class="stat-desc">EBITDA Projected</div></div>
+    <div class="stat r d1"><div class="stat-num">$3.3M</div><div class="stat-desc">Annual Savings</div></div>
+    <div class="stat r d2"><div class="stat-num">200+</div><div class="stat-desc">Design Students Taught</div></div>
+    <div class="stat r d3"><div class="stat-num">2</div><div class="stat-desc">Side Projects Shipped</div></div>
+  </section>
+
+  <!-- WORK -->
+  <section class="work" id="work">
+    <div class="section-header r">
+      <span class="label">Selected Work</span>
+      <span class="section-count">02 case studies</span>
+    </div>
+    <div class="cards">
+      <a class="card r" href="chronicle.html">
+        <img class="card-img" src="chronicle_screen.svg" alt="Chronicle — AI surgical documentation"/>
+        <div class="card-scrim"></div>
+        <span class="card-badge">View case study ↗</span>
+        <div class="card-body">
+          <div class="card-cat">AI Product · 0→1 · Healthcare</div>
+          <h2 class="card-title">Chronicle</h2>
+          <p class="card-meta">AI-powered surgical documentation · UW Medicine · Brave Award</p>
+        </div>
+      </a>
+      <a class="card r d1" href="att.html">
+        <img class="card-img" src="att_screen.svg" alt="AT&T Customer Connect portal"/>
+        <div class="card-scrim"></div>
+        <span class="card-badge">View case study ↗</span>
+        <div class="card-body">
+          <div class="card-cat">Enterprise UX · Omnichannel · Compliance</div>
+          <h2 class="card-title">AT&T Customer Connect</h2>
+          <p class="card-meta">Agent portal · $137M EBITDA impact · FCC-mandated flows</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ABOUT — no experience table here -->
+  <section class="about" id="about">
+    <div class="about-left r">
+      <div class="label">About</div>
+      <h2 class="about-hed">Design is a decision-making discipline.</h2>
+    </div>
+    <div class="about-right r d1">
+      <p class="about-body">I'm Warisha — a product designer with roots in mission-driven organizations and enterprise-scale products. I design at the intersection of <strong>AI, compliance, and human complexity</strong> — from surgical operating rooms to federal telecommunications mandates.</p>
+      <p class="about-body">I hold an MS in Human Centered Design &amp; Engineering from the University of Washington, where I led the design of a patent-pending AI tool recognized for innovation. Good design earns trust through decisions that are clearly reasoned and rigorously tested.</p>
+    </div>
+  </section>
+
+  <!-- TIMELINE — experience lives here only -->
+  <section class="timeline" id="exp">
+    <div class="label">Experience</div>
+    <div class="tl-grid r">
+      <div class="tl-sidebar">
+        <div class="label">Where I've been</div>
+        <h2 class="tl-hed">Senior across domains. Consistent in craft.</h2>
+      </div>
+      <div class="tl-items">
+
+        <div class="tl-item">
+          <div class="tl-date-col"><span class="tl-date">2024–Now</span></div>
+          <div class="tl-content">
+            <div class="tl-role">Product Designer</div>
+            <div class="tl-org">AT&T — Mass Markets &amp; Purchasing</div>
+            <div class="tl-desc">Designed end-to-end omnichannel device-return journeys across desktop, mobile, and tablet — transforming complex compliance processes into consumer-grade experiences projected to deliver $137M EBITDA. Redesigned FCC-mandated passcode reset flows, saving $3.3M annually. Contributed scalable patterns to the AT&T design system.</div>
+            <div class="tl-tags"><span class="tl-tag">Enterprise UX</span><span class="tl-tag">Omnichannel</span><span class="tl-tag">FCC Compliance</span><span class="tl-tag">Design System</span></div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date-col"><span class="tl-date">2024</span></div>
+          <div class="tl-content">
+            <div class="tl-role">Lead Designer · UX Consultant</div>
+            <div class="tl-org">Chronicle — UW Medicine Otolaryngology</div>
+            <div class="tl-desc">Led product design on a 0→1 AI interface for surgeons, turning hours-long endoscopic surgery videos into intelligent 15-minute highlight reels. Assembled and directed a senior cross-functional team from Microsoft, Amazon, and CrowdStrike. Recognized with the Brave Award for Innovation in AI.</div>
+            <div class="tl-tags"><span class="tl-tag">AI Product</span><span class="tl-tag">0→1</span><span class="tl-tag">Healthcare</span><span class="tl-tag">Patent Pending</span></div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date-col"><span class="tl-date">2023</span></div>
+          <div class="tl-content">
+            <div class="tl-role">Functional Design Lead</div>
+            <div class="tl-org">Black Venture Capital Consortium</div>
+            <div class="tl-desc">Supported and led design teams in preparing to ship a 0→1 product. Managed cross-functional alignment across design, product, and engineering in an early-stage environment.</div>
+            <div class="tl-tags"><span class="tl-tag">0→1 Strategy</span></div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date-col"><span class="tl-date">Prior</span></div>
+          <div class="tl-content">
+            <div class="tl-role">Director of Design &amp; Partnerships</div>
+            <div class="tl-org">Humanitarian Tracker</div>
+            <div class="tl-desc">Led digital transformation across website, brand, and a crowdsourced data-entry platform for a mission-driven humanitarian data organization.</div>
+            <div class="tl-tags"><span class="tl-tag">Brand</span><span class="tl-tag">Digital Transformation</span></div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date-col"><span class="tl-date">Prior</span></div>
+          <div class="tl-content">
+            <div class="tl-role">Founder</div>
+            <div class="tl-org">Abroaden — Cultural Discovery App</div>
+            <div class="tl-desc">Founded and shipped a consumer app allowing users to discover cultural experiences locally. End-to-end product ownership from concept to launch.</div>
+            <div class="tl-tags"><span class="tl-tag">Founder</span><span class="tl-tag">Consumer</span><span class="tl-tag">Shipped</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-left r">
+      <div class="label">Contact</div>
+      <h2 class="contact-hed">Let's make something worth making.</h2>
+    </div>
+    <div class="contact-right r d1">
+      <div class="contact-links">
+        <a href="/cdn-cgi/l/email-protection#254d4049494a655244574c564d44564a4a48574a0b464a48" class="contact-link">
+          <div class="cl-left"><span class="cl-label">Email</span><span class="cl-val"><span class="__cf_email__" data-cfemail="234b464f4f4c635442514a504b42504c4c4e514c0d404c4e">[email&#160;protected]</span></span></div>
+          <span class="cl-arrow">↗</span>
+        </a>
+        <a href="https://linkedin.com/in/warishasoomro" target="_blank" class="contact-link">
+          <div class="cl-left"><span class="cl-label">LinkedIn</span><span class="cl-val">linkedin.com/in/warishasoomro</span></div>
+          <span class="cl-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="f-copy">Warisha Soomro · Product Designer · 2025</span>
+    <ul class="f-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#exp">Experience</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    // ── Theme — persists across all pages via localStorage ──
+    const THEME_KEY = 'ws-theme';
+    const root      = document.documentElement;
+    const toggle    = document.getElementById('themeToggle');
+    const label     = toggle.querySelector('.theme-toggle-label');
+    const iconMoon  = document.getElementById('icon-moon');
+    const iconSun   = document.getElementById('icon-sun');
+
+    function applyTheme(theme) {
+      if (theme === 'light') {
+        root.setAttribute('data-theme', 'light');
+        // Currently light — toggling goes to dark, show moon + "Dark"
+        iconSun.style.display  = 'none';
+        iconMoon.style.display = 'block';
+        label.textContent = 'Dark';
+      } else {
+        root.removeAttribute('data-theme');
+        // Currently dark — toggling goes to light, show sun + "Light"
+        iconMoon.style.display = 'none';
+        iconSun.style.display  = 'block';
+        label.textContent = 'Light';
+      }
+    }
+
+    applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
+
+    toggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      localStorage.setItem(THEME_KEY, next);
+      applyTheme(next);
+    });
+
+    // ── Nav ──
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40));
+
+    // ── Scroll reveal ──
+    const obs = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('v'); obs.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.r').forEach(el => obs.observe(el));
+
+  </script>
+</body>
+</html>

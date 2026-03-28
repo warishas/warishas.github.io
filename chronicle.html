@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chronicle — Warisha Soomro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+
+  /* ── CASE HERO ───────────────────────────── */
+  .case-hero {
+    padding: 6rem 2.5rem 4rem;
+    border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: 7fr 5fr; gap: 5rem; align-items: end;
+    position: relative;
+  }
+  .case-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px; opacity: 0.2; pointer-events: none;
+  }
+  .case-hero > * { position: relative; z-index: 1; }
+
+  .back {
+    position: fixed; top: 0; right: 0; height: 52px; z-index: 300;
+    display: flex; align-items: center;
+    padding: 0 2.5rem; gap: 0.5rem;
+    font-size: 12px; font-weight: 400; letter-spacing: 0.04em;
+    color: var(--text-2); text-decoration: none;
+    border-left: 1px solid var(--border);
+    transition: color .15s, background .15s;
+  }
+  .back:hover { color: var(--text); background: var(--surface); }
+
+  .case-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .case-tag {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-3);
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 0.2rem 0.5rem;
+  }
+  .case-tag.hi { color: var(--accent-lt); border-color: var(--accent); background: rgba(91,127,166,.1); }
+
+  .case-title {
+    font-size: clamp(2.5rem, 5vw, 5.5rem);
+    font-weight: 300; line-height: 0.95;
+    letter-spacing: -0.02em; color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+  .case-title small {
+    display: block; font-size: 0.38em; font-weight: 400;
+    letter-spacing: 0.01em; color: var(--text-3);
+    margin-top: 0.5rem; line-height: 1.4;
+  }
+
+  .case-tagline {
+    font-size: 14px; font-weight: 400; color: var(--text-2);
+    max-width: 40ch; line-height: 1.75;
+    padding-left: 1rem; border-left: 2px solid var(--accent);
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .meta-item {}
+  .meta-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0.35rem; }
+  .meta-val   { font-size: 13px; font-weight: 400; color: var(--text-2); line-height: 1.5; }
+
+  /* ── HERO IMAGE ───────────────────────────── */
+  .case-img-wrap {
+    width: 100%; aspect-ratio: 16/8; overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .case-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block;
+  }
+
+  /* ── CASE STATS ───────────────────────────── */
+  .case-stats {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    border-bottom: 1px solid var(--border);
+  }
+  .cs { padding: 2.5rem; border-right: 1px solid var(--border); }
+  .cs:last-child { border-right: none; }
+  .cs-num {
+    font-size: clamp(1.4rem, 2.2vw, 2.4rem);
+    font-weight: 300; letter-spacing: -0.01em; line-height: 1; margin-bottom: 0.5rem; color: var(--text);
+  }
+  .cs:first-child .cs-num { color: var(--accent-lt); }
+  .cs-desc { font-size: 11px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); }
+
+  /* ── BODY ─────────────────────────────────── */
+  .case-body { display: grid; grid-template-columns: 200px 1fr; border-top: none; }
+
+  .case-toc {
+    border-right: 1px solid var(--border);
+    padding: 3rem 1.5rem;
+    position: sticky; top: 52px; align-self: start;
+    max-height: calc(100vh - 52px); overflow-y: auto;
+  }
+  .toc-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0; }
+  .toc-links { display: flex; flex-direction: column; gap: 0; margin-top: 1.5rem; }
+  .toc-link {
+    font-size: 12px; font-weight: 400; color: var(--text-3);
+    text-decoration: none; padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm); transition: color .15s, background .15s, border-left-color .15s;
+    border-left: 2px solid transparent;
+  }
+  .toc-link:hover { color: var(--text-2); background: var(--surface); border-left-color: var(--border-hi); }
+  .toc-link.active { color: var(--accent-lt); border-left-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+
+  .case-sections { }
+
+  .section {
+    padding: 4rem 3rem; border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .s-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 1.5rem; }
+  .s-hed {
+    font-size: clamp(1.2rem, 1.8vw, 1.7rem);
+    font-weight: 300; line-height: 1.3; letter-spacing: -0.01em;
+    color: var(--text); margin-bottom: 1.5rem;
+  }
+  .s-body {
+    font-size: 14px; font-weight: 400; color: var(--text-2);
+    line-height: 1.8; max-width: 60ch; margin-bottom: 1.25rem;
+  }
+  .s-body:last-child { margin-bottom: 0; }
+  .s-body strong { color: var(--text); font-weight: 500; }
+
+  /* Pull quote */
+  .pull {
+    margin: 2rem 0; padding: 1.5rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0;
+  }
+  .pull-text { font-size: 15px; font-weight: 300; line-height: 1.6; color: var(--text); margin-bottom: 0.5rem; font-style: italic; }
+  .pull-attr { font-size: 11px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-3); }
+
+  /* Grid layouts */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-top: 1.5rem; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); margin-top: 1.5rem; }
+  .grid-cell { background: var(--surface); padding: 1.75rem; }
+  .cell-n { font-size: 2rem; font-weight: 300; color: var(--border-hi); line-height: 1; margin-bottom: 0.75rem; }
+  .cell-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 0.4rem; }
+  .cell-body { font-size: 12px; font-weight: 400; color: var(--text-2); line-height: 1.7; }
+  .cell-note { margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border); font-size: 11px; color: var(--accent-lt); }
+
+  /* Decision list */
+  .decision { padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
+  .decision:first-child { border-top: 1px solid var(--border); margin-top: 1.5rem; }
+  .d-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-lt); margin-bottom: 0.5rem; }
+  .d-text { font-size: 13px; font-weight: 400; color: var(--text-2); line-height: 1.8; }
+  .d-text strong { color: var(--text); font-weight: 500; }
+
+  /* Principles */
+  .principle { display: grid; grid-template-columns: 2rem 1fr; gap: 1rem; padding: 1.25rem 0; border-bottom: 1px solid var(--border); align-items: start; }
+  .principle:first-child { border-top: 1px solid var(--border); margin-top: 1.5rem; }
+  .p-n { font-size: 12px; font-weight: 500; color: var(--text-3); padding-top: 0.1rem; }
+  .p-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 0.2rem; }
+  .p-desc { font-size: 12px; font-weight: 400; color: var(--text-2); line-height: 1.7; }
+
+  /* Team */
+  .team-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 1px; background: var(--border); margin-top: 1.5rem; }
+  .team-card { background: var(--surface); padding: 1.25rem; }
+  .team-init { width: 2rem; height: 2rem; border-radius: var(--radius); background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--text-3); margin-bottom: 0.6rem; }
+  .team-init.you { background: rgba(91,127,166,.2); border-color: var(--accent); color: var(--accent-lt); }
+  .team-name { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 0.15rem; }
+  .team-co   { font-size: 11px; font-weight: 400; color: var(--text-3); line-height: 1.4; }
+  .team-role-badge { display: inline-block; margin-top: 0.4rem; font-size: 9px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-lt); background: rgba(91,127,166,.1); border: 1px solid rgba(91,127,166,.3); border-radius: var(--radius-sm); padding: 0.15rem 0.4rem; }
+
+  /* Outcome */
+  .outcome-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); margin-top: 1.5rem; }
+  .oc { background: var(--surface-2); padding: 2rem; border-top: 2px solid var(--accent); }
+  .oc-val { font-size: 2rem; font-weight: 300; letter-spacing: -0.01em; color: var(--text); margin-bottom: 0.4rem; line-height: 1; }
+  .oc-desc { font-size: 12px; font-weight: 400; color: var(--text-3); line-height: 1.6; }
+
+  /* Next */
+  .next {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 2.5rem; background: var(--surface);
+    border-top: 1px solid var(--border); text-decoration: none; color: var(--text);
+    transition: background .15s;
+  }
+  .next:hover { background: var(--surface-2); }
+  .next-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0.35rem; }
+  .next-title { font-size: 1.4rem; font-weight: 300; color: var(--text); letter-spacing: -0.01em; }
+  .next-arrow { font-size: 1.2rem; color: var(--text-3); transition: transform .2s; }
+  .next:hover .next-arrow { transform: translateX(5px); color: var(--text-2); }
+
+  @media (max-width: 900px) {
+    .case-hero { grid-template-columns: 1fr; gap: 2.5rem; padding: 5rem 1.25rem 3rem; }
+    .case-stats { grid-template-columns: 1fr 1fr; }
+    .cs { border-right: none; border-bottom: 1px solid var(--border); }
+    .cs:nth-child(odd) { border-right: 1px solid var(--border); }
+    .case-body { grid-template-columns: 1fr; }
+    .case-toc { display: none; }
+    .section { padding: 3rem 1.25rem; }
+    .two-col, .three-col { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .outcome-row { grid-template-columns: 1fr; }
+    .next { padding: 2rem 1.25rem; }
+  }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html" class="logo">
+      <span class="logo-first">Warisha&nbsp;</span><span class="logo-last">Soomro</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#exp">Experience</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg id="icon-moon" class="icon-moon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.5 8.5A5.5 5.5 0 0 1 5.5 1.5a5.5 5.5 0 1 0 7 7z" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg id="icon-sun" class="icon-sun" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none"><circle cx="7" cy="7" r="2.5" stroke="currentColor" stroke-width="1.1"/><line x1="7" y1="0.5" x2="7" y2="2" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><line x1="7" y1="12" x2="7" y2="13.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><line x1="0.5" y1="7" x2="2" y2="7" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><line x1="12" y1="7" x2="13.5" y2="7" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><line x1="2.4" y1="2.4" x2="3.4" y2="3.4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><line x1="10.6" y1="10.6" x2="11.6" y2="11.6" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><line x1="11.6" y1="2.4" x2="10.6" y2="3.4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><line x1="3.4" y1="10.6" x2="2.4" y2="11.6" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+        <span class="theme-toggle-label">Light</span>
+      </button>
+      <a href="index.html" class="back">← All work</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="case-hero">
+    <div>
+      <div class="case-tags">
+        <span class="case-tag hi">AI Product</span>
+        <span class="case-tag">0→1</span>
+        <span class="case-tag">Healthcare</span>
+        <span class="case-tag">Patent Pending</span>
+        <span class="case-tag">Brave Award</span>
+      </div>
+      <h1 class="case-title">
+        Chronicle
+        <small>Enhancing surgical documentation with AI-powered video summarization</small>
+      </h1>
+      <p class="case-tagline">Giving surgeons a way to see what they've done — clearly, quickly, and on their terms.</p>
+    </div>
+    <div class="meta-grid">
+      <div class="meta-item"><div class="meta-label">Role</div><div class="meta-val">Lead Product Designer · Team Assembly</div></div>
+      <div class="meta-item"><div class="meta-label">Sponsor</div><div class="meta-val">Dr. Lingga Adidharma, UW Medicine</div></div>
+      <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-val">6 months · UW HCDE MS Capstone 2024</div></div>
+      <div class="meta-item"><div class="meta-label">Recognition</div><div class="meta-val">Brave Award for Innovation in AI</div></div>
+    </div>
+  </div>
+
+  <!-- IMAGE -->
+  <div class="case-img-wrap">
+    <img src="chronicle_screen.svg" alt="Chronicle surgical AI interface"/>
+  </div>
+
+  <!-- STATS -->
+  <div class="case-stats">
+    <div class="cs"><div class="cs-num">6 hrs</div><div class="cs-desc">→ 15 min highlight reel</div></div>
+    <div class="cs"><div class="cs-num">84%</div><div class="cs-desc">Algorithm accuracy</div></div>
+    <div class="cs"><div class="cs-num">0→1</div><div class="cs-desc">No UI existed before</div></div>
+    <div class="cs"><div class="cs-num">Award</div><div class="cs-desc">Brave Award · AI Innovation</div></div>
+  </div>
+
+  <!-- BODY -->
+  <div class="case-body">
+    <nav class="case-toc">
+      <div class="toc-label">Sections</div>
+      <div class="toc-links">
+        <a href="#problem" class="toc-link">Problem</a>
+        <a href="#team" class="toc-link">Team</a>
+        <a href="#research" class="toc-link">Research</a>
+        <a href="#principles" class="toc-link">Principles</a>
+        <a href="#decisions" class="toc-link">Decisions</a>
+        <a href="#product" class="toc-link">Product</a>
+        <a href="#outcome" class="toc-link">Outcome</a>
+      </div>
+    </nav>
+
+    <div class="case-sections">
+
+      <div class="section r" id="problem">
+        <div class="s-label">The Problem</div>
+        <h2 class="s-hed">A powerful algorithm. No way to use it.</h2>
+        <p class="s-body">Dr. Lingga Adidharma, an otolaryngology surgery resident at UW Medicine, had developed a patent-pending AI algorithm capable of condensing a 6-hour endoscopic surgery video into a 15-minute highlight reel. The algorithm had 84% accuracy, reducing irrelevant scenes to just 1%.</p>
+        <p class="s-body">The problem: <strong>there was no interface to view or edit the output.</strong> Video conversion was done manually with the help of an engineer. We were brought in to build the entire interaction model from scratch.</p>
+        <p class="s-body">Our design question: <strong>How might digital imagery improve surgeons' recall, collaboration, and time — in order to improve patient outcomes?</strong></p>
+      </div>
+
+      <div class="section r" id="team">
+        <div class="s-label">The Team</div>
+        <h2 class="s-hed">Assembled for depth of expertise.</h2>
+        <p class="s-body">I put together a senior cross-functional team drawn from Microsoft, Amazon, CrowdStrike, and Alaska Airlines. I led product design end-to-end and was recognized by the judging panel for the visual design.</p>
+        <div class="team-grid">
+          <div class="team-card"><div class="team-init you">WS</div><div class="team-name">Warisha Soomro</div><div class="team-co">AT&T</div><span class="team-role-badge">Lead Design</span></div>
+          <div class="team-card"><div class="team-init">JD</div><div class="team-name">Jenn dela Cruz</div><div class="team-co">UX Manager, Amazon</div></div>
+          <div class="team-card"><div class="team-init">HL</div><div class="team-name">Helen Ling</div><div class="team-co">Sr. Researcher, Microsoft</div></div>
+          <div class="team-card"><div class="team-init">AK</div><div class="team-name">Ariel Koh</div><div class="team-co">Sr. Designer, CrowdStrike</div></div>
+          <div class="team-card"><div class="team-init">JP</div><div class="team-name">Jack Patten</div><div class="team-co">Sr. PM, Alaska Airlines</div></div>
+        </div>
+      </div>
+
+      <div class="section r" id="research">
+        <div class="s-label">Discovery</div>
+        <h2 class="s-hed">What surgeons actually needed.</h2>
+        <div class="pull">
+          <p class="pull-text">Having objective information is much more helpful than subjective information. Go to an art museum — no two people will describe the same painting the same way.</p>
+          <p class="pull-attr">Experienced Surgeon · In-depth Interview</p>
+        </div>
+        <p class="s-body">We conducted on-site contextual inquiry at Harborview Hospital, mapping the surgeon's physical workflow. Then we ran 1:1 in-depth interviews with attending surgeons who perform endoscopic procedures. Secondary research covered medical AI literature, HIPAA constraints, and competitive video tools.</p>
+        <div class="two-col">
+          <div class="grid-cell"><div class="cell-n">01</div><div class="cell-title">Accuracy, efficiency, and brevity are constantly competing</div><div class="cell-body">Surgeons lose detail when pressed for time. Tasks are largely manual with no digital assistance.</div><div class="cell-note">→ Reduce manual effort, increase accuracy</div></div>
+          <div class="grid-cell"><div class="cell-n">02</div><div class="cell-title">Written notes are inherently subjective</div><div class="cell-body">Text interpreted inconsistently. Templates bias toward generic descriptions. Images and video are objective.</div><div class="cell-note">→ Use imagery to be objective and salient</div></div>
+          <div class="grid-cell"><div class="cell-n">03</div><div class="cell-title">Lack of digital imagery causes repeated procedures</div><div class="cell-body">Repeated scans due to unclear documentation. Accurate text may not convey urgency.</div><div class="cell-note">→ Add imagery at handoffs and consultations</div></div>
+          <div class="grid-cell"><div class="cell-n">04</div><div class="cell-title">Memory recall is an acknowledged problem</div><div class="cell-body">Notes written after the fact — sometimes days later. Multiple similar surgeries blur together.</div><div class="cell-note">→ Use wayfinding to aid recall</div></div>
+        </div>
+      </div>
+
+      <div class="section r" id="principles">
+        <div class="s-label">Design Principles</div>
+        <h2 class="s-hed">Five anchors we returned to every week.</h2>
+        <div>
+          <div class="principle"><span class="p-n">01</span><div><div class="p-name">Efficient and integrated process</div><div class="p-desc">Seamlessly integrate into existing workflows. Key tasks should take only minutes.</div></div></div>
+          <div class="principle"><span class="p-n">02</span><div><div class="p-name">Collaborative and inclusive</div><div class="p-desc">Involve surgeons throughout. Recognize generational differences in tool preferences.</div></div></div>
+          <div class="principle"><span class="p-n">03</span><div><div class="p-name">Utility focus with specific impact</div><div class="p-desc">Prioritize functionality over aesthetics. Right multimedia format for each use case.</div></div></div>
+          <div class="principle"><span class="p-n">04</span><div><div class="p-name">Practical first, speculative second</div><div class="p-desc">Ship a basic, quickly deployable UI. Build roadmap for future enhancements — don't delay MVP.</div></div></div>
+          <div class="principle"><span class="p-n">05</span><div><div class="p-name">Don't put AI on a pedestal</div><div class="p-desc">Design as if training a human assistant. Empower surgeons with control. Outcomes, not technology showcase.</div></div></div>
+        </div>
+      </div>
+
+      <div class="section r" id="decisions">
+        <div class="s-label">Key Decisions</div>
+        <h2 class="s-hed">Where judgment calls lived.</h2>
+        <div>
+          <div class="decision"><div class="d-label">Decision 1 — AI Transparency</div><div class="d-text">We designed explicit visual differentiation between <strong>AI-generated tags (star icon)</strong> and <strong>surgeon-created tags (person icon)</strong>. A confirmation modal before publishing ensures surgeons acknowledge AI-generated content. AI omission is a real risk — the surgeon stays accountable.</div></div>
+          <div class="decision"><div class="d-label">Decision 2 — Phase-Aware Timeline</div><div class="d-text">The highlight reel timeline is <strong>color-coded by surgical phase</strong> (Approach, Removal, Reconstruction). Selecting a clip jumps to that timestamp with phase context — directly addressing the memory recall problem without re-watching footage.</div></div>
+          <div class="decision"><div class="d-label">Decision 3 — Proposed / Confirmed / All</div><div class="d-text">The algorithm suggests clips, but surgeons have final authority. The <strong>three-tab system</strong> gives a clear mental model: what AI recommends, what you've approved, everything. This emerged directly from evaluative testing where the control model was initially unclear.</div></div>
+          <div class="decision"><div class="d-label">Decision 4 — Scoping the MVP</div><div class="d-text">The immediate use case is <strong>academic and educational</strong> — not operative notes — because that's where surgeons get value fastest. EMR integration and patient sharing were roadmapped, deliberately excluded from V1. Clarity over completeness.</div></div>
+        </div>
+      </div>
+
+      <div class="section r" id="product">
+        <div class="s-label">The Product</div>
+        <h2 class="s-hed">Chronicle — what we shipped.</h2>
+        <p class="s-body">A web application giving surgeons the ability to view and manage surgical video highlight reels as a supplement to their operative notes.</p>
+        <div class="three-col">
+          <div class="grid-cell"><div class="cell-title">Highlight Reel Player</div><div class="cell-body">Phase-aware video timeline, color-coded by surgical phase. Clicking a clip jumps to that timestamp.</div></div>
+          <div class="grid-cell"><div class="cell-title">Bookmark Management</div><div class="cell-body">Proposed → Confirmed → All tab structure. Surgeons approve AI suggestions or add their own bookmarks.</div></div>
+          <div class="grid-cell"><div class="cell-title">AI + User Tags</div><div class="cell-body">Structured taxonomy for searchable clip organization. Star = AI-generated. Person = surgeon-created.</div></div>
+          <div class="grid-cell"><div class="cell-title">Smart Search</div><div class="cell-body">Search across clips, tags, and phases — within a surgery or across an entire library of recorded procedures.</div></div>
+          <div class="grid-cell"><div class="cell-title">AI Responsibility Modal</div><div class="cell-body">Surgeons must confirm review of all AI-generated content before publishing. Accountability built in.</div></div>
+          <div class="grid-cell"><div class="cell-title">Publish &amp; Share</div><div class="cell-body">Export highlight reels with linked clips for colleagues, residents, and academic use.</div></div>
+        </div>
+      </div>
+
+      <div class="section r" id="outcome">
+        <div class="s-label">Outcome</div>
+        <h2 class="s-hed">What we left behind.</h2>
+        <p class="s-body">Chronicle was recognized with the Brave Award for Innovation in AI at the UW HCDE Capstone. The visual design was specifically called out by the judging panel. The algorithm's patent is pending and the interface is in active development.</p>
+        <div class="outcome-row">
+          <div class="oc"><div class="oc-val">Award</div><div class="oc-desc">Brave Award for Innovation in AI — UW HCDE judging panel</div></div>
+          <div class="oc"><div class="oc-val">Patent</div><div class="oc-desc">Provisional filing. Interface in active development.</div></div>
+          <div class="oc"><div class="oc-val">0→1</div><div class="oc-desc">No interface existed before this project. Complete interaction model built from scratch.</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <a href="att.html" class="next">
+    <div><div class="next-label">Next case study</div><div class="next-title">AT&T Customer Connect</div></div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <footer>
+    <span class="f-copy">Warisha Soomro · Product Designer · 2025</span>
+    <ul class="f-links">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#exp">Experience</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    const THEME_KEY = 'ws-theme';
+    const root      = document.documentElement;
+    const toggle    = document.getElementById('themeToggle');
+    const label     = toggle.querySelector('.theme-toggle-label');
+    const iconMoon  = document.getElementById('icon-moon');
+    const iconSun   = document.getElementById('icon-sun');
+
+    function applyTheme(theme) {
+      if (theme === 'light') {
+        root.setAttribute('data-theme', 'light');
+        iconSun.style.display  = 'none';
+        iconMoon.style.display = 'block';
+        label.textContent = 'Dark';
+      } else {
+        root.removeAttribute('data-theme');
+        iconMoon.style.display = 'none';
+        iconSun.style.display  = 'block';
+        label.textContent = 'Light';
+      }
+    }
+
+    applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
+
+    toggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      localStorage.setItem(THEME_KEY, next);
+      applyTheme(next);
+    });
+
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40));
+
+    const obs = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('v'); obs.unobserve(e.target); } });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.r').forEach(el => obs.observe(el));
+
+    const sections = document.querySelectorAll('.section[id]');
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const tocObs = new IntersectionObserver(es => {
+      es.forEach(e => {
+        if (e.isIntersecting) {
+          tocLinks.forEach(l => l.classList.remove('active'));
+          const link = document.querySelector(`.toc-link[href="#${e.target.id}"]`);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    sections.forEach(s => tocObs.observe(s));
+  </script>
+</body>
+</html>
