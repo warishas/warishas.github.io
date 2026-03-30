@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chronicle — Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,800;0,6..96,900;1,6..96,400;1,6..96,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-2: #3a3632;
+    --ink-3: #7a776f;
+    --paper: #e8e3db;
+    --paper-2: #dfd9d0;
+    --paper-3: #d4cec4;
+    --accent: #8b1a1a;
+    --accent-light: #f2d9d9;
+    --accent-mid: #c0392b;
+    --teal: #0d5a72;
+    --teal-light: #cce8f0;
+    --amber: #b85c0a;
+    --amber-light: #fde9d1;
+    --red: #8b1a1a;
+    --rule: rgba(26,26,26,0.1);
+    --serif: 'Bodoni Moda', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --mono: 'Inter', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+    background: rgba(232,227,219,0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-left { display: flex; flex-direction: column; gap: 3px; text-decoration: none; }
+  .nav-name {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--ink); text-decoration: none;
+  }
+  .nav-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--ink); flex-shrink: 0;
+  }
+  .nav-back {
+    font-size: 10px; font-weight: 300; color: var(--ink-3);
+    letter-spacing: 0.05em; margin-left: 17px;
+  }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.15em;
+    text-transform: uppercase; color: rgba(26,26,26,0.5);
+    text-decoration: none; transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-badge {
+    font-family: var(--sans); font-size: 10px; font-weight: 600;
+    background: var(--accent); color: #fff; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px; border-radius: 999px;
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+  .container--wide { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  section { padding: 5rem 0; }
+  section + section { border-top: 1px solid var(--rule); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 9rem 0 5rem;
+    background: var(--paper);
+  }
+  .hero-eyebrow {
+    font-family: var(--mono); font-size: 12px; font-weight: 500;
+    color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 32px; height: 1px; background: var(--accent);
+  }
+  .hero h1 {
+    font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 4.8rem);
+    line-height: 1.05; letter-spacing: -0.03em;
+    color: var(--ink); max-width: 820px; margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent-mid); font-weight: 400; }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--ink-2); max-width: 580px;
+    line-height: 1.7; margin-bottom: 2.5rem; font-weight: 300;
+  }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 2rem;
+    padding-top: 2.5rem; border-top: 1px solid var(--rule);
+  }
+  .hero-meta-item { }
+  .hero-meta-item dt { font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+  .hero-meta-item dd { font-size: 14px; font-weight: 500; color: var(--ink); }
+
+  /* ── AWARD BANNER ── */
+  .award-banner {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2828 100%);
+    color: #fff; padding: 2rem; border-radius: 12px;
+    display: flex; align-items: center; gap: 1.5rem;
+    margin: 3rem 0;
+  }
+  .award-icon {
+    font-size: 2.5rem; flex-shrink: 0;
+    width: 64px; height: 64px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  }
+  .award-text strong { display: block; font-size: 1.1rem; font-weight: 600; margin-bottom: 4px; }
+  .award-text p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.5; }
+
+  /* ── SECTION HEADERS ── */
+  .section-label {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--accent); }
+  h2 {
+    font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.1; letter-spacing: -0.025em; color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  h3 {
+    font-family: var(--sans); font-size: 1.1rem; font-weight: 600;
+    color: var(--ink); margin-bottom: 0.6rem;
+  }
+  p { color: var(--ink-2); line-height: 1.75; margin-bottom: 1rem; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── PULLQUOTE ── */
+  .pullquote {
+    border-left: 3px solid var(--accent);
+    padding: 1.5rem 2rem; margin: 2.5rem 0;
+    background: var(--accent-light);
+    border-radius: 0 8px 8px 0;
+  }
+  .pullquote p {
+    font-family: var(--serif); font-size: 1.3rem; font-style: italic;
+    color: var(--ink); line-height: 1.5; margin-bottom: 0.5rem;
+  }
+  .pullquote cite { font-family: var(--mono); font-size: 12px; color: var(--ink-3); letter-spacing: 0.04em; }
+
+  /* ── STAT CARDS ── */
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem; margin: 2rem 0;
+  }
+  .stat-card {
+    background: var(--paper-2); border-radius: 10px;
+    padding: 1.25rem; text-align: center;
+  }
+  .stat-card .num {
+    font-family: var(--serif); font-size: 2.8rem; color: var(--accent);
+    line-height: 1; margin-bottom: 6px;
+  }
+  .stat-card .label { font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* ── INSIGHT CARDS ── */
+  .insight-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem; margin: 2rem 0;
+  }
+  .insight-card {
+    background: var(--paper); border: 1px solid var(--rule);
+    border-radius: 10px; padding: 1.5rem;
+    position: relative; overflow: hidden;
+  }
+  .insight-card::before {
+    content: attr(data-num);
+    font-family: var(--serif); font-size: 4rem; color: var(--paper-3);
+    position: absolute; top: -8px; right: 12px;
+    line-height: 1; font-weight: 400; z-index: 0;
+  }
+  .insight-card > * { position: relative; z-index: 1; }
+  .insight-card h3 { font-size: 15px; margin-bottom: 0.5rem; }
+  .insight-card p { font-size: 14px; margin-bottom: 0; }
+
+  /* ── PROCESS STEPS ── */
+  .process-steps { margin: 2rem 0; }
+  .process-step {
+    display: grid; grid-template-columns: 48px 1fr; gap: 1.5rem;
+    padding: 1.5rem 0; border-bottom: 1px solid var(--rule);
+  }
+  .process-step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: var(--mono); font-size: 12px; font-weight: 500;
+    color: var(--accent); letter-spacing: 0.04em;
+    padding-top: 2px;
+  }
+  .step-content h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .step-content p { font-size: 14px; margin-bottom: 0; }
+
+  /* ── DESIGN PRINCIPLE CARDS ── */
+  .principle-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem; margin: 2rem 0;
+  }
+  .principle-card {
+    padding: 1.25rem; border-radius: 8px;
+    border-left: 3px solid var(--accent);
+    background: var(--paper-2);
+  }
+  .principle-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .principle-card p { font-size: 13px; margin-bottom: 0; }
+
+  /* ── FEATURE BREAKDOWN ── */
+  .feature-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: start;
+    margin: 2.5rem 0; padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .feature-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .feature-row.flip { direction: rtl; }
+  .feature-row.flip > * { direction: ltr; }
+  .feature-visual {
+    background: var(--paper-2); border-radius: 12px;
+    border: 1px solid var(--rule); overflow: hidden;
+    aspect-ratio: 16/10;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .feature-visual svg { width: 90%; max-height: 90%; }
+  @media (max-width: 640px) {
+    .feature-row, .feature-row.flip { grid-template-columns: 1fr; direction: ltr; }
+    .feature-row.flip > * { direction: ltr; }
+  }
+
+  /* ── ETHICS BOX ── */
+  .ethics-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem; margin: 2rem 0;
+  }
+  .ethics-card {
+    padding: 1.25rem; background: var(--paper-2); border-radius: 8px;
+  }
+  .ethics-card .tag {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 20px; display: inline-block;
+    margin-bottom: 8px;
+  }
+  .tag-ai { background: var(--teal-light); color: var(--teal); }
+  .tag-privacy { background: var(--amber-light); color: var(--amber); }
+  .tag-autonomy { background: var(--accent-light); color: var(--accent); }
+
+  /* ── OUTCOME CALLOUTS ── */
+  .outcome-list { list-style: none; margin: 1.5rem 0; }
+  .outcome-list li {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 0.75rem 0; border-bottom: 1px solid var(--rule);
+    font-size: 15px; color: var(--ink-2);
+  }
+  .outcome-list li:last-child { border-bottom: none; }
+  .outcome-list li::before {
+    content: '→'; color: var(--accent); font-weight: 600;
+    flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* ── REFLECTION CARDS ── */
+  .reflection-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem; margin: 2rem 0;
+  }
+  .reflection-card {
+    background: var(--paper); border: 1px solid var(--rule);
+    border-radius: 10px; padding: 1.5rem;
+  }
+  .reflection-card h3 { font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 8px; }
+  .reflection-card p { font-size: 14px; margin-bottom: 0; }
+
+  /* ── FIGMA LINKS ── */
+  .artifact-links {
+    display: flex; flex-wrap: wrap; gap: 1rem; margin: 2rem 0;
+  }
+  .artifact-link {
+    display: flex; align-items: center; gap: 10px;
+    padding: 0.75rem 1.25rem; border-radius: 8px;
+    border: 1px solid var(--rule); background: var(--paper);
+    text-decoration: none; color: var(--ink);
+    font-size: 14px; font-weight: 500;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .artifact-link:hover { border-color: var(--accent); background: var(--accent-light); }
+  .artifact-link svg { flex-shrink: 0; }
+
+  /* ── FLOW DIAGRAM ── */
+  .flow-diagram { margin: 2rem 0; border-radius: 12px; overflow: hidden; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 3rem 0;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    background: var(--paper);
+  }
+  footer p { font-size: 12px; color: var(--ink-3); margin-bottom: 0; letter-spacing: 0.06em; text-transform: uppercase; }
+  footer a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+  footer a:hover { opacity: 0.55; }
+
+  /* ── CURSOR ── */
+  body { cursor: none; }
+  #cur-dot {
+    position: fixed; width: 10px; height: 10px;
+    background: var(--accent); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    left: -100px; top: -100px;
+    transform: translate(-50%,-50%);
+    will-change: left, top;
+  }
+  #cur-ring {
+    position: fixed; width: 36px; height: 36px;
+    border: 1px solid rgba(26,26,26,0.22);
+    border-radius: 50%; pointer-events: none; z-index: 9998;
+    left: -100px; top: -100px;
+    transform: translate(-50%,-50%);
+    transition: width 0.3s, height 0.3s, border-color 0.3s, opacity 0.3s;
+    will-change: left, top;
+  }
+  body.cursor-grow #cur-ring { width: 58px; height: 58px; border-color: var(--accent); }
+  body.cursor-grow #cur-dot { background: var(--accent-mid); }
+
+  /* ── READ PROGRESS BAR ── */
+  #progress-bar {
+    position: fixed; top: 0; left: 0; z-index: 9000;
+    height: 2px; width: 0%;
+    background: var(--accent);
+    pointer-events: none;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+  .reveal.reveal--left { transform: translateX(-44px); opacity: 0; }
+  .reveal.reveal--right { transform: translateX(44px); opacity: 0; }
+  .reveal.reveal--scale { transform: scale(0.96); opacity: 0; }
+  .reveal.in-view {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  /* ── HERO WORD CLIP ── */
+  .hero-line-wrap { overflow: hidden; display: block; }
+
+  /* ── CARD LIFT ── */
+  .insight-card, .reflection-card, .ethics-card, .principle-card, .stat-card {
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .insight-card:hover, .reflection-card:hover, .stat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 44px rgba(0,0,0,0.11);
+  }
+  .ethics-card:hover, .principle-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  }
+
+  /* ── PULLQUOTE ── */
+  .pullquote { transition: border-color 0.4s, background 0.4s; }
+  .pullquote:hover { border-color: var(--accent-mid); background: #ead4d4; }
+
+  /* ── PROCESS STEP ── */
+  .process-step {
+    transition: background 0.25s, padding-left 0.3s cubic-bezier(0.16,1,0.3,1);
+    border-radius: 6px; padding-left: 8px; padding-right: 8px;
+    margin-left: -8px; margin-right: -8px;
+  }
+  .process-step:hover { background: var(--paper-2); padding-left: 20px; }
+  .step-num { transition: color 0.25s; }
+  .process-step:hover .step-num { color: var(--accent-mid); }
+
+  /* ── SECTION LABEL LINE ── */
+  .section-label::before { transition: width 0.55s cubic-bezier(0.16,1,0.3,1); }
+
+  /* ── FEATURE VISUAL ── */
+  .feature-visual {
+    transition: transform 0.45s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.45s;
+  }
+  .feature-row:hover .feature-visual {
+    transform: scale(1.025) rotate(-0.5deg);
+    box-shadow: 0 24px 56px rgba(0,0,0,0.13);
+  }
+
+  /* ── NAV LINK UNDERLINE ── */
+  .nav-links a { position: relative; }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 1px; background: var(--accent);
+    transition: width 0.25s;
+  }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .nav-links a.active { color: var(--ink); }
+
+  /* ── AWARD BANNER ── */
+  .award-banner { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s; }
+  .award-banner:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(0,0,0,0.18); }
+
+  /* ── ARTIFACT LINKS ── */
+  .artifact-link { transition: border-color 0.25s, background 0.25s, transform 0.28s cubic-bezier(0.16,1,0.3,1); }
+  .artifact-link:hover { transform: translateY(-3px); }
+
+  /* ── OUTCOME LIST ── */
+  .outcome-list li {
+    transition: background 0.2s, padding-left 0.35s cubic-bezier(0.16,1,0.3,1);
+    border-radius: 4px; padding-left: 0;
+  }
+  .outcome-list li:hover { background: var(--paper-2); padding-left: 10px; }
+
+  /* ── SCREEN FRAME TILT ── */
+  .screen-frame { transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s; }
+  .screen-frame:hover { transform: perspective(800px) rotateY(-2deg) rotateX(1deg) translateY(-4px); box-shadow: 0 32px 80px rgba(0,0,0,0.2); }
+
+  /* ── UTILITIES ── */
+  .text-sm { font-size: 14px; }
+  .text-mono { font-family: var(--mono); }
+  .mb-sm { margin-bottom: 1rem; }
+  .mb-md { margin-bottom: 2rem; }
+  .spacer { height: 1rem; }
+  .pill {
+    display: inline-block; font-family: var(--mono); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.06em; padding: 2px 10px; border-radius: 20px;
+    border: 1px solid currentColor; margin: 2px;
+  }
+  .pill-green { color: var(--accent); border-color: var(--accent-light); background: var(--accent-light); }
+  .pill-teal { color: var(--teal); border-color: var(--teal-light); background: var(--teal-light); }
+  .pill-amber { color: var(--amber); border-color: var(--amber-light); background: var(--amber-light); }
+  .pill-gray { color: var(--ink-3); border-color: var(--paper-3); background: var(--paper-3); }
+
+  /* ── SCREEN MOCKUP ── */
+  .screen-frame {
+    background: var(--ink); border-radius: 10px; padding: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    margin: 2rem 0;
+  }
+  .screen-chrome {
+    background: #1e1c1a; border-radius: 6px 6px 0 0;
+    padding: 8px 12px; display: flex; align-items: center; gap: 6px;
+  }
+  .screen-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .screen-inner {
+    background: #12100e; border-radius: 0 0 6px 6px;
+    overflow: hidden;
+  }
+  .screen-inner svg { display: block; width: 100%; }
+</style>
+</head>
+<body>
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-left" href="index.html">
+    <span class="nav-name"><span class="nav-dot"></span>WARISHA SOOMRO</span>
+    <span class="nav-back">← Back to Portfolio</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#design">Design</a></li>
+    <li><a href="#outcome">Outcome</a></li>
+    <li><a href="#reflections">Reflections</a></li>
+  </ul>
+  <span class="nav-badge">Brave Award</span>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="overview">
+<div class="container">
+
+  <p class="hero-eyebrow reveal">UX Design Lead · 0→1 · AI Product</p>
+
+  <h1>
+    <span class="hero-line-wrap"><span class="hero-word">Chronicle</span></span>
+    <span class="hero-line-wrap"><span class="hero-word"><em>Making surgical memory</em></span></span>
+    <span class="hero-line-wrap"><span class="hero-word">objective.</span></span>
+  </h1>
+
+  <p class="hero-sub reveal" style="transition-delay:0.1s;">
+    I led the end-to-end design of Chronicle — a first-of-its-kind AI-powered surgical video management tool for the UW Department of Otolaryngology. From blank page to high-fidelity prototype in one quarter, the project won the Brave Award for Innovation in AI out of 44 competing capstone teams.
+  </p>
+
+  <div class="hero-meta reveal" style="transition-delay:0.2s;">
+    <div class="hero-meta-item">
+      <dt>Client</dt>
+      <dd>UW Dept. of Otolaryngology &<br>Head and Neck Surgery</dd>
+    </div>
+    <div class="hero-meta-item">
+      <dt>My Role</dt>
+      <dd>Design Lead — Research,<br>IA, Interaction, Visual Design</dd>
+    </div>
+    <div class="hero-meta-item">
+      <dt>Team</dt>
+      <dd>4 UX practitioners<br>(Microsoft, Amazon, AT&T)</dd>
+    </div>
+    <div class="hero-meta-item">
+      <dt>Timeline</dt>
+      <dd>One quarter (Spring 2024)<br>UW HCDE MS Capstone</dd>
+    </div>
+    <div class="hero-meta-item">
+      <dt>Output</dt>
+      <dd>Figma prototype + design system<br>Patent-pending AI UI</dd>
+    </div>
+  </div>
+
+</div>
+</header>
+
+<!-- AWARD -->
+<div class="container">
+  <div class="award-banner reveal">
+    <div class="award-icon">🏆</div>
+    <div class="award-text">
+      <strong>Brave Award — Innovation in AI</strong>
+      <p>Awarded to Chronicle out of 44 capstone projects for pushing the boundaries of responsible AI integration in high-stakes medical contexts. The only project to explicitly design surgeon autonomy and AI transparency as core product principles.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXT -->
+<section id="context">
+<div class="container">
+  <p class="section-label reveal reveal--left">The brief</p>
+  <h2 class="reveal">A powerful algorithm with nowhere to live.</h2>
+
+  <p>Dr. Lingga Adidharma, an Otolaryngology surgery resident at UW Medicine, had developed a patent-pending AI algorithm capable of distilling a six-hour endoscopic surgery into a 15-minute highlight reel. The algorithm was already achieving 84% accuracy. But there was no interface. No way for a surgeon to actually use it.</p>
+
+  <p>She brought us in as a design consultancy team to answer one question:</p>
+
+  <div class="pullquote">
+    <p>"How might digital imagery improve surgeons' recall, collaboration, and time in order to improve patient outcomes?"</p>
+    <cite>— Our design question</cite>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="num">6h</div>
+      <div class="label">Raw surgery video</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">15m</div>
+      <div class="label">AI highlight reel</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">84%</div>
+      <div class="label">Algorithm accuracy</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">0</div>
+      <div class="label">Existing UI</div>
+    </div>
+  </div>
+
+  <div class="artifact-links reveal">
+    <a href="https://www.figma.com/design/GclhjG83fevzx4ozKHrGNj/SCRUBS---Design-Doc?m=auto&t=KTMVNHloXukTDLFQ-1" class="artifact-link" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Mid–High Fidelity Designs
+    </a>
+    <a href="https://www.figma.com/board/U4QwVe3HQATr8eE11iEi8G/SCRUBS-FULL-Working-Jam?t=KTMVNHloXukTDLFQ-6" class="artifact-link" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      FigJam — Team Process & Thinking
+    </a>
+    <a href="https://www.figma.com/design/Xbo8EUMfrBT2m9I0hwtzOI/Chronicle---Wires-to-Final?m=auto&t=KTMVNHloXukTDLFQ-6" class="artifact-link" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Wireframes → Final Mockups
+    </a>
+  </div>
+</div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+<div class="container">
+  <p class="section-label reveal reveal--left">Discovery</p>
+  <h2 class="reveal">Before we designed anything,<br>we went to the OR.</h2>
+
+  <p>I structured a three-pronged research approach. Rather than jumping straight to the algorithm UI, I needed to understand the full texture of a surgeon's day — their relationship with documentation, memory, and time pressure.</p>
+
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Secondary research</h3>
+        <p>Reviewed academic literature on AI-assisted surgical video analysis, conducted a legal scan across HIPAA, consumer protection, and patient privacy, and benchmarked existing surgical video editing software. This gave us the technical and regulatory landscape before speaking to anyone.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Contextual inquiry at Harborview Hospital</h3>
+        <p>Two of us went on-site at Harborview Medical Center. We observed the operating room environment, mapped the physical space, and shadowed Dr. Adidharma through handoffs and consultations. The goal: understand the end-to-end workflow, not just the documentation moment.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>In-depth interviews with surgeons</h3>
+        <p>Conducted 1:1 interviews with experienced surgeons across otolaryngology. We focused on note-taking practices, memory challenges, and current use of digital imagery. Each session surfaced increasingly sharp insights about where the real friction lived.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pullquote">
+    <p>"I don't have time to be Ernest Hemingway here."</p>
+    <cite>— Experienced surgeon, in-depth interview</cite>
+  </div>
+
+  <p class="section-label reveal reveal--left" style="margin-top: 3rem;">What we found</p>
+  <h2 class="reveal">Four compounding pain points.</h2>
+
+  <div class="insight-grid">
+    <div class="insight-card" data-num="1">
+      <span class="pill pill-amber">Time vs. accuracy</span>
+      <h3>Notes are a compromise</h3>
+      <p>Surgeons constantly trade accuracy for speed. Patient care always interrupts documentation. Tasks are manually completed with no digital assistance.</p>
+    </div>
+    <div class="insight-card" data-num="2">
+      <span class="pill pill-teal">Subjectivity</span>
+      <h3>Language fails where images don't</h3>
+      <p>Written notes are interpreted differently by different readers. "Airway dilated to 2mm" communicates far less than a picture of an almost-closed airway. Templates bias notes toward generic descriptions.</p>
+    </div>
+    <div class="insight-card" data-num="3">
+      <span class="pill pill-green">Imagery gap</span>
+      <h3>Missing visuals cause repeated procedures</h3>
+      <p>Without video, patients undergo repeated scans. Text-based notes may not convey the urgency of a condition even when they're accurate. Video accelerates consultation on complex cases.</p>
+    </div>
+    <div class="insight-card" data-num="4">
+      <span class="pill pill-gray">Memory</span>
+      <h3>Notes written days later</h3>
+      <p>Operative notes are often completed after the fact — sometimes days later. Multiple similar surgeries in a single day cause patient conditions to blur together in memory.</p>
+    </div>
+  </div>
+
+  <div class="pullquote" style="margin-top: 2rem;">
+    <p>"Reading 'the airway is dilated to 2 millimeters' is a lot harder to understand than a picture of the airway almost closed."</p>
+    <cite>— Surgery resident, contextual inquiry</cite>
+  </div>
+</div>
+</section>
+
+<!-- DEFINITION -->
+<section id="definition">
+<div class="container">
+  <p class="section-label reveal reveal--left">Definition</p>
+  <h2 class="reveal">Five principles to keep us honest.</h2>
+
+  <p>Research insights alone don't make decisions — principles do. I drove the team to translate our findings into five design principles we'd revisit every week to resolve debates and anchor our choices.</p>
+
+  <div class="principle-grid">
+    <div class="principle-card">
+      <h3>Efficient + integrated</h3>
+      <p>Seamless fit into existing workflows. Key tasks in minutes, not hours. Holistic: pre, during, and postoperative.</p>
+    </div>
+    <div class="principle-card">
+      <h3>Surgeon-centric</h3>
+      <p>Involve surgeons throughout. Account for generational differences in tool preferences and comfort with AI.</p>
+    </div>
+    <div class="principle-card">
+      <h3>Utility over aesthetics</h3>
+      <p>Prioritize functionality and tangible benefits. Identify optimal media types for specific clinical use cases.</p>
+    </div>
+    <div class="principle-card">
+      <h3>Practical first</h3>
+      <p>Build a deployable MVP. Offer a clear roadmap of future enhancements rather than speculative features.</p>
+    </div>
+    <div class="principle-card">
+      <h3>Don't put AI on a pedestal</h3>
+      <p>Design as if training a skilled human assistant — outcome-focused, not technology-showcasing. Surgeon autonomy is non-negotiable.</p>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+  <p class="section-label reveal reveal--left">My design scope</p>
+  <h2 class="reveal">From end-to-end to where it mattered most.</h2>
+
+  <p>I mapped the full system — from uploading raw surgery video all the way through storing and sharing clips — then made a deliberate call about where design effort would have the highest impact. I scoped our MVP to the three moments where surgeon judgment was most active:</p>
+
+  <!-- Flow diagram SVG inline -->
+  <div class="flow-diagram" style="background: var(--paper-2); border-radius:12px; border: 1px solid var(--rule); padding: 1.5rem;">
+    <svg width="100%" viewBox="0 0 680 120">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <!-- Background boxes (out of scope) -->
+      <g opacity="0.35">
+        <rect x="18" y="38" width="90" height="44" rx="6" fill="#e8e2d6" stroke="#c8c2b6" stroke-width="0.5"/>
+        <text font-family="DM Sans, sans-serif" font-size="12" fill="#7a776f" x="63" y="56" text-anchor="middle" dominant-baseline="central">Upload</text>
+        <text font-family="DM Sans, sans-serif" font-size="11" fill="#9a968e" x="63" y="70" text-anchor="middle" dominant-baseline="central">video</text>
+      </g>
+      <line x1="108" y1="60" x2="128" y2="60" stroke="#c8c2b6" stroke-width="0.5" marker-end="url(#arr)"/>
+      <g opacity="0.35">
+        <rect x="128" y="38" width="90" height="44" rx="6" fill="#e8e2d6" stroke="#c8c2b6" stroke-width="0.5"/>
+        <text font-family="DM Sans, sans-serif" font-size="12" fill="#7a776f" x="173" y="56" text-anchor="middle" dominant-baseline="central">Generate</text>
+        <text font-family="DM Sans, sans-serif" font-size="11" fill="#9a968e" x="173" y="70" text-anchor="middle" dominant-baseline="central">highlight reel</text>
+      </g>
+      <line x1="218" y1="60" x2="238" y2="60" stroke="#1a5c3a" stroke-width="1.5" marker-end="url(#arr)"/>
+      <!-- In-scope boxes (highlighted) -->
+      <rect x="238" y="28" width="96" height="64" rx="8" fill="#d4ead9" stroke="#1a5c3a" stroke-width="1.5"/>
+      <text font-family="DM Sans, sans-serif" font-size="12" font-weight="600" fill="#1a5c3a" x="286" y="53" text-anchor="middle" dominant-baseline="central">Review</text>
+      <text font-family="DM Sans, sans-serif" font-size="11" fill="#2a7a50" x="286" y="68" text-anchor="middle" dominant-baseline="central">clips</text>
+      <line x1="334" y1="60" x2="354" y2="60" stroke="#1a5c3a" stroke-width="1.5" marker-end="url(#arr)"/>
+      <rect x="354" y="28" width="96" height="64" rx="8" fill="#d4ead9" stroke="#1a5c3a" stroke-width="1.5"/>
+      <text font-family="DM Sans, sans-serif" font-size="12" font-weight="600" fill="#1a5c3a" x="402" y="53" text-anchor="middle" dominant-baseline="central">Select +</text>
+      <text font-family="DM Sans, sans-serif" font-size="11" fill="#2a7a50" x="402" y="68" text-anchor="middle" dominant-baseline="central">bookmark</text>
+      <line x1="450" y1="60" x2="470" y2="60" stroke="#1a5c3a" stroke-width="1.5" marker-end="url(#arr)"/>
+      <rect x="470" y="28" width="96" height="64" rx="8" fill="#d4ead9" stroke="#1a5c3a" stroke-width="1.5"/>
+      <text font-family="DM Sans, sans-serif" font-size="12" font-weight="600" fill="#1a5c3a" x="518" y="53" text-anchor="middle" dominant-baseline="central">Tag +</text>
+      <text font-family="DM Sans, sans-serif" font-size="11" fill="#2a7a50" x="518" y="68" text-anchor="middle" dominant-baseline="central">publish</text>
+      <line x1="566" y1="60" x2="586" y2="60" stroke="#c8c2b6" stroke-width="0.5" marker-end="url(#arr)"/>
+      <!-- Out of scope right side -->
+      <g opacity="0.35">
+        <rect x="586" y="38" width="78" height="44" rx="6" fill="#e8e2d6" stroke="#c8c2b6" stroke-width="0.5"/>
+        <text font-family="DM Sans, sans-serif" font-size="12" fill="#7a776f" x="625" y="56" text-anchor="middle" dominant-baseline="central">Share +</text>
+        <text font-family="DM Sans, sans-serif" font-size="11" fill="#9a968e" x="625" y="70" text-anchor="middle" dominant-baseline="central">store</text>
+      </g>
+      <!-- Labels -->
+      <text font-family="DM Mono, monospace" font-size="10" fill="#1a5c3a" x="402" y="14" text-anchor="middle">DESIGN FOCUS</text>
+      <line x1="402" y1="17" x2="402" y2="26" stroke="#1a5c3a" stroke-width="0.5"/>
+    </svg>
+  </div>
+
+</div>
+</section>
+
+<!-- DESIGN -->
+<section id="design">
+<div class="container">
+  <p class="section-label reveal reveal--left">Design process</p>
+  <h2 class="reveal">Five rounds of iteration.<br>One surgeon. Weekly.</h2>
+
+  <p>I structured a tight feedback loop: weekly syncs with Dr. Adidharma, rapid parallel prototyping across the team, and deliberate pressure on the AI interaction model. I personally owned translation from concept to pixel across every iteration.</p>
+
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">R1</div>
+      <div class="step-content">
+        <h3>Lo-fi sketches + storyboards</h3>
+        <p>Each designer independently sketched the key interaction moments — then we converged. This surfaced assumptions fast. I mapped two storyboard scenarios: post-op note-taking and care team handoff. We even used AI to generate the visual panels.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">R2</div>
+      <div class="step-content">
+        <h3>First wireframes — structure before style</h3>
+        <p>We explored three structural variants for the core screen: how to lay out the highlight reel, clip list, and operative notes simultaneously. I pushed for a side-by-side split panel model based on sponsor feedback that "viewing text and video together keeps me organized."</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">R3</div>
+      <div class="step-content">
+        <h3>Mid-fidelity — validating the AI touchpoints</h3>
+        <p>The critical design problem was how to represent AI-generated vs. surgeon-generated content clearly. I introduced the star/person icon system for tags and explicit AI disclaimers on video. Peer feedback identified navigation confusion and a need for stronger visual hierarchy.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">R4</div>
+      <div class="step-content">
+        <h3>Evaluative testing + AI Trust Score</h3>
+        <p>Ran prototype testing with Dr. Adidharma using the AI Trust Score framework. Key finding: the right rail lacked affordances for understanding clip states. The MVP use case crystallized as academic and teaching, with a clear upgrade path to direct patient care.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">R5</div>
+      <div class="step-content">
+        <h3>High-fidelity — Chronicle</h3>
+        <p>Converged on the final design system: dark navigation, color-coded surgical phase timeline, Proposed/Confirmed/All clip tabs, AI responsibility modal at publish. Every element traces back to a research finding.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FINAL DESIGN -->
+<section id="final-design" style="background: var(--paper-2);">
+<div class="container--wide">
+  <div class="container" style="padding-left:0; padding-right:0;">
+    <p class="section-label reveal reveal--left">The product</p>
+    <h2 class="reveal">Chronicle — four key surfaces.</h2>
+  </div>
+
+  <!-- Feature 1 -->
+  <div class="feature-row">
+    <div>
+      <span class="pill pill-green">Core interaction</span>
+      <h3 style="margin-top:1rem; font-size:1.3rem;">Clip Manager: the surgical command center</h3>
+      <p>The primary workspace pairs the AI-generated highlight reel with a structured clip list. Surgeons see the full video timeline color-coded by surgical phase — Approach, Removal, Reconstruction — so spatial memory is preserved. The split-panel was a deliberate decision driven by sponsor feedback: text and video side-by-side reduces cognitive overhead.</p>
+      <ul class="outcome-list">
+        <li>Phase-color-coded timeline strips for immediate orientation</li>
+        <li>Smart video search by keyword, tag, or clip label</li>
+        <li>Draft / In Progress status always visible in the header</li>
+        <li>One-click publish when ready</li>
+      </ul>
+    </div>
+    <div class="feature-visual">
+      <!-- Clip Manager mockup SVG -->
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- App header bar -->
+        <rect x="0" y="0" width="420" height="28" rx="0" fill="#0f0e0d"/>
+        <circle cx="14" cy="14" r="4" fill="#3d3b37" opacity="0.6"/>
+        <text font-family="DM Sans,sans-serif" font-size="9" fill="#ccc" x="28" y="17">Chronicle</text>
+        <text font-family="DM Sans,sans-serif" font-size="9" fill="#aaa" x="120" y="17">Home</text>
+        <text font-family="DM Sans,sans-serif" font-size="9" fill="#aaa" x="165" y="17">Library</text>
+        <text font-family="DM Sans,sans-serif" font-size="9" fill="#d4ead9" font-weight="600" x="210" y="17">Clip Manager</text>
+        <!-- Patient metadata bar -->
+        <rect x="0" y="28" width="420" height="22" fill="#1a1816"/>
+        <text font-family="DM Sans,sans-serif" font-size="8" fill="#888" x="8" y="42">Patient: John Doe</text>
+        <text font-family="DM Sans,sans-serif" font-size="8" fill="#888" x="105" y="42">Surgery: Tonsillectomy</text>
+        <text font-family="DM Sans,sans-serif" font-size="8" fill="#888" x="215" y="42">Date: 05/27/2024</text>
+        <text font-family="DM Mono,monospace" font-size="8" fill="#9a968e" x="340" y="42">Draft in Progress</text>
+        <!-- Search bar -->
+        <rect x="8" y="56" width="200" height="18" rx="4" fill="#1e1c1a" stroke="#3d3b37" stroke-width="0.5"/>
+        <text font-family="DM Sans,sans-serif" font-size="8" fill="#555" x="16" y="68">Smart video search for key features, tags, clips</text>
+        <!-- Video player area -->
+        <rect x="8" y="82" width="240" height="130" rx="6" fill="#1e1c1a" stroke="#3d3b37" stroke-width="0.5"/>
+        <!-- Simulated endoscope image (abstract circles) -->
+        <circle cx="128" cy="142" r="52" fill="#2a2522" stroke="#3d3b37" stroke-width="0.5"/>
+        <circle cx="128" cy="142" r="38" fill="#352f28"/>
+        <circle cx="118" cy="134" r="22" fill="#4a3e32"/>
+        <circle cx="132" cy="148" r="14" fill="#5a4c3c"/>
+        <circle cx="138" cy="136" r="8" fill="#6a5c4c" opacity="0.7"/>
+        <!-- Play button overlay -->
+        <circle cx="128" cy="142" r="14" fill="rgba(255,255,255,0.12)"/>
+        <polygon points="124,136 124,148 136,142" fill="white" opacity="0.8"/>
+        <!-- Video controls -->
+        <rect x="8" y="214" width="240" height="14" rx="0" fill="#161412"/>
+        <text font-family="DM Mono,monospace" font-size="7" fill="#666" x="14" y="223">00:02</text>
+        <text font-family="DM Mono,monospace" font-size="7" fill="#666" x="220" y="223">15:40</text>
+        <!-- Timeline strip -->
+        <rect x="8" y="228" width="240" height="24" rx="0" fill="#161412"/>
+        <!-- Phase colors on timeline -->
+        <rect x="8" y="232" width="80" height="8" rx="0" fill="#7f4f24" opacity="0.7"/>
+        <rect x="90" y="232" width="90" height="8" rx="0" fill="#1a5c3a" opacity="0.7"/>
+        <rect x="182" y="232" width="66" height="8" rx="0" fill="#0d5a72" opacity="0.7"/>
+        <!-- Timeline thumbnails -->
+        <rect x="8" y="241" width="240" height="11" rx="0" fill="#0f0e0d"/>
+        <rect x="10" y="242" width="28" height="9" rx="2" fill="#2a2522"/>
+        <rect x="41" y="242" width="28" height="9" rx="2" fill="#352f28"/>
+        <rect x="72" y="242" width="28" height="9" rx="2" fill="#2a2522"/>
+        <rect x="103" y="242" width="28" height="9" rx="2" fill="#3a3028"/>
+        <rect x="134" y="242" width="28" height="9" rx="2" fill="#2a2522"/>
+        <rect x="165" y="242" width="28" height="9" rx="2" fill="#352f28"/>
+        <rect x="196" y="242" width="28" height="9" rx="2" fill="#2a2522"/>
+        <!-- Right panel: Bookmarked Clips -->
+        <rect x="256" y="56" width="156" height="196" rx="6" fill="#1a1816" stroke="#3d3b37" stroke-width="0.5"/>
+        <rect x="256" y="56" width="156" height="24" rx="6" fill="#1e1c1a" stroke="#3d3b37" stroke-width="0.5"/>
+        <text font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#d4ead9" x="266" y="68">Bookmarked Clips</text>
+        <rect x="364" y="60" width="36" height="14" rx="3" fill="#1a5c3a"/>
+        <text font-family="DM Sans,sans-serif" font-size="8" fill="white" x="382" y="69" text-anchor="middle">Publish</text>
+        <!-- Tabs -->
+        <rect x="256" y="80" width="156" height="18" fill="#161412"/>
+        <text font-family="DM Sans,sans-serif" font-size="8" fill="#1a5c3a" x="272" y="92">Proposed</text>
+        <rect x="265" y="93" width="38" height="1" fill="#1a5c3a"/>
+        <text font-family="DM Sans,sans-serif" font-size="8" fill="#666" x="316" y="92">Confirmed</text>
+        <text font-family="DM Sans,sans-serif" font-size="8" fill="#666" x="362" y="92">All</text>
+        <!-- Clip 1 -->
+        <rect x="262" y="104" width="144" height="42" rx="4" fill="#1e1c1a" stroke="#3d3b37" stroke-width="0.5"/>
+        <rect x="262" y="104" width="36" height="42" rx="4" fill="#2a2522"/>
+        <circle cx="280" cy="125" r="12" fill="#352f28"/>
+        <text font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#e8e2d6" x="304" y="116">Initial Incision</text>
+        <text font-family="DM Mono,monospace" font-size="7" fill="#1a5c3a" x="302" y="127">✦ Robotic Assist</text>
+        <text font-family="DM Mono,monospace" font-size="7" fill="#1a5c3a" x="302" y="137">✦ Incision</text>
+        <!-- Bookmark icon -->
+        <rect x="394" y="107" width="8" height="10" rx="1" fill="#1a5c3a"/>
+        <polygon points="394,113 398,117 402,113" fill="#1a5c3a"/>
+        <!-- Clip 2 -->
+        <rect x="262" y="150" width="144" height="42" rx="4" fill="#1e1c1a" stroke="#3d3b37" stroke-width="0.5"/>
+        <rect x="262" y="150" width="36" height="42" rx="4" fill="#2a2522"/>
+        <circle cx="280" cy="171" r="12" fill="#3a2820"/>
+        <text font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#e8e2d6" x="304" y="162">Dorsal Breakage</text>
+        <text font-family="DM Mono,monospace" font-size="7" fill="#1a5c3a" x="302" y="173">✦ Complication</text>
+        <text font-family="DM Mono,monospace" font-size="7" fill="#1a5c3a" x="302" y="183">✦ Incision</text>
+        <!-- Clip 3 -->
+        <rect x="262" y="196" width="144" height="42" rx="4" fill="#1e1c1a" stroke="#3d3b37" stroke-width="0.5"/>
+        <rect x="262" y="196" width="36" height="42" rx="4" fill="#2a2522"/>
+        <circle cx="280" cy="217" r="12" fill="#2a3020"/>
+        <text font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#e8e2d6" x="304" y="208">Over-Dilated Fuselage</text>
+        <text font-family="DM Mono,monospace" font-size="7" fill="#1a5c3a" x="302" y="219">✦ Confounded</text>
+        <text font-family="DM Mono,monospace" font-size="7" fill="#1a5c3a" x="302" y="229">✦ Proprioception</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Feature 2 -->
+  <div class="feature-row flip">
+    <div>
+      <span class="pill pill-teal">AI transparency</span>
+      <h3 style="margin-top:1rem; font-size:1.3rem;">Tags: structured, but flexible</h3>
+      <p>Tags solve two problems at once: they make clips searchable across procedures, and they make AI involvement legible. I designed a two-icon system — a sparkle (✦) for AI-generated tags, a person icon for surgeon-added ones. Surgeons can add, remove, and modify any tag. The AI is an assistant, not an authority.</p>
+      <ul class="outcome-list">
+        <li>AI-suggested tags distinguished visually from manual ones</li>
+        <li>Tags are searchable across the full surgical library</li>
+        <li>Taxonomy is structured but extensible — surgeons add their own</li>
+        <li>Tags appear in the publish confirmation for final review</li>
+      </ul>
+    </div>
+    <div class="feature-visual">
+      <svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="340" height="200" fill="#1a1816" rx="8"/>
+        <!-- Tag clusters showing both types -->
+        <text font-family="DM Sans,sans-serif" font-size="10" fill="#aaa" x="14" y="22">AI-suggested tags</text>
+        <!-- AI tags (sparkle icon) -->
+        <rect x="14" y="30" width="95" height="22" rx="11" fill="#1e3329" stroke="#1a5c3a" stroke-width="0.5"/>
+        <text font-family="DM Mono,monospace" font-size="9" fill="#2a7a50" x="24" y="44">✦ Share with Patient</text>
+        <rect x="116" y="30" width="80" height="22" rx="11" fill="#1e3329" stroke="#1a5c3a" stroke-width="0.5"/>
+        <text font-family="DM Mono,monospace" font-size="9" fill="#2a7a50" x="126" y="44">✦ Obstruction</text>
+        <rect x="204" y="30" width="108" height="22" rx="11" fill="#1e3329" stroke="#1a5c3a" stroke-width="0.5"/>
+        <text font-family="DM Mono,monospace" font-size="9" fill="#2a7a50" x="214" y="44">✦ Secondary Procepting</text>
+        <rect x="14" y="58" width="105" height="22" rx="11" fill="#1e3329" stroke="#1a5c3a" stroke-width="0.5"/>
+        <text font-family="DM Mono,monospace" font-size="9" fill="#2a7a50" x="24" y="72">✦ Robotic Assistance</text>
+        <rect x="126" y="58" width="80" height="22" rx="11" fill="#1e3329" stroke="#1a5c3a" stroke-width="0.5"/>
+        <text font-family="DM Mono,monospace" font-size="9" fill="#2a7a50" x="136" y="72">✦ Suction Used</text>
+        <!-- Divider -->
+        <line x1="14" y1="94" x2="326" y2="94" stroke="#2a2820" stroke-width="0.5"/>
+        <text font-family="DM Sans,sans-serif" font-size="10" fill="#aaa" x="14" y="112">Surgeon-added tags</text>
+        <!-- User tags (person icon) -->
+        <rect x="14" y="120" width="90" height="22" rx="11" fill="#1e2a38" stroke="#0d5a72" stroke-width="0.5"/>
+        <text font-family="DM Mono,monospace" font-size="9" fill="#0d5a72" x="24" y="134">⊙ Resident Demo</text>
+        <rect x="112" y="120" width="100" height="22" rx="11" fill="#1e2a38" stroke="#0d5a72" stroke-width="0.5"/>
+        <text font-family="DM Mono,monospace" font-size="9" fill="#0d5a72" x="122" y="134">⊙ Key Teaching Moment</text>
+        <rect x="14" y="148" width="80" height="22" rx="22" fill="#1a1816" stroke="#3d3b37" stroke-width="1" stroke-dasharray="3,2"/>
+        <text font-family="DM Mono,monospace" font-size="9" fill="#555" x="30" y="162">+ Add Tag</text>
+        <!-- Legend -->
+        <rect x="14" y="180" width="8" height="8" rx="4" fill="#1e3329" stroke="#1a5c3a" stroke-width="0.5"/>
+        <text font-family="DM Mono,monospace" font-size="8" fill="#666" x="28" y="188">AI-generated</text>
+        <rect x="100" y="180" width="8" height="8" rx="4" fill="#1e2a38" stroke="#0d5a72" stroke-width="0.5"/>
+        <text font-family="DM Mono,monospace" font-size="8" fill="#666" x="114" y="188">Surgeon-added</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Feature 3 -->
+  <div class="feature-row">
+    <div>
+      <span class="pill pill-amber">Responsible AI</span>
+      <h3 style="margin-top:1rem; font-size:1.3rem;">Publish modal: the surgeon stays in control</h3>
+      <p>The most critical UX decision in the project: before any AI-generated content enters the patient record, the surgeon must actively confirm they have reviewed it. This wasn't an afterthought — it was a design principle from week one. The modal shows exactly what will be shared and requires an explicit acknowledgment.</p>
+      <ul class="outcome-list">
+        <li>Full preview of highlight reel and all bookmarked clips</li>
+        <li>Explicit acknowledgment of AI-generated nature</li>
+        <li>Back button to make changes before final commit</li>
+        <li>Prevents passive over-reliance on AI output</li>
+      </ul>
+    </div>
+    <div class="feature-visual">
+      <svg viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg">
+        <!-- Dimmed background -->
+        <rect x="0" y="0" width="340" height="240" fill="#0f0e0d" opacity="0.85" rx="8"/>
+        <!-- Modal -->
+        <rect x="40" y="20" width="260" height="200" rx="8" fill="#1e1c1a" stroke="#3d3b37" stroke-width="0.5"/>
+        <!-- Modal header -->
+        <text font-family="DM Sans,sans-serif" font-size="11" font-weight="600" fill="#e8e2d6" x="55" y="44">You are using AI Generated Content</text>
+        <!-- Close button -->
+        <text font-family="DM Sans,sans-serif" font-size="14" fill="#666" x="288" y="44">×</text>
+        <!-- Divider -->
+        <line x1="40" y1="54" x2="300" y2="54" stroke="#2a2820" stroke-width="0.5"/>
+        <!-- Body copy -->
+        <text font-family="DM Sans,sans-serif" font-size="8" fill="#888" x="55" y="68">Our AI has generated titles and tags for key moments in your</text>
+        <text font-family="DM Sans,sans-serif" font-size="8" fill="#888" x="55" y="80">video. AI can make mistakes — review carefully before publishing.</text>
+        <text font-family="DM Sans,sans-serif" font-size="8" fill="#888" x="55" y="96">By clicking continue, you acknowledge use of AI-generated</text>
+        <text font-family="DM Sans,sans-serif" font-size="8" fill="#888" x="55" y="108">content and have validated all bookmarked clips and tags.</text>
+        <!-- Highlight reel preview -->
+        <text font-family="DM Mono,monospace" font-size="8" fill="#9a968e" x="55" y="124">Highlight Reel (15:42)</text>
+        <rect x="55" y="130" width="230" height="18" rx="3" fill="#12100e" stroke="#2a2820" stroke-width="0.5"/>
+        <!-- Phase timeline preview -->
+        <rect x="57" y="132" width="76" height="14" rx="2" fill="#7f4f24" opacity="0.7"/>
+        <rect x="135" y="132" width="86" height="14" rx="2" fill="#1a5c3a" opacity="0.7"/>
+        <rect x="223" y="132" width="60" height="14" rx="2" fill="#0d5a72" opacity="0.7"/>
+        <!-- Bookmarked clips preview -->
+        <text font-family="DM Mono,monospace" font-size="8" fill="#9a968e" x="55" y="162">Bookmarked Clips (3 clips, 8 tags)</text>
+        <rect x="55" y="168" width="230" height="16" rx="3" fill="#12100e" stroke="#2a2820" stroke-width="0.5"/>
+        <text font-family="DM Mono,monospace" font-size="7" fill="#1a5c3a" x="62" y="179">✦ Initial Incision and Exposure</text>
+        <!-- Action buttons -->
+        <rect x="55" y="196" width="60" height="16" rx="4" fill="#1e1c1a" stroke="#3d3b37" stroke-width="0.5"/>
+        <text font-family="DM Sans,sans-serif" font-size="8" fill="#888" x="85" y="207" text-anchor="middle">← Back</text>
+        <rect x="218" y="196" width="72" height="16" rx="4" fill="#1a5c3a"/>
+        <text font-family="DM Sans,sans-serif" font-size="8" fill="white" x="254" y="207" text-anchor="middle">Continue →</text>
+      </svg>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ETHICS -->
+<section id="ethics">
+<div class="container">
+  <p class="section-label reveal reveal--left">Responsible AI</p>
+  <h2 class="reveal">We treated ethics as a design constraint,<br>not a disclaimer.</h2>
+
+  <p>Working in a HIPAA-adjacent context with AI-generated medical content forced the team to make ethics explicit in every screen — not just in a legal appendix. I drove the integration of responsible AI principles directly into the interaction model.</p>
+
+  <div class="ethics-grid">
+    <div class="ethics-card">
+      <span class="tag tag-ai">AI transparency</span>
+      <h3>Every AI touch is labeled</h3>
+      <p>AI-suggested clips and tags carry a distinct visual marker (✦). Surgeon-generated content uses a person icon. No ambiguity about what the machine produced.</p>
+    </div>
+    <div class="ethics-card">
+      <span class="tag tag-autonomy">Surgeon autonomy</span>
+      <h3>The surgeon approves everything</h3>
+      <p>The publish modal requires an active confirmation before any AI-generated content reaches the patient record. No passive defaults. The surgeon is the author.</p>
+    </div>
+    <div class="ethics-card">
+      <span class="tag tag-ai">Error awareness</span>
+      <h3>Omission is a risk we named</h3>
+      <p>We explicitly designed for the risk that AI omits something important — and resisted the temptation to let surgeons over-rely on the highlight reel as a substitute for their own memory.</p>
+    </div>
+    <div class="ethics-card">
+      <span class="tag tag-privacy">Privacy</span>
+      <h3>HIPAA scoped to sponsor</h3>
+      <p>We explicitly established that compliance with HIPAA, patient data, and ePHI regulations was the sponsor's legal responsibility — and designed around that boundary rather than pretending it didn't exist.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- OUTCOME -->
+<section id="outcome">
+<div class="container">
+  <p class="section-label reveal reveal--left">Outcome</p>
+  <h2 class="reveal">From proof-of-concept to<br>investor-ready design.</h2>
+
+  <p>Chronicle went from a raw algorithm with no interface to a high-fidelity prototype that could be shown to investors and used to pitch the pre-startup. The sponsor, Dr. Adidharma, used the prototype directly in subsequent presentations and conversations with UW stakeholders.</p>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="num">44</div>
+      <div class="label">Competing projects</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">1st</div>
+      <div class="label">Brave Award winner</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">5</div>
+      <div class="label">Design iterations</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">3</div>
+      <div class="label">Surgeons interviewed</div>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+  <p class="section-label reveal reveal--left">Future roadmap</p>
+  <h2 class="reveal">What we left on the table (intentionally).</h2>
+
+  <ul class="outcome-list">
+    <li><strong>Audio-to-notes:</strong> Using intraoperative audio to automatically flag key moments and generate operative brief drafts — reducing surgeon manual effort to near zero.</li>
+    <li><strong>EMR integration:</strong> Direct integration with EPIC, reducing the friction of exporting notes and clips into existing patient records.</li>
+    <li><strong>Patient-facing sharing:</strong> A dedicated flow for sharing relevant clips directly with patients — with appropriate context and responsible sharing guardrails.</li>
+    <li><strong>Resident portfolio:</strong> A secondary use case emerged during testing: building a surgical "portfolio" for residents to document their progression through training.</li>
+    <li><strong>AI-generated notes:</strong> Expanding the AI from clip suggestion to full operative note generation — with the same responsibility modal framework ensuring surgeon review.</li>
+  </ul>
+</div>
+</section>
+
+<!-- REFLECTIONS -->
+<section id="reflections">
+<div class="container">
+  <p class="section-label reveal reveal--left">Reflections</p>
+  <h2 class="reveal">What leading this taught me<br>about AI product design.</h2>
+
+  <div class="reflection-grid">
+    <div class="reflection-card">
+      <h3>Capability ≠ interface</h3>
+      <p>The algorithm was technically impressive but completely invisible to users without a design layer. The insight that drove everything: a tool isn't a product until a human can trust it enough to use it.</p>
+    </div>
+    <div class="reflection-card">
+      <h3>Ethics goes in the interaction, not the appendix</h3>
+      <p>The responsible AI principles we debated in week two ended up as actual UI elements — the publish modal, the tag icon system, the AI disclaimers on video. Good ethics is good design.</p>
+    </div>
+    <div class="reflection-card">
+      <h3>User research in high-stakes domains is irreplaceable</h3>
+      <p>No amount of secondary research would have surfaced "I don't have time to be Hemingway here." Being in the hospital, talking to surgeons under real pressure — that's where the real design brief lived.</p>
+    </div>
+    <div class="reflection-card">
+      <h3>The sponsor relationship was itself a design problem</h3>
+      <p>Dr. Adidharma was simultaneously our user, our subject matter expert, and our critic. Weekly syncs kept us calibrated. Her feedback made the designs sharper at every iteration — when we leaned into that dynamic instead of presenting to her, outcomes improved.</p>
+    </div>
+    <div class="reflection-card">
+      <h3>MVP scope is a UX decision</h3>
+      <p>Choosing to focus on Review → Select → Publish and leave Upload, Storage, and Sharing to future sprints wasn't a compromise — it was what made the prototype credible. Scope selection is itself a design skill.</p>
+    </div>
+    <div class="reflection-card">
+      <h3>AI used to create, not just describe</h3>
+      <p>We used AI to generate storyboard visuals, refine language, and accelerate iteration — while being explicit about where human review was non-negotiable. A useful model for how to ship AI-assisted work responsibly.</p>
+    </div>
+  </div>
+
+  <div class="pullquote" style="margin-top: 3rem;">
+    <p>"Having objective information is much more helpful than subjective information."</p>
+    <cite>— Experienced surgeon, in-depth interview. The sentence that grounded the entire product.</cite>
+  </div>
+
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+  <p>© 2025 Warisha Soomro — Chronicle Case Study</p>
+  <p style="margin-top:12px; text-transform:none; font-size:13px; color:var(--ink-3);">
+    <a href="index.html" style="color:var(--accent);">← Back to Portfolio</a>
+    &nbsp;&nbsp;·&nbsp;&nbsp;
+    <a href="https://www.figma.com/design/GclhjG83fevzx4ozKHrGNj/SCRUBS---Design-Doc?m=auto&t=KTMVNHloXukTDLFQ-1" target="_blank">Figma Designs ↗</a>
+    &nbsp;&nbsp;·&nbsp;&nbsp;
+    <a href="https://www.figma.com/board/U4QwVe3HQATr8eE11iEi8G/SCRUBS-FULL-Working-Jam?t=KTMVNHloXukTDLFQ-6" target="_blank">FigJam ↗</a>
+    &nbsp;&nbsp;·&nbsp;&nbsp;
+    <a href="https://www.figma.com/design/Xbo8EUMfrBT2m9I0hwtzOI/Chronicle---Wires-to-Final?m=auto&t=KTMVNHloXukTDLFQ-6" target="_blank">Wireframe → Final ↗</a>
+  </p>
+</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── CUSTOM CURSOR ── */
+const dot  = document.getElementById('cur-dot');
+const ring = document.getElementById('cur-ring');
+let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+let rx = mx, ry = my;
+
+window.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  gsap.set(dot, { left: mx, top: my });
+});
+
+(function animRing() {
+  rx += (mx - rx) * 0.09;
+  ry += (my - ry) * 0.09;
+  gsap.set(ring, { left: rx, top: ry });
+  requestAnimationFrame(animRing);
+})();
+
+document.querySelectorAll('a, button, .stat-card, .insight-card, .reflection-card, .ethics-card').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
+});
+
+/* ── READ PROGRESS BAR ── */
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  bar.style.width = (pct * 100) + '%';
+});
+
+/* ── HERO WORD CLIP ── */
+const heroWords = document.querySelectorAll('.hero-word');
+gsap.set(heroWords, { y: '110%' });
+gsap.to(heroWords, {
+  y: '0%',
+  duration: 1.1,
+  stagger: 0.14,
+  ease: 'power4.out',
+  delay: 0.2
+});
+
+/* ── HERO EYEBROW LINE GROW ── */
+gsap.delayedCall(0.9, () => {
+  document.querySelector('.hero-eyebrow') && 
+    document.querySelector('.hero-eyebrow').classList.add('line-grown');
+});
+
+/* ── NAV ENTRANCE ── */
+gsap.from('nav', { y: -20, opacity: 0, duration: 0.7, delay: 0.1, ease: 'power3.out' });
+
+/* ── SCROLL REVEAL — IntersectionObserver ── */
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const delay = el.dataset.delay ? parseFloat(el.dataset.delay) : 0;
+      setTimeout(() => el.classList.add('in-view'), delay * 1000);
+      revealObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObs.observe(el));
+
+/* ── SECTION LABELS — line grow on scroll ── */
+document.querySelectorAll('.section-label').forEach(el => {
+  const obs = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      gsap.to(el, { '--label-w': '20px', duration: 0.55, ease: 'power2.out' });
+      el.classList.add('line-grown');
+      obs.unobserve(el);
+    }
+  }, { threshold: 0.5 });
+  obs.observe(el);
+});
+
+/* ── STAT COUNTER — count up on scroll ── */
+document.querySelectorAll('.stat-card .num').forEach(el => {
+  const raw = el.textContent.trim();
+  const num = parseFloat(raw.replace(/[^\d.]/g, ''));
+  if (isNaN(num)) return;
+  const suffix = raw.replace(/[\d.]/g, '');
+  el.textContent = suffix ? '0' + suffix : '0';
+
+  const obs = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      gsap.to({ val: 0 }, {
+        val: num,
+        duration: 1.6,
+        ease: 'power2.out',
+        delay: 0.2,
+        onUpdate: function() {
+          const v = this.targets()[0].val;
+          el.textContent = (Number.isInteger(num) ? Math.round(v) : v.toFixed(1)) + suffix;
+        }
+      });
+      obs.unobserve(el);
+    }
+  }, { threshold: 0.5 });
+  obs.observe(el);
+});
+
+/* ── STAGGER REVEAL — grids ── */
+function staggerGrid(selector, delay) {
+  const groups = {};
+  document.querySelectorAll(selector).forEach(el => {
+    const parent = el.parentElement;
+    if (!groups[parent]) groups[parent] = [];
+    groups[parent].push(el);
+  });
+  Object.values(groups).forEach(items => {
+    gsap.set(items, { opacity: 0, y: 28 });
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        gsap.to(items, {
+          opacity: 1, y: 0,
+          duration: 0.75, stagger: 0.09,
+          ease: 'power3.out', delay: delay || 0
+        });
+        obs.unobserve(entry.target);
+      }
+    }, { threshold: 0.1 });
+    obs.observe(items[0].parentElement);
+  });
+}
+staggerGrid('.stat-card');
+staggerGrid('.insight-card', 0.05);
+staggerGrid('.reflection-card', 0.05);
+staggerGrid('.ethics-card', 0.05);
+staggerGrid('.principle-card', 0.05);
+staggerGrid('.hero-meta-item', 0.3);
+
+/* ── PROCESS STEPS STAGGER ── */
+const steps = document.querySelectorAll('.process-step');
+if (steps.length) {
+  gsap.set(steps, { opacity: 0, x: -24 });
+  const obs = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      gsap.to(steps, { opacity: 1, x: 0, duration: 0.65, stagger: 0.08, ease: 'power3.out' });
+      obs.unobserve(entry.target);
+    }
+  }, { threshold: 0.1 });
+  obs.observe(steps[0].parentElement);
+}
+
+/* ── FEATURE ROWS ALTERNATE SLIDE ── */
+document.querySelectorAll('.feature-row').forEach((row, i) => {
+  const dir = row.classList.contains('flip') ? 60 : -60;
+  gsap.from(row, {
+    x: dir, opacity: 0, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: row, start: 'top 82%', once: true }
+  });
+});
+
+/* ── SCREEN FRAME PARALLAX ── */
+document.querySelectorAll('.screen-frame').forEach(frame => {
+  gsap.to(frame, {
+    y: -20, ease: 'none',
+    scrollTrigger: { trigger: frame, scrub: 1.8 }
+  });
+});
+
+/* ── NAV ACTIVE SECTION HIGHLIGHT ── */
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('section[id], header[id]');
+
+const sectionObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => sectionObs.observe(s));
+
+/* ── PULLQUOTE PARALLAX ── */
+document.querySelectorAll('.pullquote').forEach(el => {
+  gsap.from(el, {
+    x: -30, opacity: 0, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+  });
+});
+
+/* ── AWARD BANNER ENTRANCE ── */
+const awardBanner = document.querySelector('.award-banner');
+if (awardBanner) {
+  gsap.from(awardBanner, {
+    scale: 0.97, opacity: 0, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: awardBanner, start: 'top 88%', once: true }
+  });
+}
+
+/* ── 3D TILT on screen frames (mouse) ── */
+document.querySelectorAll('.screen-frame').forEach(frame => {
+  frame.addEventListener('mousemove', e => {
+    const rect = frame.getBoundingClientRect();
+    const cx = (e.clientX - rect.left) / rect.width - 0.5;
+    const cy = (e.clientY - rect.top)  / rect.height - 0.5;
+    gsap.to(frame, {
+      rotateY: cx * 8, rotateX: -cy * 5,
+      transformPerspective: 900,
+      duration: 0.5, ease: 'power2.out'
+    });
+  });
+  frame.addEventListener('mouseleave', () => {
+    gsap.to(frame, { rotateY: 0, rotateX: 0, duration: 0.6, ease: 'power3.out' });
+  });
+});
+
+/* ── OUTCOME LIST STAGGER ── */
+const outcomeItems = document.querySelectorAll('.outcome-list li');
+if (outcomeItems.length) {
+  gsap.set(outcomeItems, { opacity: 0, x: -20 });
+  const obs = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      gsap.to(outcomeItems, { opacity: 1, x: 0, duration: 0.6, stagger: 0.07, ease: 'power3.out' });
+      obs.unobserve(entry.target);
+    }
+  }, { threshold: 0.1 });
+  obs.observe(outcomeItems[0].parentElement);
+}
+
+</script>
+</body>
+</html>
