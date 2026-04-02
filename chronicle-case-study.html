@@ -6,7 +6,7 @@
 <title>Chronicle — Case Study</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,800;0,6..96,900;1,6..96,400;1,6..96,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --ink: #1a1a1a;
@@ -24,7 +24,7 @@
     --amber-light: #fde9d1;
     --red: #8b1a1a;
     --rule: rgba(26,26,26,0.1);
-    --serif: 'Bodoni Moda', Georgia, serif;
+    --serif: 'Playfair Display', Georgia, serif;
     --sans: 'Inter', system-ui, sans-serif;
     --mono: 'Inter', monospace;
   }
@@ -264,6 +264,7 @@
   .tag-ai { background: var(--teal-light); color: var(--teal); }
   .tag-privacy { background: var(--amber-light); color: var(--amber); }
   .tag-autonomy { background: var(--accent-light); color: var(--accent); }
+  .tag-inclusive { background: var(--teal-light); color: var(--teal); }
 
   /* ── OUTCOME CALLOUTS ── */
   .outcome-list { list-style: none; margin: 1.5rem 0; }
@@ -485,6 +486,7 @@
     <li><a href="#overview">Overview</a></li>
     <li><a href="#research">Research</a></li>
     <li><a href="#design">Design</a></li>
+    <li><a href="#inclusive-design">Inclusive Design</a></li>
     <li><a href="#outcome">Outcome</a></li>
     <li><a href="#reflections">Reflections</a></li>
   </ul>
@@ -499,12 +501,12 @@
 
   <h1>
     <span class="hero-line-wrap"><span class="hero-word">Chronicle</span></span>
-    <span class="hero-line-wrap"><span class="hero-word"><em>Making surgical memory</em></span></span>
-    <span class="hero-line-wrap"><span class="hero-word">objective.</span></span>
+    <span class="hero-line-wrap"><span class="hero-word"><em>A video editor built</em></span></span>
+    <span class="hero-line-wrap"><span class="hero-word">for the surgical mind.</span></span>
   </h1>
 
   <p class="hero-sub reveal" style="transition-delay:0.1s;">
-    I led the end-to-end design of Chronicle — a first-of-its-kind AI-powered surgical video management tool for the UW Department of Otolaryngology. From blank page to high-fidelity prototype in one quarter, the project won the Brave Award for Innovation in AI out of 44 competing capstone teams.
+    Surgical videos are recorded by default — yet surgeons still write notes from memory, days later. I led Chronicle end-to-end: a 0→1 AI product that turns hours of footage into reviewed, tagged clips surgeons can actually use. Research to requirements to engineer handoff, in six months. The award-winning algorithm now has an award-winning interface.
   </p>
 
   <div class="hero-meta reveal" style="transition-delay:0.2s;">
@@ -514,19 +516,19 @@
     </div>
     <div class="hero-meta-item">
       <dt>My Role</dt>
-      <dd>Design Lead — Research,<br>IA, Interaction, Visual Design</dd>
+      <dd>Design Lead — Research, Requirements,<br>IA, Interaction, Visual Design,<br>Engineer Handoff</dd>
     </div>
     <div class="hero-meta-item">
       <dt>Team</dt>
-      <dd>4 UX practitioners<br>(Microsoft, Amazon, AT&T)</dd>
+      <dd>5 UX practitioners<br>(Microsoft, Amazon, Alaska <br> Airlines, Crowdstrike, AT&T)</dd>
     </div>
     <div class="hero-meta-item">
       <dt>Timeline</dt>
-      <dd>One quarter (Spring 2024)<br>UW HCDE MS Capstone</dd>
+      <dd>6 months</dd>
     </div>
     <div class="hero-meta-item">
       <dt>Output</dt>
-      <dd>Figma prototype + design system<br>Patent-pending AI UI</dd>
+      <dd>0→1 product: research to engineer-ready specs<br>Design system + annotated Figma handoff<br>Investor-ready prototype for pre-startup pitch</dd>
     </div>
   </div>
 
@@ -539,7 +541,7 @@
     <div class="award-icon">🏆</div>
     <div class="award-text">
       <strong>Brave Award — Innovation in AI</strong>
-      <p>Awarded to Chronicle out of 44 capstone projects for pushing the boundaries of responsible AI integration in high-stakes medical contexts. The only project to explicitly design surgeon autonomy and AI transparency as core product principles.</p>
+      <p>1st of 44 capstone teams. The only project to design surgeon autonomy and AI transparency as core product principles.</p>
     </div>
   </div>
 </div>
@@ -548,11 +550,9 @@
 <section id="context">
 <div class="container">
   <p class="section-label reveal reveal--left">The brief</p>
-  <h2 class="reveal">A powerful algorithm with nowhere to live.</h2>
+  <h2 class="reveal">A solution looking<br>for a problem.</h2>
 
-  <p>Dr. Lingga Adidharma, an Otolaryngology surgery resident at UW Medicine, had developed a patent-pending AI algorithm capable of distilling a six-hour endoscopic surgery into a 15-minute highlight reel. The algorithm was already achieving 84% accuracy. But there was no interface. No way for a surgeon to actually use it.</p>
-
-  <p>She brought us in as a design consultancy team to answer one question:</p>
+  <p>Dr. Lingga Adidharma built a patent-pending AI algorithm that could compress six-hour surgeries into 15-minute highlight reels — and needed an interface to take it to market. After our first client meeting, my team put it plainly: cart before the horse. We stepped back before touching wireframes to validate the problem and the user. That reframe shaped everything.</p>
 
   <div class="pullquote">
     <p>"How might digital imagery improve surgeons' recall, collaboration, and time in order to improve patient outcomes?"</p>
@@ -601,28 +601,26 @@
   <p class="section-label reveal reveal--left">Discovery</p>
   <h2 class="reveal">Before we designed anything,<br>we went to the OR.</h2>
 
-  <p>I structured a three-pronged research approach. Rather than jumping straight to the algorithm UI, I needed to understand the full texture of a surgeon's day — their relationship with documentation, memory, and time pressure.</p>
-
   <div class="process-steps">
     <div class="process-step">
       <div class="step-num">01</div>
       <div class="step-content">
         <h3>Secondary research</h3>
-        <p>Reviewed academic literature on AI-assisted surgical video analysis, conducted a legal scan across HIPAA, consumer protection, and patient privacy, and benchmarked existing surgical video editing software. This gave us the technical and regulatory landscape before speaking to anyone.</p>
+        <p>Literature review, legal scan across HIPAA and patient privacy, competitive benchmark. Technical and regulatory landscape established before speaking to anyone.</p>
       </div>
     </div>
     <div class="process-step">
       <div class="step-num">02</div>
       <div class="step-content">
         <h3>Contextual inquiry at Harborview Hospital</h3>
-        <p>Two of us went on-site at Harborview Medical Center. We observed the operating room environment, mapped the physical space, and shadowed Dr. Adidharma through handoffs and consultations. The goal: understand the end-to-end workflow, not just the documentation moment.</p>
+        <p>On-site at Harborview Medical Center. Shadowed Dr. Adidharma through handoffs and consultations to understand the full workflow — not just the documentation moment.</p>
       </div>
     </div>
     <div class="process-step">
       <div class="step-num">03</div>
       <div class="step-content">
         <h3>In-depth interviews with surgeons</h3>
-        <p>Conducted 1:1 interviews with experienced surgeons across otolaryngology. We focused on note-taking practices, memory challenges, and current use of digital imagery. Each session surfaced increasingly sharp insights about where the real friction lived.</p>
+        <p>1:1 interviews with experienced surgeons. Focused on note-taking, memory under pressure, and use of digital imagery. Each session sharpened where the real friction lived.</p>
       </div>
     </div>
   </div>
@@ -639,22 +637,22 @@
     <div class="insight-card" data-num="1">
       <span class="pill pill-amber">Time vs. accuracy</span>
       <h3>Notes are a compromise</h3>
-      <p>Surgeons constantly trade accuracy for speed. Patient care always interrupts documentation. Tasks are manually completed with no digital assistance.</p>
+      <p>Patient care always interrupts documentation. Notes are finished later, from memory.</p>
     </div>
     <div class="insight-card" data-num="2">
       <span class="pill pill-teal">Subjectivity</span>
       <h3>Language fails where images don't</h3>
-      <p>Written notes are interpreted differently by different readers. "Airway dilated to 2mm" communicates far less than a picture of an almost-closed airway. Templates bias notes toward generic descriptions.</p>
+      <p>"Airway dilated to 2mm" means something different to every reader. A picture of an almost-closed airway doesn't.</p>
     </div>
     <div class="insight-card" data-num="3">
       <span class="pill pill-green">Imagery gap</span>
       <h3>Missing visuals cause repeated procedures</h3>
-      <p>Without video, patients undergo repeated scans. Text-based notes may not convey the urgency of a condition even when they're accurate. Video accelerates consultation on complex cases.</p>
+      <p>Without video, patients undergo repeated scans. Urgency gets lost in text.</p>
     </div>
     <div class="insight-card" data-num="4">
       <span class="pill pill-gray">Memory</span>
       <h3>Notes written days later</h3>
-      <p>Operative notes are often completed after the fact — sometimes days later. Multiple similar surgeries in a single day cause patient conditions to blur together in memory.</p>
+      <p>Operative notes written days later. Multiple similar surgeries in one day blur together.</p>
     </div>
   </div>
 
@@ -671,28 +669,28 @@
   <p class="section-label reveal reveal--left">Definition</p>
   <h2 class="reveal">Five principles to keep us honest.</h2>
 
-  <p>Research insights alone don't make decisions — principles do. I drove the team to translate our findings into five design principles we'd revisit every week to resolve debates and anchor our choices.</p>
+  <p>Before writing a single principle, we brought in Josh Lovejoy — who invented LLM-powered personalization at Google Shopping — to pressure-test our AI assumptions. His critique sharpened what "surgeon autonomy" actually means in practice.</p>
 
   <div class="principle-grid">
     <div class="principle-card">
       <h3>Efficient + integrated</h3>
-      <p>Seamless fit into existing workflows. Key tasks in minutes, not hours. Holistic: pre, during, and postoperative.</p>
+      <p>Fit existing workflows. Key tasks in minutes, not hours.</p>
     </div>
     <div class="principle-card">
       <h3>Surgeon-centric</h3>
-      <p>Involve surgeons throughout. Account for generational differences in tool preferences and comfort with AI.</p>
+      <p>Surgeons in the room at every iteration. Comfort with AI varies — design for the full spectrum.</p>
     </div>
     <div class="principle-card">
       <h3>Utility over aesthetics</h3>
-      <p>Prioritize functionality and tangible benefits. Identify optimal media types for specific clinical use cases.</p>
+      <p>Function over form. Every feature earns its place clinically.</p>
     </div>
     <div class="principle-card">
       <h3>Practical first</h3>
-      <p>Build a deployable MVP. Offer a clear roadmap of future enhancements rather than speculative features.</p>
+      <p>Ship something credible. Leave a clear roadmap, not speculative features.</p>
     </div>
     <div class="principle-card">
       <h3>Don't put AI on a pedestal</h3>
-      <p>Design as if training a skilled human assistant — outcome-focused, not technology-showcasing. Surgeon autonomy is non-negotiable.</p>
+      <p>Surgeons approve everything. Their corrections train the model. Blind trust is dangerous — structured disagreement is a feature.</p>
     </div>
   </div>
 
@@ -700,7 +698,7 @@
   <p class="section-label reveal reveal--left">My design scope</p>
   <h2 class="reveal">From end-to-end to where it mattered most.</h2>
 
-  <p>I mapped the full system — from uploading raw surgery video all the way through storing and sharing clips — then made a deliberate call about where design effort would have the highest impact. I scoped our MVP to the three moments where surgeon judgment was most active:</p>
+  <p>I mapped the full system, then scoped to the three moments where surgeon judgment is most active:</p>
 
   <!-- Flow diagram SVG inline -->
   <div class="flow-diagram" style="background: var(--paper-2); border-radius:12px; border: 1px solid var(--rule); padding: 1.5rem;">
@@ -755,44 +753,67 @@
 <section id="design">
 <div class="container">
   <p class="section-label reveal reveal--left">Design process</p>
-  <h2 class="reveal">Five rounds of iteration.<br>One surgeon. Weekly.</h2>
+  <h2 class="reveal">Research to requirements<br>to engineer handoff.</h2>
 
-  <p>I structured a tight feedback loop: weekly syncs with Dr. Adidharma, rapid parallel prototyping across the team, and deliberate pressure on the AI interaction model. I personally owned translation from concept to pixel across every iteration.</p>
+  <p>My initial concept: use the highlight reel to auto-fill operative notes. The client approved it. We scrapped it — dev timelines made it unrealistic, and honest scoping meant shipping something credible over something ambitious. That decision freed us to go deep on what remained.</p>
 
   <div class="process-steps">
     <div class="process-step">
       <div class="step-num">R1</div>
       <div class="step-content">
         <h3>Lo-fi sketches + storyboards</h3>
-        <p>Each designer independently sketched the key interaction moments — then we converged. This surfaced assumptions fast. I mapped two storyboard scenarios: post-op note-taking and care team handoff. We even used AI to generate the visual panels.</p>
+        <p>Independent sketches converged to surface conflicting assumptions. AI-generated storyboard panels for two scenarios: post-op notes and care team handoff.</p>
       </div>
     </div>
     <div class="process-step">
       <div class="step-num">R2</div>
       <div class="step-content">
         <h3>First wireframes — structure before style</h3>
-        <p>We explored three structural variants for the core screen: how to lay out the highlight reel, clip list, and operative notes simultaneously. I pushed for a side-by-side split panel model based on sponsor feedback that "viewing text and video together keeps me organized."</p>
+        <p>Three structural variants. I pushed for split-panel based on sponsor feedback: "viewing text and video together keeps me organized."</p>
       </div>
     </div>
     <div class="process-step">
       <div class="step-num">R3</div>
       <div class="step-content">
         <h3>Mid-fidelity — validating the AI touchpoints</h3>
-        <p>The critical design problem was how to represent AI-generated vs. surgeon-generated content clearly. I introduced the star/person icon system for tags and explicit AI disclaimers on video. Peer feedback identified navigation confusion and a need for stronger visual hierarchy.</p>
+        <p>Introduced a star/person icon system to distinguish AI vs. surgeon-generated tags. Testing revealed the icons weren't landing. Removed them. Redesigned around color and explicit labels. The principle survived; the execution changed.</p>
       </div>
     </div>
     <div class="process-step">
       <div class="step-num">R4</div>
       <div class="step-content">
-        <h3>Evaluative testing + AI Trust Score</h3>
-        <p>Ran prototype testing with Dr. Adidharma using the AI Trust Score framework. Key finding: the right rail lacked affordances for understanding clip states. The MVP use case crystallized as academic and teaching, with a clear upgrade path to direct patient care.</p>
+        <h3>Evaluative testing — AI Trust Score</h3>
+        <p>Measured with the AI Trust Score: understand (Good), efficiency (Okay), control (Bad). The control gap drove R5.</p>
+        <div style="background:#0d0d0d;border-radius:8px;padding:24px 28px;margin-top:20px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:18px;">AI Trust Score — Evaluative Testing Results</div>
+          <div style="display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(255,255,255,0.07);">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.07);">
+              <span style="font-size:13px;font-weight:300;color:rgba(255,255,255,0.8);">I understand how and when to use Chronicle.</span>
+              <span style="display:inline-block;width:28px;height:28px;background:#86efac;border-radius:3px;flex-shrink:0;"></span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.07);">
+              <span style="font-size:13px;font-weight:300;color:rgba(255,255,255,0.8);">Chronicle will help me do my job more efficiently and effectively.</span>
+              <span style="display:inline-block;width:28px;height:28px;background:#fcd34d;border-radius:3px;flex-shrink:0;"></span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;">
+              <span style="font-size:13px;font-weight:300;color:rgba(255,255,255,0.8);">I have control using Chronicle.</span>
+              <span style="display:inline-block;width:28px;height:28px;background:#fca5a5;border-radius:3px;flex-shrink:0;"></span>
+            </div>
+          </div>
+          <div style="display:flex;gap:24px;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.07);">
+            <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,0.4);"><span style="display:inline-block;width:12px;height:12px;background:#86efac;border-radius:2px;"></span>Good</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,0.4);"><span style="display:inline-block;width:12px;height:12px;background:#fcd34d;border-radius:2px;"></span>Okay</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,0.4);"><span style="display:inline-block;width:12px;height:12px;background:#fca5a5;border-radius:2px;"></span>Bad</div>
+          </div>
+        </div>
+        <p style="margin-top:16px;">Confusion over right-rail affordances, unclear clip states, AI decisions not reversible enough. Every R5 change addressed one of those three.</p>
       </div>
     </div>
     <div class="process-step">
       <div class="step-num">R5</div>
       <div class="step-content">
-        <h3>High-fidelity — Chronicle</h3>
-        <p>Converged on the final design system: dark navigation, color-coded surgical phase timeline, Proposed/Confirmed/All clip tabs, AI responsibility modal at publish. Every element traces back to a research finding.</p>
+        <h3>High-fidelity + engineer handoff</h3>
+        <p>Final design system delivered with component annotations, interaction specs, and a full engineer handoff package. Every element traces back to a research finding. Two team members continue working with Dr. Adidharma as the algorithm moves toward patent.</p>
       </div>
     </div>
   </div>
@@ -812,13 +833,7 @@
     <div>
       <span class="pill pill-green">Core interaction</span>
       <h3 style="margin-top:1rem; font-size:1.3rem;">Clip Manager: the surgical command center</h3>
-      <p>The primary workspace pairs the AI-generated highlight reel with a structured clip list. Surgeons see the full video timeline color-coded by surgical phase — Approach, Removal, Reconstruction — so spatial memory is preserved. The split-panel was a deliberate decision driven by sponsor feedback: text and video side-by-side reduces cognitive overhead.</p>
-      <ul class="outcome-list">
-        <li>Phase-color-coded timeline strips for immediate orientation</li>
-        <li>Smart video search by keyword, tag, or clip label</li>
-        <li>Draft / In Progress status always visible in the header</li>
-        <li>One-click publish when ready</li>
-      </ul>
+      <p>The primary workspace pairs the AI highlight reel with a structured clip list, color-coded by surgical phase. Split-panel driven by sponsor feedback: "text and video together keeps me organized." Draft status always visible. One-click publish.</p>
     </div>
     <div class="feature-visual">
       <!-- Clip Manager mockup SVG -->
@@ -914,13 +929,7 @@
     <div>
       <span class="pill pill-teal">AI transparency</span>
       <h3 style="margin-top:1rem; font-size:1.3rem;">Tags: structured, but flexible</h3>
-      <p>Tags solve two problems at once: they make clips searchable across procedures, and they make AI involvement legible. I designed a two-icon system — a sparkle (✦) for AI-generated tags, a person icon for surgeon-added ones. Surgeons can add, remove, and modify any tag. The AI is an assistant, not an authority.</p>
-      <ul class="outcome-list">
-        <li>AI-suggested tags distinguished visually from manual ones</li>
-        <li>Tags are searchable across the full surgical library</li>
-        <li>Taxonomy is structured but extensible — surgeons add their own</li>
-        <li>Tags appear in the publish confirmation for final review</li>
-      </ul>
+      <p>Tags serve two functions: searchability and training signal. ✦ marks AI-generated tags; surgeon edits and additions feed back into the model. Every correction makes the algorithm more accurate. Unlabelled AI output eroded confidence in testing — explicit attribution restored it.</p>
     </div>
     <div class="feature-visual">
       <svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg">
@@ -962,13 +971,7 @@
     <div>
       <span class="pill pill-amber">Responsible AI</span>
       <h3 style="margin-top:1rem; font-size:1.3rem;">Publish modal: the surgeon stays in control</h3>
-      <p>The most critical UX decision in the project: before any AI-generated content enters the patient record, the surgeon must actively confirm they have reviewed it. This wasn't an afterthought — it was a design principle from week one. The modal shows exactly what will be shared and requires an explicit acknowledgment.</p>
-      <ul class="outcome-list">
-        <li>Full preview of highlight reel and all bookmarked clips</li>
-        <li>Explicit acknowledgment of AI-generated nature</li>
-        <li>Back button to make changes before final commit</li>
-        <li>Prevents passive over-reliance on AI output</li>
-      </ul>
+      <p>Before any AI-generated content reaches the patient record, the surgeon must actively confirm review. A design principle from week one — not an afterthought. No passive defaults. The surgeon is the author.</p>
     </div>
     <div class="feature-visual">
       <svg viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg">
@@ -1016,28 +1019,55 @@
   <p class="section-label reveal reveal--left">Responsible AI</p>
   <h2 class="reveal">We treated ethics as a design constraint,<br>not a disclaimer.</h2>
 
-  <p>Working in a HIPAA-adjacent context with AI-generated medical content forced the team to make ethics explicit in every screen — not just in a legal appendix. I drove the integration of responsible AI principles directly into the interaction model.</p>
-
   <div class="ethics-grid">
     <div class="ethics-card">
       <span class="tag tag-ai">AI transparency</span>
       <h3>Every AI touch is labeled</h3>
-      <p>AI-suggested clips and tags carry a distinct visual marker (✦). Surgeon-generated content uses a person icon. No ambiguity about what the machine produced.</p>
+      <p>✦ marks every AI-generated clip and tag. No ambiguity about what the machine produced.</p>
     </div>
     <div class="ethics-card">
       <span class="tag tag-autonomy">Surgeon autonomy</span>
       <h3>The surgeon approves everything</h3>
-      <p>The publish modal requires an active confirmation before any AI-generated content reaches the patient record. No passive defaults. The surgeon is the author.</p>
+      <p>Active confirmation required before anything AI-generated reaches the patient record.</p>
     </div>
     <div class="ethics-card">
       <span class="tag tag-ai">Error awareness</span>
       <h3>Omission is a risk we named</h3>
-      <p>We explicitly designed for the risk that AI omits something important — and resisted the temptation to let surgeons over-rely on the highlight reel as a substitute for their own memory.</p>
+      <p>The highlight reel is a supplement, not a substitute. Designed to resist over-reliance.</p>
     </div>
     <div class="ethics-card">
       <span class="tag tag-privacy">Privacy</span>
       <h3>HIPAA scoped to sponsor</h3>
-      <p>We explicitly established that compliance with HIPAA, patient data, and ePHI regulations was the sponsor's legal responsibility — and designed around that boundary rather than pretending it didn't exist.</p>
+      <p>HIPAA compliance scoped to the sponsor. We designed around that boundary clearly.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- INCLUSIVE DESIGN -->
+<section id="inclusive-design">
+<div class="container">
+  <p class="section-label reveal reveal--left">Inclusive design</p>
+  <h2 class="reveal">Designed for surgeons<br>under pressure.</h2>
+
+  <p>Inclusive design in a surgical context isn't about edge cases — it's about the baseline. Surgeons using Chronicle are time-pressured, context-switching constantly, and making decisions where mistakes have consequences. Every core interaction was designed with that stress state in mind.</p>
+
+  <div class="ethics-grid">
+    <div class="ethics-card">
+      <span class="tag tag-inclusive">Cognitive load</span>
+      <h3>Split-panel reduces context-switching</h3>
+      <p>Video and clip list side-by-side so surgeons never lose their place. Switching between screens in a post-op review compounds mental fatigue — keeping both in view was a deliberate decision, not a layout choice.</p>
+    </div>
+    <div class="ethics-card">
+      <span class="tag tag-inclusive">Scannability</span>
+      <h3>Tabs designed for quick orientation</h3>
+      <p>Proposed / Confirmed / All gives surgeons an immediate read on what needs attention without parsing a list. The information hierarchy was built around a surgeon who has three minutes, not thirty.</p>
+    </div>
+    <div class="ethics-card">
+      <span class="tag tag-autonomy">Intentional friction</span>
+      <h3>The publish modal slows the right moment</h3>
+      <p>Before sharing a highlight reel, surgeons see exactly what they're publishing and confirm review. The friction is the feature — a time-pressured surgeon needs one moment of deliberate pause before AI-generated content leaves the system. EMR integration is scoped to a future sprint; right now the goal is making the highlight reel usable and shareable on its own terms.</p>
     </div>
   </div>
 </div>
@@ -1047,26 +1077,26 @@
 <section id="outcome">
 <div class="container">
   <p class="section-label reveal reveal--left">Outcome</p>
-  <h2 class="reveal">From proof-of-concept to<br>investor-ready design.</h2>
+  <h2 class="reveal">From raw algorithm to<br>investor-ready product.</h2>
 
-  <p>Chronicle went from a raw algorithm with no interface to a high-fidelity prototype that could be shown to investors and used to pitch the pre-startup. The sponsor, Dr. Adidharma, used the prototype directly in subsequent presentations and conversations with UW stakeholders.</p>
+  <p>Zero to investor-ready in six months. Dr. Adidharma used the prototype in UW stakeholder and investor presentations. The design made the algorithm pitchable. The AI Trust Score defined readiness — and the control gap became the brief for the next sprint.</p>
 
   <div class="stat-grid">
     <div class="stat-card">
-      <div class="num">44</div>
-      <div class="label">Competing projects</div>
+      <div class="num">84%</div>
+      <div class="label">Algorithm accuracy at handoff</div>
     </div>
     <div class="stat-card">
       <div class="num">1st</div>
-      <div class="label">Brave Award winner</div>
+      <div class="label">Brave Award — 44 teams</div>
     </div>
     <div class="stat-card">
-      <div class="num">5</div>
-      <div class="label">Design iterations</div>
+      <div class="num">3/3</div>
+      <div class="label">AI Trust dimensions measured</div>
     </div>
     <div class="stat-card">
-      <div class="num">3</div>
-      <div class="label">Surgeons interviewed</div>
+      <div class="num">0→1</div>
+      <div class="label">Research to engineer handoff</div>
     </div>
   </div>
 
@@ -1075,11 +1105,11 @@
   <h2 class="reveal">What we left on the table (intentionally).</h2>
 
   <ul class="outcome-list">
-    <li><strong>Audio-to-notes:</strong> Using intraoperative audio to automatically flag key moments and generate operative brief drafts — reducing surgeon manual effort to near zero.</li>
-    <li><strong>EMR integration:</strong> Direct integration with EPIC, reducing the friction of exporting notes and clips into existing patient records.</li>
-    <li><strong>Patient-facing sharing:</strong> A dedicated flow for sharing relevant clips directly with patients — with appropriate context and responsible sharing guardrails.</li>
-    <li><strong>Resident portfolio:</strong> A secondary use case emerged during testing: building a surgical "portfolio" for residents to document their progression through training.</li>
-    <li><strong>AI-generated notes:</strong> Expanding the AI from clip suggestion to full operative note generation — with the same responsibility modal framework ensuring surgeon review.</li>
+    <li><strong>Audio-to-notes:</strong> Intraoperative audio to auto-flag moments and draft operative briefs.</li>
+    <li><strong>EMR integration:</strong> Direct EPIC integration for notes and clips into patient records.</li>
+    <li><strong>Patient-facing sharing:</strong> Clips shared directly with patients, with responsible guardrails.</li>
+    <li><strong>Resident portfolio:</strong> Surgical progression tracking for residents — surfaced during testing.</li>
+    <li><strong>AI-generated notes:</strong> Full operative note generation from video, same responsibility framework.</li>
   </ul>
 </div>
 </section>
@@ -1092,28 +1122,28 @@
 
   <div class="reflection-grid">
     <div class="reflection-card">
-      <h3>Capability ≠ interface</h3>
-      <p>The algorithm was technically impressive but completely invisible to users without a design layer. The insight that drove everything: a tool isn't a product until a human can trust it enough to use it.</p>
+      <h3>A solution isn't a product</h3>
+      <p>Refusing to build before validating the problem was the most valuable thing we did. The cart-before-the-horse moment was the brief, not a blocker.</p>
     </div>
     <div class="reflection-card">
-      <h3>Ethics goes in the interaction, not the appendix</h3>
-      <p>The responsible AI principles we debated in week two ended up as actual UI elements — the publish modal, the tag icon system, the AI disclaimers on video. Good ethics is good design.</p>
+      <h3>Ethics in the interaction, not the appendix</h3>
+      <p>Week-two principles became actual UI elements. The publish modal, tag system, and AI disclaimers aren't features — they're the ethics made visible.</p>
     </div>
     <div class="reflection-card">
-      <h3>User research in high-stakes domains is irreplaceable</h3>
-      <p>No amount of secondary research would have surfaced "I don't have time to be Hemingway here." Being in the hospital, talking to surgeons under real pressure — that's where the real design brief lived.</p>
+      <h3>Research in high-stakes domains is irreplaceable</h3>
+      <p>No secondary research would have surfaced "I don't have time to be Hemingway here." That line came from being in the hospital.</p>
     </div>
     <div class="reflection-card">
-      <h3>The sponsor relationship was itself a design problem</h3>
-      <p>Dr. Adidharma was simultaneously our user, our subject matter expert, and our critic. Weekly syncs kept us calibrated. Her feedback made the designs sharper at every iteration — when we leaned into that dynamic instead of presenting to her, outcomes improved.</p>
+      <h3>The client was also the user</h3>
+      <p>Dr. Adidharma was user, SME, and critic simultaneously. Weekly syncs kept us honest. Leaning into that dynamic — not just presenting to her — made every iteration sharper.</p>
     </div>
     <div class="reflection-card">
-      <h3>MVP scope is a UX decision</h3>
-      <p>Choosing to focus on Review → Select → Publish and leave Upload, Storage, and Sharing to future sprints wasn't a compromise — it was what made the prototype credible. Scope selection is itself a design skill.</p>
+      <h3>Scope is a product skill</h3>
+      <p>Academic use as the MVP beachhead wasn't a retreat — it was the right pitch for investors at the pre-startup stage. Knowing what to leave out is as important as knowing what to build.</p>
     </div>
     <div class="reflection-card">
-      <h3>AI used to create, not just describe</h3>
-      <p>We used AI to generate storyboard visuals, refine language, and accelerate iteration — while being explicit about where human review was non-negotiable. A useful model for how to ship AI-assisted work responsibly.</p>
+      <h3>AI as a design tool, not just a subject</h3>
+      <p>Used AI to generate storyboard visuals and accelerate iteration — while being explicit about where human review was non-negotiable.</p>
     </div>
   </div>
 
@@ -1128,7 +1158,7 @@
 <!-- FOOTER -->
 <footer>
 <div class="container">
-  <p>© 2025 Warisha Soomro — Chronicle Case Study</p>
+  <p>Updated April 2026</p>
   <p style="margin-top:12px; text-transform:none; font-size:13px; color:var(--ink-3);">
     <a href="index.html" style="color:var(--accent);">← Back to Portfolio</a>
     &nbsp;&nbsp;·&nbsp;&nbsp;
