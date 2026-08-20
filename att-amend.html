@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amend — Warisha Soomro</title>
+<meta name="description" content="Case study: editing pending orders in place instead of cancel-and-restart">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #0e0e0e; --fg: #ffffff; --accent: #ff3e00; --gray: #222222; --syne: "Syne", sans-serif; --inter: "Inter", sans-serif; }
+  * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+  body { background-color: var(--bg); color: var(--fg); font-family: var(--inter); overflow-x: hidden; line-height: 1.6; }
+  a, button { cursor: pointer; } a { color: inherit; }
+  ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--accent); }
+  .huge-type { font-family: var(--syne); font-weight: 800; line-height: 0.9; letter-spacing: -0.03em; text-transform: uppercase; }
+  .outline-text { -webkit-text-stroke: 1px var(--fg); color: transparent; opacity: 0.15; }
+  .container { width: 900px; max-width: 92%; margin: 0 auto; position: relative; }
+  section { padding: 120px 0; } section.tight { padding: 60px 0; }
+  nav { position: fixed; top: 0; width: 100%; padding: 30px 60px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; mix-blend-mode: difference; }
+  .logo { font-family: var(--syne); font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; text-decoration: none; }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a { color: white; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; font-weight: 600; }
+  .eyebrow { font-family: var(--syne); color: var(--accent); font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-bottom: 24px; }
+  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 160px; padding-bottom: 80px; }
+  .hero-title { font-size: clamp(3.5rem, 8vw, 7rem); margin-bottom: 40px; }
+  .hero-sub { font-size: 1.5rem; font-weight: 300; color: #999; max-width: 700px; margin-bottom: 60px; }
+  .meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; border-top: 1px solid var(--gray); padding-top: 30px; }
+  .meta-item .meta-label { font-family: var(--syne); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #666; display: block; margin-bottom: 8px; }
+  .meta-item .meta-value { font-size: 1rem; font-weight: 400; }
+  h2.section-title { font-family: var(--inter); font-size: clamp(2rem, 4vw, 3rem); text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 40px; line-height: 1; }
+  h3.block-title { font-family: var(--syne); font-size: 1.3rem; text-transform: uppercase; letter-spacing: -0.01em; margin: 40px 0 16px; color: var(--accent); }
+  p { font-size: 1.05rem; font-weight: 300; color: #ccc; margin-bottom: 20px; max-width: 720px; }
+  p.lede { font-size: 1.3rem; color: #eee; max-width: 760px; }
+  ul.cs-list { list-style: none; margin: 20px 0; max-width: 720px; }
+  ul.cs-list li { font-size: 1.05rem; font-weight: 300; color: #ccc; padding-left: 28px; position: relative; margin-bottom: 14px; }
+  ul.cs-list li::before { content: "—"; position: absolute; left: 0; color: var(--accent); }
+  .divider { height: 1px; background: var(--gray); width: 100%; margin: 60px 0; }
+  .quote-block { border-left: 2px solid var(--accent); padding: 10px 0 10px 30px; margin: 40px 0; max-width: 700px; }
+  .quote-block p { font-size: 1.3rem; font-style: italic; color: #fff; font-weight: 300; margin-bottom: 8px; }
+  .quote-block span { font-size: 0.8rem; color: #666; font-family: var(--syne); text-transform: uppercase; letter-spacing: 0.05em; }
+  .amend-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin: 40px 0; }
+  .amend-chip { border: 1px solid var(--gray); padding: 20px 14px; text-align: center; }
+  .amend-chip .n { font-family: var(--syne); font-size: 0.75rem; color: var(--accent); text-transform: uppercase; display: block; margin-bottom: 6px; }
+  .amend-chip .d { font-size: 0.85rem; color: #bbb; }
+  .transcript { border: 1px solid var(--gray); padding: 30px; margin: 40px 0; background: #131313; }
+  .transcript .line { margin-bottom: 16px; font-size: 0.95rem; }
+  .transcript .who { font-family: var(--syne); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); display: block; margin-bottom: 4px; }
+  .transcript .who.pm { color: #888; }
+  .transcript p { margin-bottom: 0; color: #ddd; font-size: 0.95rem; max-width: none; }
+  .caveat { font-size: 0.85rem; color: #666; font-style: italic; max-width: 700px; margin-top: -8px; margin-bottom: 20px; }
+  .sticky-type { position: relative; font-size: 10rem; line-height: 0.7; opacity: 0.05; z-index: 0; pointer-events: none; font-family: var(--syne); text-transform: uppercase; }
+  footer { padding: 100px 0 60px; background: #000; margin-top: 80px; }
+  .footer-cta { font-size: clamp(3rem, 8vw, 6rem); line-height: 0.9; font-family: var(--syne); text-align: center; padding: 60px 0; text-transform: uppercase; }
+  .footer-cta a { color: inherit; text-decoration: none; transition: color 0.3s; } .footer-cta a:hover { color: var(--accent); }
+  .footer-link { color: inherit; text-decoration: none; transition: color 0.3s; } .footer-link:hover, .footer-link:focus { color: var(--accent); }
+  .footer-meta { display: flex; justify-content: space-between; font-family: var(--syne); font-size: 0.8rem; text-transform: uppercase; color: #555; flex-wrap: wrap; gap: 20px; }
+  .footer-socials { display: flex; gap: 30px; }
+  .blob { position: fixed; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,62,0,0.15) 0%, rgba(14,14,14,0) 70%); border-radius: 50%; pointer-events: none; z-index: -1; transition: transform 0.1s ease-out; }
+  .reveal-text { overflow: hidden; display: inline-block; }
+  .reveal-text span { display: inline-block; transform: translateY(100%); transition: transform 1s cubic-bezier(0.7,0,0.3,1); }
+  .reveal-text.active span { transform: translateY(0); }
+  @media (max-width: 767px) {
+    nav { padding: 20px; background: rgba(14,14,14,0.95); }
+    .logo { font-size: 1.2rem; } .nav-links { gap: 16px; } .nav-links a { font-size: 0.7rem; }
+    #hero { padding-top: 120px; } .meta-grid { grid-template-columns: 1fr 1fr; }
+    .amend-grid { grid-template-columns: 1fr 1fr; }
+    .sticky-type { font-size: 4rem; } .footer-meta { flex-direction: column; align-items: flex-start; }
+    .blob { display: none; } section { padding: 70px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+</style>
+</head>
+<body>
+
+  <div class="blob" id="cursor-blob"></div>
+
+  <nav>
+    <a class="logo" href="index.html">Warisha Soomro</a>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="hero">
+      <div class="container">
+        <span class="eyebrow">Case Study / 02 — Workflow &amp; Constraints</span>
+        <h1 class="huge-type hero-title">Amend</h1>
+        <p class="hero-sub">A customer changes their mind about a delivery address, or wants to add
+          AutoPay after the fact — and the only tool an agent had was to cancel the whole pending order
+          and start over. I designed the in-place editing experience that let agents amend a live order
+          instead, and negotiated its scope directly against real backend limitations.</p>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Senior UX Designer</span></div>
+          <div class="meta-item"><span class="meta-label">Company</span><span class="meta-value">AT&T — Customer Connect</span></div>
+          <div class="meta-item"><span class="meta-label">Timeline</span><span class="meta-value">2025</span></div>
+          <div class="meta-item"><span class="meta-label">Team</span><span class="meta-value">PM, Engineering, Backend/Order Graph</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tight"><div class="container"><div class="sticky-type outline-text">02</div></div></section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">The Problem</h2>
+        <p class="lede">Any change to a pending wireless order — a new phone number, a different delivery address, an added feature — meant canceling the entire order and rebuilding it from scratch.</p>
+        <p>That's expensive in every sense: it costs the agent time, it costs the customer patience, and it introduces fallout risk every time an order gets recreated instead of adjusted. The fix sounds simple — "let agents edit the order" — but a pending order isn't a static form. It's a live object moving through fulfillment, and different fields become un-editable at different points depending on what's already happened downstream in supply chain and billing systems.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Designing Around a Moving Deadline</h2>
+        <p>The core design constraint was the <strong style="color:#fff; font-weight:400;">Point of No Return (PONR)</strong> — the moment in an order's lifecycle after which a given field can no longer be safely changed without becoming a different kind of transaction entirely. A phone-number change is amendable before activation completes in the order graph; after that point, it isn't an amend anymore, it's a new exchange order. A delivery address is editable before the item drops to the warehouse; after that, it isn't.</p>
+        <p>I designed the interface so this constraint was visible and enforced, not just documented in a spec: eligible fields show an active edit affordance, everything else is locked, and eligibility is checked in real time against the order's actual status — not assumed from the order type alone.</p>
+        <div class="amend-grid">
+          <div class="amend-chip"><span class="n">Amendable</span><div class="d">Phone number (CTN)</div></div>
+          <div class="amend-chip"><span class="n">Amendable</span><div class="d">AutoPay enrollment</div></div>
+          <div class="amend-chip"><span class="n">Amendable</span><div class="d">Delivery address</div></div>
+          <div class="amend-chip"><span class="n">Amendable</span><div class="d">Add-ons &amp; promotions</div></div>
+          <div class="amend-chip"><span class="n">Amendable</span><div class="d">Rate plan</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">When the Backend Says No</h2>
+        <p>Good design in an enterprise system isn't just proposing the ideal flow — it's finding out in real time what's actually buildable, and adjusting the design live rather than shipping something engineering has to quietly walk back later. During one working session with our PM, I was walking through a mockup that let an agent cancel a single line directly from the amend flow:</p>
+        <div class="transcript">
+          <div class="line"><span class="who">UX Designer</span><p>Right here — this is what I had mocked up before. You're in the amend order page, and you can cancel the order or cancel the line from here if you want.</p></div>
+          <div class="line"><span class="who pm">PM</span><p>That's not possible — in the [backend system], they won't give us a cancel indicator. The backend team is saying that's not feasible.</p></div>
+          <div class="line"><span class="who">UX Designer</span><p>Wait — why is this not possible?</p></div>
+          <div class="line"><span class="who pm">PM</span><p>Technical limitation.</p></div>
+        </div>
+        <p>That exchange is a fair representative sample of how the whole workstream operated: I'd propose a flow, the PM would surface a backend constraint in real time, and we'd resolve scope on the spot rather than let the disagreement sit unresolved in a backlog. Where a capability wasn't feasible — like canceling an individual line mid-amend — I pulled it from that iteration rather than designing an interface for something the system couldn't actually support, and flagged it for a later phase once the backend dependency was resolved.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Designing for the Undo, Not Just the Do</h2>
+        <p>Because this flow touches billing, inventory holds, and shipping — real operational consequences, not just UI state — I designed explicit failure and reversal paths as first-class parts of the flow, not an afterthought:</p>
+        <ul class="cs-list">
+          <li>An agent can cancel an in-progress amend at any point, which triggers the system to release the hold it placed on the order rather than leaving it stuck.</li>
+          <li>If a CTN amendment fails on the backend, the interface reverts cleanly to the original number and surfaces a clear, agent-facing explanation instead of a raw error.</li>
+          <li>Every amend action writes to an order history — who changed what, the old value, the new value, and when — so a later agent (or a customer dispute) has a real audit trail instead of a guess.</li>
+          <li>Rollout is staged behind feature flags by user, store, profile, and channel, so the capability can be dialed back instantly if something goes wrong in production without a full redeploy.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Impact</h2>
+        <ul class="cs-list">
+          <li>Agents can now resolve common post-submission changes — a new number, a corrected address, an added feature — without canceling and recreating the order, removing a source of fallout risk tied to order recreation.</li>
+          <li>The amend interface reused existing New Number, Port-In, and payment-method components rather than introducing new patterns, which kept the design consistent with the rest of the platform and reduced the training burden on agents.</li>
+          <li>Staged, flagged rollout meant the feature could reach real agents incrementally instead of as a single high-risk cutover.</li>
+        </ul>
+        <p class="caveat">This feature shipped in phases; the scope described above reflects what was designed and, per the team's working sessions, agreed as buildable — some edge cases (like the single-line cancel discussed above) were intentionally deferred rather than shipped in the initial release.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Reflection</h2>
+        <p>This project sharpened a habit I now consider non-negotiable: get into the room with engineering while the design is still soft, not after it's final. The moment I found out "cancel a line" wasn't backend-feasible was more valuable in that live conversation than it would have been three sprints later as a blocked ticket. Good systems design isn't just knowing what the ideal flow looks like — it's knowing exactly where the real constraints are, and being comfortable redesigning on the spot when you hit one.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-cta"><a href="index.html#work">More Work →</a></div>
+      <div class="divider"></div>
+      <div class="footer-meta">
+        <div>© 2026 Warisha Soomro</div>
+        <div class="footer-socials">
+          <a class="footer-link" href="https://www.linkedin.com/in/warishas" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="footer-link" href="mailto:warisha9@hotmail.com">Email</a>
+        </div>
+        <div>Open to Relocation</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var blob = document.getElementById('cursor-blob');
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+      if (!isTouch && !reduceMotion) {
+        document.addEventListener('mousemove', function (e) {
+          if (blob) blob.style.transform = 'translate(' + (e.clientX - 200) + 'px, ' + (e.clientY - 200) + 'px)';
+        });
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) { if (entry.isIntersecting) entry.target.classList.add('active'); });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal-text').forEach(function (t) { observer.observe(t); });
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+          var href = this.getAttribute('href');
+          var target = document.querySelector(href);
+          if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

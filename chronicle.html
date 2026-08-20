@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chronicle — Warisha Soomro</title>
+<meta name="description" content="Case study: AI-assisted surgical video documentation for surgeons">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e0e; --fg: #ffffff; --accent: #ff3e00; --gray: #222222;
+    --syne: "Syne", sans-serif; --inter: "Inter", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+  body { background-color: var(--bg); color: var(--fg); font-family: var(--inter); overflow-x: hidden; line-height: 1.6; }
+  a, button { cursor: pointer; }
+  a { color: inherit; }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); }
+  .huge-type { font-family: var(--syne); font-weight: 800; line-height: 0.9; letter-spacing: -0.03em; text-transform: uppercase; }
+  .outline-text { -webkit-text-stroke: 1px var(--fg); color: transparent; opacity: 0.15; }
+  .container { width: 900px; max-width: 92%; margin: 0 auto; position: relative; }
+  section { padding: 120px 0; }
+  section.tight { padding: 60px 0; }
+  nav { position: fixed; top: 0; width: 100%; padding: 30px 60px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; mix-blend-mode: difference; }
+  .logo { font-family: var(--syne); font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; text-decoration: none; }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a { color: white; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; font-weight: 600; }
+  .eyebrow { font-family: var(--syne); color: var(--accent); font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-bottom: 24px; }
+  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 160px; padding-bottom: 80px; }
+  .hero-title { font-size: clamp(3.5rem, 8vw, 7rem); margin-bottom: 40px; }
+  .hero-sub { font-size: 1.5rem; font-weight: 300; color: #999; max-width: 700px; margin-bottom: 60px; }
+  .meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; border-top: 1px solid var(--gray); padding-top: 30px; }
+  .meta-item .meta-label { font-family: var(--syne); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #666; display: block; margin-bottom: 8px; }
+  .meta-item .meta-value { font-size: 1rem; font-weight: 400; }
+  h2.section-title { font-family: var(--inter); font-size: clamp(2rem, 4vw, 3rem); text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 40px; line-height: 1; }
+  h3.block-title { font-family: var(--syne); font-size: 1.3rem; text-transform: uppercase; letter-spacing: -0.01em; margin: 40px 0 16px; color: var(--accent); }
+  p { font-size: 1.05rem; font-weight: 300; color: #ccc; margin-bottom: 20px; max-width: 720px; }
+  p.lede { font-size: 1.3rem; color: #eee; max-width: 760px; }
+  ul.cs-list { list-style: none; margin: 20px 0; max-width: 720px; }
+  ul.cs-list li { font-size: 1.05rem; font-weight: 300; color: #ccc; padding-left: 28px; position: relative; margin-bottom: 14px; }
+  ul.cs-list li::before { content: "—"; position: absolute; left: 0; color: var(--accent); }
+  .divider { height: 1px; background: var(--gray); width: 100%; margin: 60px 0; }
+  .quote-block { border-left: 2px solid var(--accent); padding: 10px 0 10px 30px; margin: 40px 0; max-width: 700px; }
+  .quote-block p { font-size: 1.4rem; font-style: italic; color: #fff; font-weight: 300; margin-bottom: 8px; }
+  .quote-block span { font-size: 0.8rem; color: #666; font-family: var(--syne); text-transform: uppercase; letter-spacing: 0.05em; }
+  .timeline { display: flex; flex-wrap: wrap; gap: 0; margin: 40px 0; border-top: 1px solid var(--gray); border-bottom: 1px solid var(--gray); }
+  .timeline-step { flex: 1 1 140px; padding: 24px 20px; border-right: 1px solid var(--gray); }
+  .timeline-step:last-child { border-right: none; }
+  .timeline-step .t-month { font-family: var(--syne); font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 8px; }
+  .timeline-step .t-desc { font-size: 0.9rem; color: #aaa; font-weight: 300; }
+  .team-row { display: flex; flex-wrap: wrap; gap: 16px; margin: 30px 0; }
+  .team-chip { font-family: var(--syne); font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--gray); padding: 10px 18px; letter-spacing: 0.02em; }
+  .team-chip.me { border-color: var(--accent); color: var(--accent); }
+  .caveat { font-size: 0.85rem; color: #666; font-style: italic; max-width: 700px; margin-top: -8px; margin-bottom: 20px; }
+  .sticky-type { position: relative; font-size: 10rem; line-height: 0.7; opacity: 0.05; z-index: 0; pointer-events: none; font-family: var(--syne); text-transform: uppercase; }
+  footer { padding: 100px 0 60px; background: #000; margin-top: 80px; }
+  .footer-cta { font-size: clamp(3rem, 8vw, 6rem); line-height: 0.9; font-family: var(--syne); text-align: center; padding: 60px 0; text-transform: uppercase; }
+  .footer-cta a { color: inherit; text-decoration: none; transition: color 0.3s; }
+  .footer-cta a:hover { color: var(--accent); }
+  .footer-link { color: inherit; text-decoration: none; transition: color 0.3s; }
+  .footer-link:hover, .footer-link:focus { color: var(--accent); }
+  .footer-meta { display: flex; justify-content: space-between; font-family: var(--syne); font-size: 0.8rem; text-transform: uppercase; color: #555; flex-wrap: wrap; gap: 20px; }
+  .footer-socials { display: flex; gap: 30px; }
+  .blob { position: fixed; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,62,0,0.15) 0%, rgba(14,14,14,0) 70%); border-radius: 50%; pointer-events: none; z-index: -1; transition: transform 0.1s ease-out; }
+  .reveal-text { overflow: hidden; display: inline-block; }
+  .reveal-text span { display: inline-block; transform: translateY(100%); transition: transform 1s cubic-bezier(0.7,0,0.3,1); }
+  .reveal-text.active span { transform: translateY(0); }
+  @media (max-width: 767px) {
+    nav { padding: 20px; background: rgba(14,14,14,0.95); }
+    .logo { font-size: 1.2rem; } .nav-links { gap: 16px; } .nav-links a { font-size: 0.7rem; }
+    #hero { padding-top: 120px; }
+    .meta-grid { grid-template-columns: 1fr 1fr; }
+    .timeline { flex-direction: column; }
+    .timeline-step { border-right: none; border-bottom: 1px solid var(--gray); }
+    .sticky-type { font-size: 4rem; }
+    .footer-meta { flex-direction: column; align-items: flex-start; }
+    .blob { display: none; }
+    section { padding: 70px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+</style>
+</head>
+<body>
+
+  <div class="blob" id="cursor-blob"></div>
+
+  <nav>
+    <a class="logo" href="index.html">Warisha Soomro</a>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="hero">
+      <div class="container">
+        <span class="eyebrow">Case Study / 04 — Zero to One</span>
+        <h1 class="huge-type hero-title">Chronicle</h1>
+        <p class="hero-sub">Surgeons narrate hours of endoscopic footage into a handful of sentences in their operative notes, because nobody has time to re-watch a three-hour surgery. Chronicle uses AI to cut that footage into a reviewable highlight reel — giving surgeons a second, visual record alongside the note they already write.</p>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Product Designer</span></div>
+          <div class="meta-item"><span class="meta-label">Program</span><span class="meta-value">UW HCDE MS Capstone</span></div>
+          <div class="meta-item"><span class="meta-label">Timeline</span><span class="meta-value">Jan – Jun 2024</span></div>
+          <div class="meta-item"><span class="meta-label">Team</span><span class="meta-value">Team Scrubs — 5 designers/researchers</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tight"><div class="container"><div class="sticky-type outline-text">04</div></div></section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">The Question</h2>
+        <p class="lede">How might digital imagery improve surgeons' recall, collaboration, and time — without becoming one more thing they have to manage?</p>
+        <p>Our sponsor had built a patent-pending algorithm that could compress an hours-long endoscopic surgical video down to fifteen minutes or less, isolating the phases and key moments a surgeon would actually want to see again. What didn't exist yet was any interface for a surgeon to use it. We were handed a capable model and an open question: what does a surgeon actually do with a video, and where does it belong in a workflow built entirely around written notes?</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Grounding the Problem Before Designing Anything</h2>
+        <p>We spent the first third of the project refusing to sketch a single screen until we understood the world we were designing for. That discipline came from the whole team, and I was one of the designers doing the legwork alongside our researcher.</p>
+
+        <h3 class="block-title">Contextual inquiry at Harborview</h3>
+        <p>We spent time on-site in the operating room and surrounding spaces, mapping the end-to-end journey of a surgeon through handoffs and consultations, and watching where video references already showed up — or conspicuously didn't.</p>
+
+        <h3 class="block-title">In-depth interviews</h3>
+        <p>One-on-one conversations with surgeons who perform endoscopic surgery and consultations went deeper: how they take notes mid-procedure, how they use (or avoid) digital imagery, and where AI could plausibly fit into that without adding friction to an already time-pressured job.</p>
+
+        <p>Our research question evolved as we learned — it started broad ("what's a typical day like for a surgeon?") and narrowed as patterns emerged, eventually converging on the question that shaped the whole rest of the project: <em>what is the value of a video for a surgeon, specifically in their workflow?</em></p>
+
+        <div class="quote-block">
+          <p>Surgeons will be spending additional time adding video to their notes, so reducing friction is paramount.</p>
+          <span>Synthesized Research Insight</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Designing With the Team</h2>
+        <p>Our process was a deliberate cycle of divergence and convergence: independent work during the week, then a working session to debrief sponsor and instructor feedback and reconcile what each of us had explored. I contributed sketches and interaction concepts at the wireframe and mid-fidelity stages, where two or three of us would rapidly iterate on the same flow in parallel to stress-test alternatives before converging on one direction.</p>
+        <p>Two insights from concept testing with our sponsor, a practicing surgeon, directly shaped the interface:</p>
+        <ul class="cs-list">
+          <li>Side-by-side comparison between the written note and the video kept surgeons oriented — video as a supplement to the note, never a replacement for it.</li>
+          <li>Surgeons already follow an internal checklist while operating. The AI's first-pass edit needed to echo that existing structure, not impose a new one.</li>
+        </ul>
+        <div class="team-row">
+          <div class="team-chip me">Warisha — Product Design</div>
+          <div class="team-chip">PM</div>
+          <div class="team-chip">UX Researcher</div>
+          <div class="team-chip">UX Designer</div>
+          <div class="team-chip">UX Generalist</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Keeping the Surgeon in Control</h2>
+        <p>The most senior-level tension in this project wasn't visual — it was about trust in an automated system making editorial decisions about a legal medical record. Every design conversation about the AI's output came back to the same constraint: the surgeon needed to stay the final authority over what the video showed and how it was used, not the algorithm.</p>
+        <p>We used an AI Trust Score during evaluative testing specifically to measure that — not just "does this look good," but "do you believe what this is showing you, and would you rely on it." That surfaced a concrete usability gap: the right rail's edit-versus-add functions weren't clearly differentiated, and clips in the list lacked enough affordance to tell which one was currently in view. Both went back into the next iteration.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Final Design</h2>
+        <p class="lede">A web application that lets surgeons view and manage surgical video highlight reels as a supplement to their operative notes.</p>
+        <p>Using the sponsor's AI compression model, Chronicle reduces hours of raw endoscopic footage into a fifteen-minute (or shorter) reel, organized around the recognizable phases and key moments of the surgery. Surgeons can review, reference, and eventually cite these clips the same way they'd reference a written note — closing the gap between what happened in the OR and what makes it into the record.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Where It Landed</h2>
+        <ul class="cs-list">
+          <li>Usability evaluation showed a positive directional signal for the MVP experience — surgeons could navigate the reel and understood the video's relationship to their notes.</li>
+          <li>The clearest near-term use case that emerged was educational and academic reference, with surgeons expressing real appetite to eventually extend it into operative notes themselves.</li>
+          <li>We handed the requirements document and high-fidelity Figma prototype to our sponsor for their development team to carry into implementation.</li>
+        </ul>
+        <p class="caveat">This was a capstone project delivered to a sponsor, not a shipped commercial product — outcomes reflect usability evaluation and sponsor validation, not production usage data.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Reflection</h2>
+        <p>Chronicle taught me how to design for trust in a system that makes decisions a human used to make alone. The interesting design problem was never "how do we show a video" — it was how to make an AI's editorial judgment legible and overridable enough that a surgeon, whose license is on the line, would actually rely on it. That's a very different kind of craft than visual polish, and it's the one I most want to keep practicing.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-cta"><a href="index.html#work">More Work →</a></div>
+      <div class="divider"></div>
+      <div class="footer-meta">
+        <div>© 2026 Warisha Soomro</div>
+        <div class="footer-socials">
+          <a class="footer-link" href="https://www.linkedin.com/in/warishas" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="footer-link" href="mailto:warisha9@hotmail.com">Email</a>
+        </div>
+        <div>Open to Relocation</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var blob = document.getElementById('cursor-blob');
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+      if (!isTouch && !reduceMotion) {
+        document.addEventListener('mousemove', function (e) {
+          if (blob) blob.style.transform = 'translate(' + (e.clientX - 200) + 'px, ' + (e.clientY - 200) + 'px)';
+        });
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) { if (entry.isIntersecting) entry.target.classList.add('active'); });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal-text').forEach(function (t) { observer.observe(t); });
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+          var href = this.getAttribute('href');
+          var target = document.querySelector(href);
+          if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

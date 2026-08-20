@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Device Return Journey — Warisha Soomro</title>
+<meta name="description" content="Case study: journey-aware device return experience for AT&T Customer Connect">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #0e0e0e; --fg: #ffffff; --accent: #ff3e00; --gray: #222222; --syne: "Syne", sans-serif; --inter: "Inter", sans-serif; }
+  * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+  body { background-color: var(--bg); color: var(--fg); font-family: var(--inter); overflow-x: hidden; line-height: 1.6; }
+  a, button { cursor: pointer; } a { color: inherit; }
+  ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--accent); }
+  .huge-type { font-family: var(--syne); font-weight: 800; line-height: 0.9; letter-spacing: -0.03em; text-transform: uppercase; }
+  .outline-text { -webkit-text-stroke: 1px var(--fg); color: transparent; opacity: 0.15; }
+  .container { width: 900px; max-width: 92%; margin: 0 auto; position: relative; }
+  section { padding: 120px 0; } section.tight { padding: 60px 0; }
+  nav { position: fixed; top: 0; width: 100%; padding: 30px 60px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; mix-blend-mode: difference; }
+  .logo { font-family: var(--syne); font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; text-decoration: none; }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a { color: white; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; font-weight: 600; }
+  .eyebrow { font-family: var(--syne); color: var(--accent); font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-bottom: 24px; }
+  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 160px; padding-bottom: 80px; }
+  .hero-title { font-size: clamp(3.2rem, 7vw, 6.4rem); margin-bottom: 40px; }
+  .hero-sub { font-size: 1.5rem; font-weight: 300; color: #999; max-width: 720px; margin-bottom: 60px; }
+  .meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; border-top: 1px solid var(--gray); padding-top: 30px; }
+  .meta-item .meta-label { font-family: var(--syne); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #666; display: block; margin-bottom: 8px; }
+  .meta-item .meta-value { font-size: 1rem; font-weight: 400; }
+  h2.section-title { font-family: var(--inter); font-size: clamp(2rem, 4vw, 3rem); text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 40px; line-height: 1; }
+  h3.block-title { font-family: var(--syne); font-size: 1.3rem; text-transform: uppercase; letter-spacing: -0.01em; margin: 40px 0 16px; color: var(--accent); }
+  p { font-size: 1.05rem; font-weight: 300; color: #ccc; margin-bottom: 20px; max-width: 720px; }
+  p.lede { font-size: 1.3rem; color: #eee; max-width: 780px; }
+  code.tok { font-family: var(--inter); background: #1a1a1a; padding: 2px 6px; }
+  ul.cs-list { list-style: none; margin: 20px 0; max-width: 720px; }
+  ul.cs-list li { font-size: 1.05rem; font-weight: 300; color: #ccc; padding-left: 28px; position: relative; margin-bottom: 14px; }
+  ul.cs-list li::before { content: "—"; position: absolute; left: 0; color: var(--accent); }
+  .divider { height: 1px; background: var(--gray); width: 100%; margin: 60px 0; }
+  .quote-block { border-left: 2px solid var(--accent); padding: 10px 0 10px 30px; margin: 40px 0; max-width: 700px; }
+  .quote-block p { font-size: 1.4rem; font-style: italic; color: #fff; font-weight: 300; margin-bottom: 8px; }
+  .quote-block span { font-size: 0.8rem; color: #666; font-family: var(--syne); text-transform: uppercase; letter-spacing: 0.05em; }
+  .q3-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 40px 0; }
+  .q3-card { border: 1px solid var(--gray); padding: 26px; }
+  .q3-card .q-num { font-family: var(--syne); color: var(--accent); font-size: 0.75rem; text-transform: uppercase; display: block; margin-bottom: 12px; }
+  .q3-card p { font-size: 1.05rem; color: #eee; margin-bottom: 0; max-width: none; }
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 40px 0; }
+  .compare-col { border: 1px solid var(--gray); padding: 30px; }
+  .compare-col h4 { font-family: var(--syne); font-size: 1rem; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 0.03em; }
+  .compare-col ul { list-style: none; }
+  .compare-col li { font-size: 0.95rem; font-weight: 300; color: #bbb; padding: 8px 0; border-bottom: 1px solid #1a1a1a; }
+  .tradeoff { border: 1px solid var(--gray); padding: 32px; margin: 40px 0; }
+  .tradeoff .side { padding: 14px 0; border-bottom: 1px solid #1a1a1a; }
+  .tradeoff .side:last-of-type { border-bottom: none; }
+  .tradeoff .side .who { font-family: var(--syne); font-size: 0.7rem; text-transform: uppercase; color: var(--accent); letter-spacing: 0.05em; display: block; margin-bottom: 6px; }
+  .tradeoff .side p { margin-bottom: 0; font-size: 0.98rem; color: #ccc; max-width: none; }
+  .caveat { font-size: 0.85rem; color: #666; font-style: italic; max-width: 700px; margin-top: -8px; margin-bottom: 20px; }
+  .flow-steps { display: flex; flex-wrap: wrap; gap: 0; align-items: center; margin: 40px 0; }
+  .flow-step { font-family: var(--syne); font-size: 0.85rem; text-transform: uppercase; border: 1px solid var(--gray); padding: 14px 20px; }
+  .flow-arrow { color: var(--accent); padding: 0 14px; font-size: 1.2rem; }
+  .impact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 30px 0; }
+  .impact-col { border: 1px solid var(--gray); padding: 28px; }
+  .impact-col h4 { font-family: var(--syne); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888; margin-bottom: 16px; }
+  .impact-col.validated h4 { color: var(--accent); }
+  .team-row { display: flex; flex-wrap: wrap; gap: 16px; margin: 30px 0; }
+  .team-chip { font-family: var(--syne); font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--gray); padding: 10px 18px; letter-spacing: 0.02em; }
+  .team-chip.me { border-color: var(--accent); color: var(--accent); }
+  .sticky-type { position: relative; font-size: 10rem; line-height: 0.7; opacity: 0.05; z-index: 0; pointer-events: none; font-family: var(--syne); text-transform: uppercase; }
+  footer { padding: 100px 0 60px; background: #000; margin-top: 80px; }
+  .footer-cta { font-size: clamp(3rem, 8vw, 6rem); line-height: 0.9; font-family: var(--syne); text-align: center; padding: 60px 0; text-transform: uppercase; }
+  .footer-cta a { color: inherit; text-decoration: none; transition: color 0.3s; } .footer-cta a:hover { color: var(--accent); }
+  .footer-link { color: inherit; text-decoration: none; transition: color 0.3s; } .footer-link:hover, .footer-link:focus { color: var(--accent); }
+  .footer-meta { display: flex; justify-content: space-between; font-family: var(--syne); font-size: 0.8rem; text-transform: uppercase; color: #555; flex-wrap: wrap; gap: 20px; }
+  .footer-socials { display: flex; gap: 30px; }
+  .blob { position: fixed; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,62,0,0.15) 0%, rgba(14,14,14,0) 70%); border-radius: 50%; pointer-events: none; z-index: -1; transition: transform 0.1s ease-out; }
+  .reveal-text { overflow: hidden; display: inline-block; }
+  .reveal-text span { display: inline-block; transform: translateY(100%); transition: transform 1s cubic-bezier(0.7,0,0.3,1); }
+  .reveal-text.active span { transform: translateY(0); }
+  @media (max-width: 767px) {
+    nav { padding: 20px; background: rgba(14,14,14,0.95); }
+    .logo { font-size: 1.2rem; } .nav-links { gap: 16px; } .nav-links a { font-size: 0.7rem; }
+    #hero { padding-top: 120px; } .meta-grid { grid-template-columns: 1fr 1fr; }
+    .compare-grid, .q3-grid, .impact-grid { grid-template-columns: 1fr; }
+    .sticky-type { font-size: 4rem; } .footer-meta { flex-direction: column; align-items: flex-start; }
+    .blob { display: none; } section { padding: 70px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+</style>
+</head>
+<body>
+
+  <div class="blob" id="cursor-blob"></div>
+
+  <nav>
+    <a class="logo" href="index.html">Warisha Soomro</a>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="hero">
+      <div class="container">
+        <span class="eyebrow">Case Study / 01 — Systems &amp; Research</span>
+        <h1 class="huge-type hero-title">Device Return<br>Journey</h1>
+        <p class="hero-sub">Six return programs, seven backend systems, one frontline agent trying to answer a customer's question. I owned UX for Device Protection and Warranty returns inside AT&T's Customer Connect platform — reframed the problem around a single question the interface had never actually answered, and initiated the research that proved the reframe was right.</p>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Senior UX Designer</span></div>
+          <div class="meta-item"><span class="meta-label">Company</span><span class="meta-value">AT&T — Customer Connect</span></div>
+          <div class="meta-item"><span class="meta-label">Timeline</span><span class="meta-value">2024 – 2025</span></div>
+          <div class="meta-item"><span class="meta-label">Team</span><span class="meta-value">PM · Eng · Research · Content Design</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tight"><div class="container"><div class="sticky-type outline-text">01</div></div></section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">The Problem</h2>
+        <p class="lede">Frontline experts had no single, journey-aware view of a wireless return — and the interface answered a question customers weren't actually asking.</p>
+        <p>An expert helping a customer with a returned phone had to leave the Equipment tab, hunt across Order and Returns views, and sometimes swivel to other systems entirely just to piece together what had happened. Buyer's Remorse, Trade-In, Next Up, Device Protection, and Warranty returns each carry their own rules, statuses, and completion definitions — but the interface treated them identically. The same generic fields appeared whether or not they applied, and backend values like <code class="tok">cash-carry</code> or <code class="tok">DF/INBOUND</code> went untranslated, forcing experts to interpret engineering language mid-call.</p>
+        <p>My scope was Device Protection and Warranty — two of the highest-friction journeys, since a claim can be operationally settled before a generic tracker would ever say "Received."</p>
+
+        <h3 class="block-title">The question underneath the problem</h3>
+        <p>Every symptom I heard from experts — overwhelming screens, unexplained fields, confusion about revisions — traced back to one missing answer: does the customer still owe AT&T a device, or not? I reframed the redesign around three questions the interface needed to answer, in order, before showing anything else:</p>
+        <div class="q3-grid">
+          <div class="q3-card"><span class="q-num">01</span><p>Does the customer still owe a device?</p></div>
+          <div class="q3-card"><span class="q-num">02</span><p>What evidence explains the current status?</p></div>
+          <div class="q3-card"><span class="q-num">03</span><p>What should the expert do next?</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">My Role &amp; Approach</h2>
+        <p>I owned the return experience for Device Protection and Warranty end to end, with day-to-day autonomy and light oversight from the platform's design lead. Two decisions shaped how I worked, and both are ones I'd defend to a hiring panel.</p>
+        <h3 class="block-title">I refused to design from assumptions</h3>
+        <p>An in-store handoff and a mailed exchange look identical to a customer, but they're structurally different orders with different obligations. Rather than guess what experts needed in the moment, I made the case to product and business stakeholders that we needed to validate the proposed design with the people who'd use it, before development locked it in.</p>
+        <h3 class="block-title">I initiated the research, rather than waiting for it</h3>
+        <p>Research wasn't a standing part of this workstream. I brought the UX research team in myself, scoped the study with researcher Angie DeFord, and used the findings to settle open design debates with data instead of opinion.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Research I Initiated</h2>
+        <p class="lede">Device Protection &amp; Warranty Order Research — with UX Researcher Angie DeFord</p>
+        <p>I scoped a focus-group study to pressure-test the proposed Order and Returns tabs across three realistic scenarios: an initial insurance claim, a first revision (device not received, new order created), and a second revision (a repeat non-receipt). Nine frontline experts participated, spanning Mobility Loyalty, Sales &amp; Service, CX Labs, and the Centralized Support Desk.</p>
+        <h3 class="block-title">What we heard</h3>
+        <ul class="cs-list">
+          <li>Experts could identify an open insurance claim quickly once labels like "Insurance" and "Device Protection" were visible, and the CTN helped them confirm which line was affected.</li>
+          <li>Once a second or third revision existed, experts could tell something had changed, but not <em>why</em> — several said they'd fall back to reading call notes to reconstruct the story, exactly the swivel behavior the redesign was meant to remove.</li>
+          <li>The information-dense return screen was appreciated for completeness but called "overwhelming" by more than one participant — density without hierarchy was making the page harder to scan, not easier.</li>
+          <li>Some fields had no clear owner in the expert's mental model. Nobody could explain where a "Refund Amount" figure came from, and "Claim ID" was recognized as an Asurion-side identifier irrelevant to their workflow.</li>
+          <li>Certain details were genuinely load-bearing: the RMA number was named directly as one of the most useful fields on the page, particularly for lost-equipment cases.</li>
+        </ul>
+        <div class="quote-block">
+          <p>"You have to section this stuff — you can't just have it as a list."</p>
+          <span>Research Participant, Device Protection Study</span>
+        </div>
+        <p>That line reframed the direction: the fix wasn't more explanatory text, it was restructuring the page around the scenario the expert was actually in — grouping fields by claim stage instead of by data source, and cutting fields no one could explain.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">The Design Decision That Mattered Most</h2>
+        <p class="lede">Organize the interface around customer responsibility, not backend structure.</p>
+        <p>The source systems modeled an in-store handoff, a shipped exchange, an RMA, and internal reverse-logistics movement as different technical objects. My job was to collapse that into the one question an expert actually needed answered: is the customer still on the hook for this device?</p>
+        <p>A store might accept a device from a customer and later ship it internally to a warehouse. From the customer's side, their obligation ended the moment they handed it over — but a naive design would keep showing return-tracking detail for that internal movement, implying the customer still owed something they didn't. I deliberately separated <strong style="color:#fff; font-weight:400;">customer return accountability</strong> from <strong style="color:#fff; font-weight:400;">internal inventory movement</strong>, and made sure internal logistics events were labeled as internal — never surfaced in a way that could make an expert tell a customer they still owed a device they'd already returned.</p>
+
+        <h3 class="block-title">The tradeoff I had to resolve</h3>
+        <p>Device Protection and Warranty could be considered operationally complete the moment a carrier scanned pickup — but a generic tracker still implied "Received" was required to close the loop. Meanwhile, shipment events like Drop Off and Returned were genuinely valuable evidence when a customer later disputed sending a device back.</p>
+        <div class="tradeoff">
+          <div class="side"><span class="who">Simplify</span><p>Remove the secondary shipment timeline entirely for Device Protection and Warranty — it doesn't reflect how those journeys actually close out, and it risks confusing experts with a milestone that isn't required.</p></div>
+          <div class="side"><span class="who">Preserve</span><p>Keep the full shipment history visible in every case, because Drop Off and Returned events are exactly what an expert needs when a customer disputes the return.</p></div>
+          <div class="side"><span class="who">Resolution</span><p>I separated the two needs instead of picking one: a primary status communicates whether the customer's obligation is complete, using each journey's real completion logic — no "Received" milestone where it doesn't apply, no rejection state where rejection isn't part of the process. Supporting shipment evidence stays available underneath for the dispute cases that actually need it.</p></div>
+        </div>
+
+        <h3 class="block-title">Where I chose to hold the line</h3>
+        <p>Not every idea made it in. When the team considered surfacing raw Order Type and Order Action values directly in Order History, I pushed to pause it — the underlying values included ambiguous, unmapped strings like <code class="tok">Modify.change…</code> that wouldn't mean anything to an expert without translation first. More data isn't automatically more useful information; I'd rather ship less and have every field on the screen mean something than ship more and make experts guess.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">The Solution</h2>
+        <h3 class="block-title">Translate the backend into plain language</h3>
+        <p>Fulfillment values that meant nothing to an expert — <code class="tok">cash-carry</code>, <code class="tok">CC</code>, <code class="tok">ship</code>, <code class="tok">DF</code> — became two plain labels experts could act on immediately. I worked with content designer Laura Landgren to get this language right, since the words on the screen carried as much weight as the layout around them.</p>
+        <div class="compare-grid">
+          <div class="compare-col">
+            <h4>In-Store Return</h4>
+            <ul>
+              <li>BRE type, receipt &amp; transaction ID</li>
+              <li>Device IMEI, serial, SKU, make/model</li>
+              <li>Store location, return date &amp; reason</li>
+              <li>Refund amount &amp; restocking fee</li>
+              <li>No RMA shown — the handoff is already complete</li>
+            </ul>
+          </div>
+          <div class="compare-col">
+            <h4>Mail-In Return</h4>
+            <ul>
+              <li>RMA number, status, creation date</li>
+              <li>Return-by date &amp; non-return fee</li>
+              <li>CTN and shipment tracking</li>
+              <li>Original order &amp; payment detail</li>
+              <li>Full RMA lifecycle, since the device is still in transit</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="block-title">Fix the navigation, not just the page</h3>
+        <p>I added return and exchange visibility directly to the Equipment tab so an expert could jump straight into the relevant Returns view instead of hunting for it — the most-cited pain point going into the study. Related order revisions were grouped together so an expert didn't have to manually reconstruct which orders belonged to the same claim.</p>
+
+        <h3 class="block-title">Make validation part of the process, not an afterthought</h3>
+        <p>Coming out of this project, I proposed making frontline validation a formal checkpoint rather than an optional step designers reach for when there's time:</p>
+        <div class="flow-steps">
+          <div class="flow-step">Design</div><span class="flow-arrow">→</span>
+          <div class="flow-step">Frontline Checkpoint</div><span class="flow-arrow">→</span>
+          <div class="flow-step">Iteration</div><span class="flow-arrow">→</span>
+          <div class="flow-step">Feasibility Review</div><span class="flow-arrow">→</span>
+          <div class="flow-step">Development</div>
+        </div>
+        <p>Moving expert validation earlier means design changes get caught while they're still cheap — before engineering has built against an assumption that turns out to be wrong.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Grounded in Existing Research, Too</h2>
+        <p>Alongside the study I initiated, I drew on an existing AT&T employee persona framework — built by the UX Research team from 75+ interviews, 60 survey responses, and dozens of hours of retail and call-center observation — to understand how experts operate across their broader day. That research consistently surfaced a pattern I designed directly against: employees work across too many disconnected systems, and every extra swivel erodes both efficiency and their confidence on a live call. I didn't conduct that research, but analyzing it against my own findings gave me a second, independent signal that consolidation and plain-language status were the right problems to solve.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Collaboration</h2>
+        <div class="team-row">
+          <div class="team-chip me">Warisha — UX Design (Owner)</div>
+          <div class="team-chip">Angie DeFord — UX Research</div>
+          <div class="team-chip">Laura Landgren — Content Design</div>
+          <div class="team-chip">Product &amp; Business Stakeholders</div>
+          <div class="team-chip">OrderGraph / Backend Eng</div>
+        </div>
+        <p>This shipped through sustained coordination across the Customer Connect platform team, the OrderGraph backend team responsible for the underlying data model, and the research and content design partners above. Because the return logic touched real customer-facing consequences — refunds, non-return fees, RMA deadlines — I worked closely with business stakeholders to keep the interface honest about status, rather than optimizing for a cleaner-looking screen at the cost of accuracy.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Impact</h2>
+        <div class="impact-grid">
+          <div class="impact-col validated">
+            <h4>Validated — Frontline Review</h4>
+            <p style="margin-bottom:14px;">Before a line of it was built, frontline reviewers evaluated the redesigned Figma directly:</p>
+            <div class="quote-block" style="margin: 20px 0 0;">
+              <p style="font-size:1.15rem;">"Will SAVE so much time trying to find returns."</p>
+              <span>Frontline Expert, Design Review</span>
+            </div>
+          </div>
+          <div class="impact-col">
+            <h4>Modeled — Business Case</h4>
+            <p style="margin-bottom:0;">This redesign was tied to a finance-partnered handle-time and savings model spanning several million annual Device Return contacts. <!-- WS: insert the exact figures here once you've confirmed (a) they come from a verified internal source you can point to directly, not a third-party summary, and (b) you're cleared to disclose exact internal financial figures externally. Until then, keep this directional. --></p>
+          </div>
+        </div>
+        <ul class="cs-list">
+          <li>Experts described the new flow as easier to navigate and expected it to meaningfully cut click time, especially for new hires still building system fluency.</li>
+          <li>Several asked to be included in the eventual pilot — a strong, if informal, vote of confidence from the people closest to the problem.</li>
+          <li>Conditional field display removed the specific confusion the research surfaced: RMA information no longer appears on returns where no RMA exists, and unexplained fields like the mystery "Refund Amount" were cut.</li>
+        </ul>
+        <p class="caveat">Two internal dollar-benefit estimates existed for the broader returns initiative this work supported ($20M and $6M annually, tied to different scoping assumptions); as of my last review, neither had been finance-vetted, so I'm not quoting either as a personal result here.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Reflection</h2>
+        <p>The instinct to bring in research wasn't process for its own sake — it was that I didn't trust my own assumptions about what "overwhelming" meant to someone who reads this screen fifty times a day. And the instinct to separate customer accountability from backend structure wasn't a stylistic choice — it was the one reframe that made every other decision on this project obvious once I'd made it. That's the kind of judgment I want a team to be able to hand me a messy, high-stakes system and trust me to find.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-cta"><a href="index.html#work">More Work →</a></div>
+      <div class="divider"></div>
+      <div class="footer-meta">
+        <div>© 2026 Warisha Soomro</div>
+        <div class="footer-socials">
+          <a class="footer-link" href="https://www.linkedin.com/in/warishas" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="footer-link" href="mailto:warisha9@hotmail.com">Email</a>
+        </div>
+        <div>Open to Relocation</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var blob = document.getElementById('cursor-blob');
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+      if (!isTouch && !reduceMotion) {
+        document.addEventListener('mousemove', function (e) {
+          if (blob) blob.style.transform = 'translate(' + (e.clientX - 200) + 'px, ' + (e.clientY - 200) + 'px)';
+        });
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) { if (entry.isIntersecting) entry.target.classList.add('active'); });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal-text').forEach(function (t) { observer.observe(t); });
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+          var href = this.getAttribute('href');
+          var target = document.querySelector(href);
+          if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

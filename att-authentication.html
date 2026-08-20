@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FCC Authentication — Warisha Soomro</title>
+<meta name="description" content="Case study: omni-channel FCC-mandated authentication across AT&T Customer Connect">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #0e0e0e; --fg: #ffffff; --accent: #ff3e00; --gray: #222222; --syne: "Syne", sans-serif; --inter: "Inter", sans-serif; }
+  * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+  body { background-color: var(--bg); color: var(--fg); font-family: var(--inter); overflow-x: hidden; line-height: 1.6; }
+  a, button { cursor: pointer; } a { color: inherit; }
+  ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--accent); }
+  .huge-type { font-family: var(--syne); font-weight: 800; line-height: 0.9; letter-spacing: -0.03em; text-transform: uppercase; }
+  .outline-text { -webkit-text-stroke: 1px var(--fg); color: transparent; opacity: 0.15; }
+  .container { width: 900px; max-width: 92%; margin: 0 auto; position: relative; }
+  section { padding: 100px 0; } section.tight { padding: 50px 0; }
+  nav { position: fixed; top: 0; width: 100%; padding: 30px 60px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; mix-blend-mode: difference; }
+  .logo { font-family: var(--syne); font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; text-decoration: none; }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a { color: white; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; font-weight: 600; }
+  .eyebrow { font-family: var(--syne); color: var(--accent); font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-bottom: 24px; }
+  #hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding-top: 160px; padding-bottom: 60px; }
+  .hero-title { font-size: clamp(3.5rem, 8vw, 7rem); margin-bottom: 32px; }
+  .hero-sub { font-size: 1.4rem; font-weight: 300; color: #999; max-width: 680px; margin-bottom: 50px; }
+  .meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; border-top: 1px solid var(--gray); padding-top: 30px; }
+  .meta-item .meta-label { font-family: var(--syne); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #666; display: block; margin-bottom: 8px; }
+  .meta-item .meta-value { font-size: 1rem; font-weight: 400; }
+  h2.section-title { font-family: var(--inter); font-size: clamp(1.8rem, 3.5vw, 2.6rem); text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 24px; line-height: 1; }
+  h3.block-title { font-family: var(--syne); font-size: 1.1rem; text-transform: uppercase; letter-spacing: -0.01em; margin: 8px 0 20px; color: var(--accent); }
+  p { font-size: 1.02rem; font-weight: 300; color: #ccc; margin-bottom: 16px; max-width: 700px; }
+  p.lede { font-size: 1.2rem; color: #eee; max-width: 720px; }
+  ul.cs-list { list-style: none; margin: 16px 0; max-width: 700px; }
+  ul.cs-list li { font-size: 1.02rem; font-weight: 300; color: #ccc; padding-left: 28px; position: relative; margin-bottom: 12px; }
+  ul.cs-list li::before { content: "—"; position: absolute; left: 0; color: var(--accent); }
+  .divider { height: 1px; background: var(--gray); width: 100%; margin: 50px 0; }
+  .caveat { font-size: 0.85rem; color: #666; font-style: italic; max-width: 700px; margin-top: -4px; margin-bottom: 16px; }
+  .flow-steps { display: flex; flex-wrap: wrap; gap: 0; align-items: center; margin: 32px 0; }
+  .flow-step { font-family: var(--syne); font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--gray); padding: 12px 18px; }
+  .flow-arrow { color: var(--accent); padding: 0 12px; font-size: 1.1rem; }
+  .sticky-type { position: relative; font-size: 10rem; line-height: 0.7; opacity: 0.05; z-index: 0; pointer-events: none; font-family: var(--syne); text-transform: uppercase; }
+
+  /* Artifact placeholders */
+  .artifact-intro { max-width: 700px; margin-bottom: 28px; }
+  .artifact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 20px 0 60px; }
+  .artifact-grid.single { grid-template-columns: 1fr; }
+  .artifact { border: 1px dashed #333; background: #141414; aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; }
+  .artifact-tag { font-family: var(--syne); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: #444; }
+  .artifact-caption { margin-top: 10px; font-size: 0.85rem; color: #888; max-width: 100%; }
+  .artifact-caption strong { color: #bbb; font-weight: 600; }
+
+  footer { padding: 100px 0 60px; background: #000; margin-top: 60px; }
+  .footer-cta { font-size: clamp(3rem, 8vw, 6rem); line-height: 0.9; font-family: var(--syne); text-align: center; padding: 60px 0; text-transform: uppercase; }
+  .footer-cta a { color: inherit; text-decoration: none; transition: color 0.3s; } .footer-cta a:hover { color: var(--accent); }
+  .footer-link { color: inherit; text-decoration: none; transition: color 0.3s; } .footer-link:hover, .footer-link:focus { color: var(--accent); }
+  .footer-meta { display: flex; justify-content: space-between; font-family: var(--syne); font-size: 0.8rem; text-transform: uppercase; color: #555; flex-wrap: wrap; gap: 20px; }
+  .footer-socials { display: flex; gap: 30px; }
+  .blob { position: fixed; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,62,0,0.15) 0%, rgba(14,14,14,0) 70%); border-radius: 50%; pointer-events: none; z-index: -1; transition: transform 0.1s ease-out; }
+  .reveal-text { overflow: hidden; display: inline-block; }
+  .reveal-text span { display: inline-block; transform: translateY(100%); transition: transform 1s cubic-bezier(0.7,0,0.3,1); }
+  .reveal-text.active span { transform: translateY(0); }
+  @media (max-width: 767px) {
+    nav { padding: 20px; background: rgba(14,14,14,0.95); }
+    .logo { font-size: 1.2rem; } .nav-links { gap: 16px; } .nav-links a { font-size: 0.7rem; }
+    #hero { padding-top: 120px; } .meta-grid { grid-template-columns: 1fr 1fr; }
+    .artifact-grid { grid-template-columns: 1fr; }
+    .sticky-type { font-size: 4rem; } .footer-meta { flex-direction: column; align-items: flex-start; }
+    .blob { display: none; } section { padding: 60px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+</style>
+</head>
+<body>
+
+  <div class="blob" id="cursor-blob"></div>
+
+  <nav>
+    <a class="logo" href="index.html">Warisha Soomro</a>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <main>
+    <section id="hero">
+      <div class="container">
+        <span class="eyebrow">Case Study / 03 — Compliance &amp; Identity Systems</span>
+        <h1 class="huge-type hero-title" style="font-size: clamp(1.5rem, 5vw, 4.5rem);">Customer Authentication</h1>
+        <p class="hero-sub">A federal mandate doesn't negotiate on deadlines. In 2024, the FCC required AT&amp;T to close the authentication gaps behind SIM-swap and account-takeover fraud — and I was the only UX designer responsible for rebuilding how Customer Connect verifies identity, across every account type, device state, and channel it touches.</p>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Senior UX Designer (Sole Owner)</span></div>
+          <div class="meta-item"><span class="meta-label">Company</span><span class="meta-value">AT&amp;T — Customer Connect</span></div>
+          <div class="meta-item"><span class="meta-label">Timeline</span><span class="meta-value">2024–2025</span></div>
+          <div class="meta-item"><span class="meta-label">Team</span><span class="meta-value">Content Design, Engineering, Product, QA</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tight"><div class="container"><div class="sticky-type outline-text">03</div></div></section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">The Problem</h2>
+        <p class="lede">One mandate, four variables: wireless vs. unified accounts, authenticated vs. unauthenticated handsets, four channels, and every way authentication can fail. No fallback could rely on data a bad actor could guess or buy.</p>
+        <p>The riskiest edge case — a cancelled account, reached offline or through IVR, with none of the usual identity signals available — had no real path before this project.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">My Role</h2>
+        <p>I was the sole UX designer assigned to this initiative — no dedicated design lead on it, no second designer to divide the account-type and channel combinations with. I worked directly with content design on system language and with identity and backend engineering on what was actually enforceable server-side, but the failure-state mapping, flow architecture, and trade-off decisions were mine to make.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">The Model</h2>
+        <p>Passcode first, OTP-to-email on failure, capped attempts before routing to retail — applied consistently across every account and device state.</p>
+        <div class="flow-steps">
+          <div class="flow-step">Passcode</div><span class="flow-arrow">→</span>
+          <div class="flow-step">OTP to Email</div><span class="flow-arrow">→</span>
+          <div class="flow-step">Retry, Up to Limit</div><span class="flow-arrow">→</span>
+          <div class="flow-step">Retail Referral</div>
+        </div>
+        <p>We deliberately chose not to surface a live failed-attempt counter — handled as standard backend behavior rather than a visible threshold an attacker could work against.</p>
+
+        <div class="artifact-grid">
+          <div>
+            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
+            <p class="artifact-caption"><strong>FCC L0</strong> — [caption]</p>
+          </div>
+          <div>
+            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
+            <p class="artifact-caption"><strong>Waterfall Authentication</strong> — [caption]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Owning Every Failure State</h2>
+        <p class="artifact-intro">Before I designed a single error screen, I mapped every state the authentication flow could enter on my own — sent, shown, consent allowed or denied, authentication success or failure, authorization granted or denied, timed out. Nobody assigned me that map; half of those states didn't have a UX owner until I claimed them. Success was the easy screen. These weren't — and some, like passcode reset, had to ship twice: once for wireless accounts, then again, separately, for unified accounts.</p>
+
+        <div class="artifact-grid single">
+          <div>
+            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
+            <p class="artifact-caption"><strong>Authentication State Map</strong> — [caption]</p>
+          </div>
+        </div>
+
+        <div class="artifact-grid">
+          <div>
+            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
+            <p class="artifact-caption"><strong>Push Notification Errors</strong> — [caption]</p>
+          </div>
+          <div>
+            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
+            <p class="artifact-caption"><strong>Failed Passcode Attempts</strong> — [caption]</p>
+          </div>
+          <div>
+            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
+            <p class="artifact-caption"><strong>Passcode Reset — IVR, Handset Authenticated</strong> — [caption]</p>
+          </div>
+          <div>
+            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
+            <p class="artifact-caption"><strong>FCC Cancelled Accounts</strong> — [caption]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">One Model, Every Channel</h2>
+        <p class="artifact-intro">Call center, retail, and chat each have different constraints — different latency, different UI real estate, different teams owning the surface. The authentication logic stayed identical across all three; only its expression changed. The Sprinklr integration below is the clearest proof: two authentication systems collapsed into one login for the customer, after years of contract and integration hurdles other teams hadn't been able to clear.</p>
+
+        <div class="artifact-grid">
+          <div>
+            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
+            <p class="artifact-caption"><strong>OTP — Chat Interim Solution</strong> — [caption]</p>
+          </div>
+          <div>
+            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
+            <p class="artifact-caption"><strong>FCC Chat</strong> — [caption]</p>
+          </div>
+          <div>
+            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
+            <p class="artifact-caption"><strong>Seamless Integration — Sprinklr + ACC</strong> — [caption]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Impact</h2>
+        <ul class="cs-list">
+          <li>Replaced a per-channel, per-account-type patchwork with one waterfall model — covering the previously unhandled cancelled-account case for the first time.</li>
+          <li>Independently mapped and designed for every failure state in the authentication flow — denied consent, timeout, exceeded attempts, unverifiable email — before any of them had a UX owner.</li>
+          <li>Aligned unique dev requirements across six applications inside a fixed federal deadline; the first mandated release passed pre-launch verification with zero defects, and business stakeholders called it one of the fastest release-to-production turnarounds they'd seen.</li>
+          <li>The redesigned authorization flow was processing authentication events in the millions within days of launch — under compliance, legal, and AVP-level sign-off on every release.</li>
+        </ul>
+        <p class="caveat">Fraud and account-takeover metrics aren't mine to disclose. What's shown here is delivery scope, system volume, defect rate, and sign-off level.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Reflection</h2>
+        <p>Compliance work is graded on what you forgot, not what you shipped. This project taught me to design the whole state machine up front — not just the path I hoped the customer would take.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-cta"><a href="index.html#work">More Work →</a></div>
+      <div class="divider"></div>
+      <div class="footer-meta">
+        <div>© 2026 Warisha Soomro</div>
+        <div class="footer-socials">
+          <a class="footer-link" href="https://www.linkedin.com/in/warishas" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="footer-link" href="mailto:warisha9@hotmail.com">Email</a>
+        </div>
+        <div>Open to Relocation</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var blob = document.getElementById('cursor-blob');
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+      if (!isTouch && !reduceMotion) {
+        document.addEventListener('mousemove', function (e) {
+          if (blob) blob.style.transform = 'translate(' + (e.clientX - 200) + 'px, ' + (e.clientY - 200) + 'px)';
+        });
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) { if (entry.isIntersecting) entry.target.classList.add('active'); });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal-text').forEach(function (t) { observer.observe(t); });
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+          var href = this.getAttribute('href');
+          var target = document.querySelector(href);
+          if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
