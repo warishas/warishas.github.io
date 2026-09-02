@@ -25,19 +25,19 @@
   .eyebrow { font-family: var(--syne); color: var(--accent); font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-bottom: 24px; }
   #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 160px; padding-bottom: 80px; }
   .hero-title { font-size: clamp(3.5rem, 8vw, 7rem); margin-bottom: 40px; }
-  .hero-sub { font-size: 1.5rem; font-weight: 300; color: #999; max-width: 700px; margin-bottom: 60px; }
+  .hero-sub { font-size: 1.5rem; font-weight: 300; color: #999; margin-bottom: 60px; }
   .meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; border-top: 1px solid var(--gray); padding-top: 30px; }
   .meta-item .meta-label { font-family: var(--syne); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #666; display: block; margin-bottom: 8px; }
   .meta-item .meta-value { font-size: 1rem; font-weight: 400; }
   h2.section-title { font-family: var(--inter); font-size: clamp(2rem, 4vw, 3rem); text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 40px; line-height: 1; }
   h3.block-title { font-family: var(--syne); font-size: 1.3rem; text-transform: uppercase; letter-spacing: -0.01em; margin: 40px 0 16px; color: var(--accent); }
-  p { font-size: 1.05rem; font-weight: 300; color: #ccc; margin-bottom: 20px; max-width: 720px; }
-  p.lede { font-size: 1.3rem; color: #eee; max-width: 760px; }
-  ul.cs-list { list-style: none; margin: 20px 0; max-width: 720px; }
+  p { font-size: 1.05rem; font-weight: 300; color: #ccc; margin-bottom: 20px; }
+  p.lede { font-size: 1.3rem; color: #eee; }
+  ul.cs-list { list-style: none; margin: 20px 0; }
   ul.cs-list li { font-size: 1.05rem; font-weight: 300; color: #ccc; padding-left: 28px; position: relative; margin-bottom: 14px; }
   ul.cs-list li::before { content: "—"; position: absolute; left: 0; color: var(--accent); }
   .divider { height: 1px; background: var(--gray); width: 100%; margin: 60px 0; }
-  .quote-block { border-left: 2px solid var(--accent); padding: 10px 0 10px 30px; margin: 40px 0; max-width: 700px; }
+  .quote-block { border-left: 2px solid var(--accent); padding: 10px 0 10px 30px; margin: 40px 0; }
   .quote-block p { font-size: 1.3rem; font-style: italic; color: #fff; font-weight: 300; margin-bottom: 8px; }
   .quote-block span { font-size: 0.8rem; color: #666; font-family: var(--syne); text-transform: uppercase; letter-spacing: 0.05em; }
   .amend-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin: 40px 0; }
@@ -49,7 +49,64 @@
   .transcript .who { font-family: var(--syne); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); display: block; margin-bottom: 4px; }
   .transcript .who.pm { color: #888; }
   .transcript p { margin-bottom: 0; color: #ddd; font-size: 0.95rem; max-width: none; }
-  .caveat { font-size: 0.85rem; color: #666; font-style: italic; max-width: 700px; margin-top: -8px; margin-bottom: 20px; }
+  .caveat { font-size: 0.85rem; color: #666; font-style: italic; margin-top: -8px; margin-bottom: 20px; }
+  figure.artifact { margin: 40px 0; }
+  .artifact-frame { border: 1px dashed #3a3a3a; background: #131313; aspect-ratio: 16 / 10; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 24px; overflow: hidden; }
+  .artifact-frame.has-image { border: none; background: none; padding: 0; aspect-ratio: auto; align-items: flex-start; }
+  .artifact-images { display: flex; flex-direction: column; gap: 16px; width: 100%; align-items: stretch; }
+  .artifact-images img { width: 100%; height: auto; max-width: 100%; max-height: 760px; object-fit: contain; cursor: zoom-in; }
+  .artifact-images.carousel { flex-direction: row; align-items: flex-start; gap: 14px; }
+  .carousel-main { flex: 1; min-width: 0; background: #131313; }
+  .carousel-main img { width: 100%; height: auto; max-height: 760px; object-fit: contain; cursor: zoom-in; display: block; }
+  .carousel-thumbs { display: flex; flex-direction: column; gap: 10px; width: 110px; flex-shrink: 0; }
+  .carousel-thumb { border: 1px solid var(--gray); background: #131313; padding: 0; cursor: pointer; overflow: hidden; border-radius: 4px; opacity: 0.55; transition: opacity 0.2s ease, border-color 0.2s ease; }
+  .carousel-thumb img { width: 100%; height: 74px; object-fit: cover; display: block; cursor: pointer; }
+  .carousel-thumb:hover { opacity: 0.85; }
+  .carousel-thumb.active { opacity: 1; border-color: var(--accent); }
+  @media (max-width: 767px) {
+    .artifact-images.carousel { flex-direction: column; }
+    .carousel-thumbs { flex-direction: row; width: auto; overflow-x: auto; }
+    .carousel-thumb { flex: 0 0 90px; }
+    .carousel-thumb img { height: 60px; }
+  }
+  .lightbox-overlay { position: fixed; inset: 0; background: #0a0a0a; display: flex; align-items: center; justify-content: center; padding: 40px; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.2s ease; }
+  .lightbox-overlay.active { opacity: 1; visibility: visible; }
+  .lightbox-img-wrap { position: relative; display: flex; align-items: center; justify-content: center; max-width: 100%; max-height: 100%; }
+  .lightbox-overlay img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; cursor: zoom-in; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+  .lightbox-img-wrap.zoom-active img { cursor: zoom-out; }
+  .lightbox-close { position: absolute; top: 24px; right: 32px; color: #fff; font-size: 2rem; font-weight: 300; line-height: 1; cursor: pointer; background: none; border: none; z-index: 2001; }
+  .lightbox-hint { position: absolute; bottom: -32px; left: 50%; transform: translateX(-50%); color: #777; font-size: 0.75rem; font-weight: 300; white-space: nowrap; }
+  .lightbox-lens { position: absolute; width: 220px; height: 220px; border-radius: 50%; border: 2px solid var(--accent); box-shadow: 0 0 0 2000px rgba(0,0,0,0.6), 0 0 24px rgba(255,62,0,0.5); pointer-events: none; background-repeat: no-repeat; display: none; }
+  .lightbox-img-wrap.zoom-active .lightbox-lens.active { display: block; }
+  @media (max-width: 767px) {
+    .lightbox-lens { width: 150px; height: 150px; }
+  }
+  .artifact-frame .artifact-num { font-family: var(--syne); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; }
+  .artifact-frame .artifact-fill { font-size: 0.8rem; color: #555; text-transform: uppercase; letter-spacing: 0.05em; max-width: 320px; }
+  figure.artifact figcaption { font-size: 0.85rem; color: #999; font-weight: 300; font-style: italic; margin-top: 12px; }
+
+  /* Fig. 02 — interactive shared draft lifecycle diagram */
+  .artifact-frame.has-diagram { border: none; background: #111; aspect-ratio: auto; padding: 44px 28px; }
+  .lifecycle-diagram { display: flex; align-items: stretch; justify-content: center; width: 100%; gap: 0; }
+  .lc-step { flex: 1 1 90px; min-width: 0; min-height: 78px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: #1a1a1a; border: 1px solid var(--gray); border-radius: 10px; padding: 14px 10px; text-align: center; position: relative; cursor: default; transition: flex-grow 0.35s ease, min-height 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease; }
+  .lc-step .lc-index { font-family: var(--syne); font-size: 0.65rem; letter-spacing: 0.08em; color: var(--accent); }
+  .lc-step .lc-label { font-size: 0.7rem; font-weight: 300; color: #ccc; line-height: 1.3; }
+  .lc-step .lc-desc { font-size: 0.68rem; font-weight: 300; color: #999; line-height: 1.45; max-height: 0; opacity: 0; overflow: hidden; margin-top: 0; transition: max-height 0.35s ease, opacity 0.25s ease, margin-top 0.35s ease; }
+  .lc-step:hover, .lc-step:focus-visible { flex-grow: 2.4; min-height: 168px; border-color: var(--accent); box-shadow: 0 0 24px rgba(255,62,0,0.35); background: #1f1f1f; z-index: 5; outline: none; }
+  .lc-step:hover .lc-desc, .lc-step:focus-visible .lc-desc { max-height: 200px; opacity: 1; margin-top: 8px; }
+  .lc-connector { flex: 0 0 26px; position: relative; align-self: center; height: 2px; background: var(--gray); margin: 0 2px; }
+  .lc-connector::after { content: ""; position: absolute; right: -1px; top: 50%; transform: translateY(-50%); border-style: solid; border-width: 4px 0 4px 6px; border-color: transparent transparent transparent var(--gray); }
+  @media (max-width: 767px) {
+    .lifecycle-diagram { flex-direction: column; }
+    .lc-step { padding: 12px; }
+    .lc-step:hover, .lc-step:focus-visible { flex-grow: 0; min-height: 168px; }
+    .lc-connector { align-self: center; width: 2px; height: 20px; flex: 0 0 20px; }
+    .lc-connector::after { right: 50%; top: auto; bottom: -1px; transform: translateX(50%) rotate(90deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lc-step { transition: none; }
+    .lc-step .lc-desc { transition: none; }
+  }
   .sticky-type { position: relative; font-size: 10rem; line-height: 0.7; opacity: 0.05; z-index: 0; pointer-events: none; font-family: var(--syne); text-transform: uppercase; }
   footer { padding: 100px 0 60px; background: #000; margin-top: 80px; }
   .footer-cta { font-size: clamp(3rem, 8vw, 6rem); line-height: 0.9; font-family: var(--syne); text-align: center; padding: 60px 0; text-transform: uppercase; }
@@ -93,9 +150,9 @@
         <p class="hero-sub">A customer changes their mind about a delivery address, or wants to add
           AutoPay after the fact — and the only tool an agent had was to cancel the whole pending order
           and start over. I designed the in-place editing experience that let agents amend a live order
-          instead, and negotiated its scope directly against real backend limitations.</p>
+          and negotiated its scope against backend limitations.</p>
         <div class="meta-grid">
-          <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Senior UX Designer</span></div>
+          <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">UX Designer</span></div>
           <div class="meta-item"><span class="meta-label">Company</span><span class="meta-value">AT&T — Customer Connect</span></div>
           <div class="meta-item"><span class="meta-label">Timeline</span><span class="meta-value">2025</span></div>
           <div class="meta-item"><span class="meta-label">Team</span><span class="meta-value">PM, Engineering, Backend/Order Graph</span></div>
@@ -103,55 +160,214 @@
       </div>
     </section>
 
-    <section class="tight"><div class="container"><div class="sticky-type outline-text">02</div></div></section>
+    <section class="tight"><div class="container"><div class="sticky-type outline-text">02-Amends</div></div></section>
 
     <section>
       <div class="container">
         <h2 class="section-title">The Problem</h2>
         <p class="lede">Any change to a pending wireless order — a new phone number, a different delivery address, an added feature — meant canceling the entire order and rebuilding it from scratch.</p>
-        <p>That's expensive in every sense: it costs the agent time, it costs the customer patience, and it introduces fallout risk every time an order gets recreated instead of adjusted. The fix sounds simple — "let agents edit the order" — but a pending order isn't a static form. It's a live object moving through fulfillment, and different fields become un-editable at different points depending on what's already happened downstream in supply chain and billing systems.</p>
+        <p>Recreating an order costs the agent time, costs the customer patience, and introduces fallout risk every time an order gets rebuilt instead of adjusted. The fix sounds simple — "let agents edit
+          the order" — but a pending order isn't a static form. It's a live object moving through fulfillment, and different fields become un-editable at different points depending on what's already
+          happened downstream in supply chain and billing systems.</p>
       </div>
     </section>
 
     <section>
       <div class="container">
         <h2 class="section-title">Designing Around a Moving Deadline</h2>
-        <p>The core design constraint was the <strong style="color:#fff; font-weight:400;">Point of No Return (PONR)</strong> — the moment in an order's lifecycle after which a given field can no longer be safely changed without becoming a different kind of transaction entirely. A phone-number change is amendable before activation completes in the order graph; after that point, it isn't an amend anymore, it's a new exchange order. A delivery address is editable before the item drops to the warehouse; after that, it isn't.</p>
-        <p>I designed the interface so this constraint was visible and enforced, not just documented in a spec: eligible fields show an active edit affordance, everything else is locked, and eligibility is checked in real time against the order's actual status — not assumed from the order type alone.</p>
+        <p>The core design constraint was the <strong style="color:#fff; font-weight:400;">Point of No Return (PONR)</strong> — the moment in an order's lifecycle
+          after which a given field can no longer be changed without becoming a different kind of transaction entirely.
+        <p>I designed the interface so this constraint was visible and enforced, not just documented in a spec: eligible fields shown in an active state and ineligable changes in a disabled state.
+          Eligibility is checked in real time against the order's actual status.</p>
         <div class="amend-grid">
-          <div class="amend-chip"><span class="n">Amendable</span><div class="d">Phone number (CTN)</div></div>
-          <div class="amend-chip"><span class="n">Amendable</span><div class="d">AutoPay enrollment</div></div>
-          <div class="amend-chip"><span class="n">Amendable</span><div class="d">Delivery address</div></div>
-          <div class="amend-chip"><span class="n">Amendable</span><div class="d">Add-ons &amp; promotions</div></div>
-          <div class="amend-chip"><span class="n">Amendable</span><div class="d">Rate plan</div></div>
+          <div class="amend-chip"><span class="n">Phone number (CTN)</span><div class="d">amendable before activation</div></div>
+          <div class="amend-chip"><span class="n">AutoPay enrollment</span><div class="d">no PONR checkpoint</div></div>
+          <div class="amend-chip"><span class="n">Delivery address</span><div class="d">amendable before the item drops to the warehouse</div></div>
+          <div class="amend-chip"><span class="n">Add-ons &amp; promotions</span><div class="d">amendable "for any order still in a pending state"</div></div>
+          <div class="amend-chip"><span class="n">Rate plan</span><div class="d">amendable prior to backend order completion</div></div>
         </div>
+        <figure class="artifact">
+            <div class="artifact-frame has-image">
+                <span class="artifact-num">Disabling fields beyond PONR</span>
+                <div class="artifact-images carousel">
+                    <div class="carousel-main"><img src="amends/disabled-states-ship.png" alt="disabled states"></div>
+                    <div class="carousel-thumbs">
+                        <button class="carousel-thumb active" data-src="amends/disabled-states-ship.png" data-alt="disabled states" aria-label="Show shipping disabled state"><img src="amends/disabled-states-ship.png" alt="disabled states thumbnail"></button>
+                        <button class="carousel-thumb" data-src="amends/disabled-states-line.png" data-alt="disabled states" aria-label="Show line disabled state"><img src="amends/disabled-states-line.png" alt="disabled states thumbnail"></button>
+                    </div>
+                </div>
+            </div>
+          <figcaption>The amend screen at the point an agent opens a pending order. Amendable fields have an enabled ship button, non-amendable fields that are past the point of no return (PONR) have disabled edit buttons.</figcaption>
+        </figure>
       </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Deciding What to Focus On</h2>
+            <p class="lede">The ask was to let agents amend a live order. What arrived was eleven amendment types from different corners of the shopping experience — each treated by stakeholders as its own request.</p>
+            <p>Eleven standalone flows would have meant eleven inconsistent patterns and a customer routed through multiple submissions any time more than one thing changed in a call — the exact failure this project existed to fix. My PM and I reframed it as one architecture problem instead: a single stateful draft that any eligible change gets added to, validated once, and submitted once.</p>
+            <ul class="cs-list">
+                <li><strong>One page with 10 amend types.</strong> Amending address, phone number, device details, plans, billing, and all other requirements can now be done from one page. </li>
+                <li><strong>Single-line as MVP 1</strong> Scope was always multiline but I pushed to sequence single-line first so we could build on existing sales-flow patterns and align with the sales team ahead of multiline</li>
+                <li><strong>Built multiline - an MVP 2 experience - in parallel </strong>so that the design could scale as multiline depended on initiatives that weren't ready yet. Considering both experiences to cut engineering rework later.</li>
+                <li><strong>One cancel CTA instead of two.</strong> Partial cancel and full cancel were combined into once CTA by building a single line experience that could easily scale to multiline with little engineering rework. </li>
+</ul>
+            <figure class="artifact">
+                <div class="artifact-frame has-image">
+                    <span class="artifact-num">Designing MVP 1 and MVP 2 in Tandem</span>
+                    <div class="artifact-images carousel">
+                        <div class="carousel-main"><img src="amends/singlelineview.png" alt="single line view"></div>
+                        <div class="carousel-thumbs">
+                            <button class="carousel-thumb active" data-src="amends/singlelineview.png" data-alt="single line view" aria-label="Show single line view"><img src="amends/singlelineview.png" alt="single line view thumbnail"></button>
+                            <button class="carousel-thumb" data-src="amends/multilineview.png" data-alt="multi line view" aria-label="Show multi line view"><img src="amends/multilineview.png" alt="multi line view thumbnail"></button>
+                        </div>
+                    </div>
+                </div>
+                <figcaption>While scope was for an amends page that supported single and multiline changes, the design depended on new patterns that had not been built yet. I rescoped to prioritize single line and pushed for multiline to be the MVP2 experience but designed and approved in tandem so we were not held up later.</figcaption>
+            </figure>
+        </div>
     </section>
 
     <section>
       <div class="container">
         <h2 class="section-title">When the Backend Says No</h2>
-        <p>Good design in an enterprise system isn't just proposing the ideal flow — it's finding out in real time what's actually buildable, and adjusting the design live rather than shipping something engineering has to quietly walk back later. During one working session with our PM, I was walking through a mockup that let an agent cancel a single line directly from the amend flow:</p>
+        <p>During one working session with our PM, I was walking through a mockup that let an agent cancel a single line directly from the amend flow:</p>
+        <figure class="artifact">
+          <div class="artifact-frame has-image">
+            <span class="artifact-num">Don't Initiate Cancel from the Amend Page</span>
+            <div class="artifact-images carousel">
+                <div class="carousel-main"><img src="amends/cancel-mock.png" alt="scrapped cancel view"></div>
+                <div class="carousel-thumbs">
+                    <button class="carousel-thumb active" data-src="amends/cancel-mock.png" data-alt="scrapped cancel view" aria-label="Show cancel in amend page"><img src="amends/singlelineview.png" alt="Show cancel in amend page thumbnail"></button>
+                    <button class="carousel-thumb" data-src="amends/cancelmulti-mock.png" data-alt="scrapped cancel view" aria-label="Show cancel in amend page"><img src="amends/multilineview.png" alt="Show cancel in amend page thumbnail"></button>
+                </div>
+            </div>
+          </div>
+          <figcaption>The version shown in this session: inline "Cancel order" and "Cancel line" actions on the amend page itself. This is the mock the PM flagged as backend-infeasible mid-review — pulled before it went further.</figcaption>
+        </figure>
         <div class="transcript">
-          <div class="line"><span class="who">UX Designer</span><p>Right here — this is what I had mocked up before. You're in the amend order page, and you can cancel the order or cancel the line from here if you want.</p></div>
+          <div class="line"><span class="who">UX (Me)</span><p>Right here — this is what I had mocked up before. You're in the amend order page, and you can cancel the order or cancel the line from here if you want.</p></div>
           <div class="line"><span class="who pm">PM</span><p>That's not possible — in the [backend system], they won't give us a cancel indicator. The backend team is saying that's not feasible.</p></div>
-          <div class="line"><span class="who">UX Designer</span><p>Wait — why is this not possible?</p></div>
+          <div class="line"><span class="who">UX (Me) </span><p>Wait — why is this not possible?</p></div>
           <div class="line"><span class="who pm">PM</span><p>Technical limitation.</p></div>
         </div>
-        <p>That exchange is a fair representative sample of how the whole workstream operated: I'd propose a flow, the PM would surface a backend constraint in real time, and we'd resolve scope on the spot rather than let the disagreement sit unresolved in a backlog. Where a capability wasn't feasible — like canceling an individual line mid-amend — I pulled it from that iteration rather than designing an interface for something the system couldn't actually support, and flagged it for a later phase once the backend dependency was resolved.</p>
+        <p>The cancel experience was particularly complex because of the lack of scope clarity. My PM and I didn't know if we would be initating partial cancel and full cancel as seperate CTAs on top of the amend experience or both from one CTA — more on how this got resolved below. I explored the option of no cancel CTA at all until already in the amend flow but that was closed by the dev team, leaving me with a few other brainstormed ideas to try out.</p>
       </div>
     </section>
 
     <section>
       <div class="container">
-        <h2 class="section-title">Designing for the Undo, Not Just the Do</h2>
-        <p>Because this flow touches billing, inventory holds, and shipping — real operational consequences, not just UI state — I designed explicit failure and reversal paths as first-class parts of the flow, not an afterthought:</p>
+        <h2 class="section-title">Getting the Org to Move</h2>
+        <p class="lede">Cancel's scope was unclear from the start — the original ask was two separate CTAs, a full cancel and a partial cancel, as two distinct requests. Building the MVP2 card structure reframed the problem: once every line already renders as its own selectable card, full and partial cancel aren't different actions, just different scope. I rebuilt cancel around that structure — the agent selects the line(s), and selecting all of them is a full cancel by construction — collapsing two CTAs into one.</p>
+        <figure class="artifact">
+            <div class="artifact-frame has-image">
+                <span class="artifact-num">Final Cancel Experience</span>
+                <div class="artifact-images">
+                    <img src="amends/finalcancel-mock.png" alt="cancel view">
+                </div>
+            </div>
+          <figcaption>The final version of cancel: one "Cancel" entry point, one scope choice — order or line — with the backend routing resolved behind that single decision instead of surfaced as two separate flows.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">The Review Before Submit</h2>
+        <p class="lede">Every change an agent adds to a draft — a device swap, a removed promotion, a corrected address — lands in one consolidated review before the single submission fires.</p>
+        <figure class="artifact">
+          <div class="artifact-frame has-diagram">
+            <span class="artifact-num">Fig. 04</span>
+            <div class="lifecycle-diagram" role="img" aria-label="Shared draft lifecycle: open pending order, evaluate eligible actions, open the amend order page, add changes incrementally, validate and reprice, review in a summary page, submit once.">
+              <div class="lc-step" tabindex="0">
+                <span class="lc-index">1</span>
+                <span class="lc-label">Open pending order</span>
+                <span class="lc-desc">Agent opens an order that's still pending fulfillment, pulling its live status straight from the order graph.</span>
+              </div>
+              <div class="lc-connector"></div>
+              <div class="lc-step" tabindex="0">
+                <span class="lc-index">2</span>
+                <span class="lc-label">Evaluate eligible actions</span>
+                <span class="lc-desc">The order's actual status is checked against PONR rules to determine which fields are still eligible to change.</span>
+              </div>
+              <div class="lc-connector"></div>
+              <div class="lc-step" tabindex="0">
+                <span class="lc-index">3</span>
+                <span class="lc-label">Open the amend order page</span>
+                <span class="lc-desc">One page loads with every detail of the customer's line, device, and plan pre-populated — edit options enabled or disabled per PONR, all inside the same stateful draft.</span>
+              </div>
+              <div class="lc-connector"></div>
+              <div class="lc-step" tabindex="0">
+                <span class="lc-index">4</span>
+                <span class="lc-label">Add changes incrementally</span>
+                <span class="lc-desc">Agents add any eligible change — address, plan, add-on — to that same draft instead of submitting each one separately.</span>
+              </div>
+              <div class="lc-connector"></div>
+              <div class="lc-step" tabindex="0">
+                <span class="lc-index">5</span>
+                <span class="lc-label">Validate &amp; reprice</span>
+                <span class="lc-desc">The draft is revalidated and repriced against the order's current state — terms and conditions are included, and billing updates if a monthly cost changed.</span>
+              </div>
+              <div class="lc-connector"></div>
+              <div class="lc-step" tabindex="0">
+                <span class="lc-index">6</span>
+                <span class="lc-label">Review</span>
+                <span class="lc-desc">All amended items land on one summary page so the agent and customer can review the full set of changes together before confirming.</span>
+              </div>
+              <div class="lc-connector"></div>
+              <div class="lc-step" tabindex="0">
+                <span class="lc-index">7</span>
+                <span class="lc-label">Submit once</span>
+                <span class="lc-desc">Every change in the draft submits together as one transaction, instead of one submission per amendment type.</span>
+              </div>
+            </div>
+          </div>
+          <figcaption>The lifecycle every amendment type routes through: open pending order → evaluate eligible actions → open one amend order page with line, device, and plan details pre-populated and edit options enabled or disabled per PONR → add changes incrementally → validate and reprice, including terms and conditions and any billing updates → review all amended items in a summary page → submit once. This is the structure that replaced eleven separate proposed flows.</figcaption>
+        </figure>
+        <p>This review screen is where that model becomes something an agent can actually verify against. It surfaces:</p>
+        <ul class="cs-list">
+          <li>Original and resulting selections, side by side</li>
+          <li>Updated monthly and one-time charges</li>
+          <li>Promotions added or removed</li>
+          <li>Delivery and porting impact</li>
+          <li>Financing or agreement requirements</li>
+          <li>Canceled items</li>
+          <li>Returns or customer follow-up required</li>
+        </ul>
+        <p>It's the one place in the flow where every downstream consequence of a multi-part amend is visible at once, before it's irreversible.</p>
+        <figure class="artifact">
+          <div class="artifact-frame has-image">
+            <span class="artifact-num">Displaying Multipe Amends</span>
+            <div class="artifact-images carousel">
+                <div class="carousel-main"><img src="amends/amendedbadge.png" alt="single line view"></div>
+                <div class="carousel-thumbs">
+                    <button class="carousel-thumb active" data-src="amends/amendedbadge.png" data-alt="single line view" aria-label="Show change badges"><img src="amends/amendedbadge.png" alt="single line view thumbnail"></button>
+                    <button class="carousel-thumb" data-src="amends/amendedsummary.png" data-alt="multi line view" aria-label="Show summary totals"><img src="amends/amendedsummary.png" alt="multi line view thumbnail"></button>
+                </div>
+            </div>
+          </div>
+          <figcaption>The review an agent sees before submitting a draft with multiple changes: badges to show which sections were changed, repriced totals, and every downstream consequence — porting, financing, returns — surfaced in one place instead of one submission per change.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Errors and a Change of Heart</h2>
+        <p>Because this flow touches billing, inventory holds, and shipping — real operational consequences, not just UI state — I designed explicit failure and reversal paths as first-class parts of the flow:</p>
         <ul class="cs-list">
           <li>An agent can cancel an in-progress amend at any point, which triggers the system to release the hold it placed on the order rather than leaving it stuck.</li>
           <li>If a CTN amendment fails on the backend, the interface reverts cleanly to the original number and surfaces a clear, agent-facing explanation instead of a raw error.</li>
           <li>Every amend action writes to an order history — who changed what, the old value, the new value, and when — so a later agent (or a customer dispute) has a real audit trail instead of a guess.</li>
           <li>Rollout is staged behind feature flags by user, store, profile, and channel, so the capability can be dialed back instantly if something goes wrong in production without a full redeploy.</li>
         </ul>
+        <figure class="artifact">
+            <div class="artifact-images">
+                <img src="amends/errors.png" alt="cancel view">
+            </div>
+        </figure>
+        <p class="caveat">Agent-facing copy — failure explanations, disabled-state messages, review-screen labels — went through two business reviews a week before shipping. I used AI to draft first-pass copy variants; the language above reflects that review cycle, not a single draft.</p>
       </div>
     </section>
 
@@ -170,7 +386,8 @@
     <section>
       <div class="container">
         <h2 class="section-title">Reflection</h2>
-        <p>This project sharpened a habit I now consider non-negotiable: get into the room with engineering while the design is still soft, not after it's final. The moment I found out "cancel a line" wasn't backend-feasible was more valuable in that live conversation than it would have been three sprints later as a blocked ticket. Good systems design isn't just knowing what the ideal flow looks like — it's knowing exactly where the real constraints are, and being comfortable redesigning on the spot when you hit one.</p>
+        <p>Finding out "cancel a line" wasn't backend-feasible in that working session was worth more than finding out three sprints later as a blocked ticket. That's the case for staying in the room with engineering while a design is still soft, rather than presenting a finished mock and hearing about the wall afterward.</p>
+        <p>The harder skill sits next to that one, not against it: telling a real constraint apart from an inherited assumption. I accepted the line-level cancel limitation the moment engineering confirmed it was a backend wall. I didn't accept the backend-first cancellation model, because that one was never a wall — it was just the shape the conversation had taken before I got in the room. Knowing which of those two responses a given moment calls for is most of the job.</p>
       </div>
     </section>
   </main>
@@ -189,6 +406,15 @@
       </div>
     </div>
   </footer>
+
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+    <div class="lightbox-img-wrap" id="lightbox-img-wrap">
+      <img id="lightbox-img" src="" alt="">
+      <div class="lightbox-lens" id="lightbox-lens"></div>
+      <span class="lightbox-hint" id="lightbox-hint">Click image to zoom in</span>
+    </div>
+  </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -211,6 +437,99 @@
           if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
         });
       });
+
+      var lightbox = document.getElementById('lightbox');
+      var lightboxImg = document.getElementById('lightbox-img');
+      var lightboxClose = document.getElementById('lightbox-close');
+      var lightboxWrap = document.getElementById('lightbox-img-wrap');
+      var lightboxLens = document.getElementById('lightbox-lens');
+      var lightboxHint = document.getElementById('lightbox-hint');
+      var zoomActive = false;
+      var ZOOM_FACTOR = 2.5;
+
+      function openLightbox(src, alt) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || '';
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        zoomActive = false;
+        lightboxWrap.classList.remove('zoom-active');
+        lightboxLens.classList.remove('active');
+        lightboxHint.style.display = '';
+      }
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        zoomActive = false;
+        lightboxWrap.classList.remove('zoom-active');
+        lightboxLens.classList.remove('active');
+      }
+
+      function updateLens(clientX, clientY) {
+        var imgRect = lightboxImg.getBoundingClientRect();
+        var wrapRect = lightboxWrap.getBoundingClientRect();
+        var xInImg = Math.max(0, Math.min(clientX - imgRect.left, imgRect.width));
+        var yInImg = Math.max(0, Math.min(clientY - imgRect.top, imgRect.height));
+        var lensSize = lightboxLens.offsetWidth;
+        var lensX = (imgRect.left - wrapRect.left) + xInImg;
+        var lensY = (imgRect.top - wrapRect.top) + yInImg;
+        lightboxLens.style.left = (lensX - lensSize / 2) + 'px';
+        lightboxLens.style.top = (lensY - lensSize / 2) + 'px';
+        lightboxLens.style.backgroundImage = 'url(' + lightboxImg.src + ')';
+        lightboxLens.style.backgroundSize = (imgRect.width * ZOOM_FACTOR) + 'px ' + (imgRect.height * ZOOM_FACTOR) + 'px';
+        lightboxLens.style.backgroundPosition = (-(xInImg * ZOOM_FACTOR - lensSize / 2)) + 'px ' + (-(yInImg * ZOOM_FACTOR - lensSize / 2)) + 'px';
+      }
+
+      lightboxImg.addEventListener('click', function (e) {
+        e.stopPropagation();
+        zoomActive = !zoomActive;
+        lightboxWrap.classList.toggle('zoom-active', zoomActive);
+        lightboxHint.style.display = zoomActive ? 'none' : '';
+        if (zoomActive) {
+          lightboxLens.classList.add('active');
+          updateLens(e.clientX, e.clientY);
+        } else {
+          lightboxLens.classList.remove('active');
+        }
+      });
+      lightboxWrap.addEventListener('mousemove', function (e) {
+        if (zoomActive) updateLens(e.clientX, e.clientY);
+      });
+      lightboxWrap.addEventListener('mouseleave', function () {
+        lightboxLens.classList.remove('active');
+      });
+      lightboxWrap.addEventListener('mouseenter', function () {
+        if (zoomActive) lightboxLens.classList.add('active');
+      });
+      lightboxImg.addEventListener('touchmove', function (e) {
+        if (zoomActive && e.touches[0]) {
+          e.preventDefault();
+          updateLens(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: false });
+
+      document.querySelectorAll('.artifact-frame img').forEach(function (img) {
+        if (img.closest('.carousel-thumb')) return;
+        img.addEventListener('click', function () { openLightbox(img.src, img.alt); });
+      });
+
+      document.querySelectorAll('.carousel-thumbs').forEach(function (thumbGroup) {
+        var mainImg = thumbGroup.parentElement.querySelector('.carousel-main img');
+        thumbGroup.querySelectorAll('.carousel-thumb').forEach(function (thumb) {
+          thumb.addEventListener('click', function () {
+            var src = thumb.getAttribute('data-src');
+            var alt = thumb.getAttribute('data-alt') || '';
+            mainImg.src = src;
+            mainImg.alt = alt;
+            thumbGroup.querySelectorAll('.carousel-thumb').forEach(function (t) { t.classList.remove('active'); });
+            thumb.classList.add('active');
+          });
+        });
+      });
+
+      lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+      lightboxClose.addEventListener('click', closeLightbox);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLightbox(); });
     });
   </script>
 </body>
