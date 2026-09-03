@@ -48,6 +48,8 @@
   .artifact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 20px 0 60px; }
   .artifact-grid.single { grid-template-columns: 1fr; }
   .artifact { border: 1px dashed #333; background: #141414; aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; }
+  .artifact.has-image { border: none; background: none; padding: 0; aspect-ratio: auto; }
+  .artifact.has-image img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
   .artifact-tag { font-family: var(--syne); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: #444; }
   .artifact-caption { margin-top: 10px; font-size: 0.85rem; color: #888; max-width: 100%; }
   .artifact-caption strong { color: #bbb; font-weight: 600; }
@@ -94,7 +96,7 @@
         <h1 class="huge-type hero-title" style="font-size: clamp(1.5rem, 5vw, 4.5rem);">Customer Authentication</h1>
         <p class="hero-sub">A federal mandate doesn't negotiate on deadlines. In 2024, the FCC required AT&amp;T to close the authentication gaps behind SIM-swap and account-takeover fraud — and I was the only UX designer responsible for rebuilding how Customer Connect verifies identity, across every account type, device state, and channel it touches.</p>
         <div class="meta-grid">
-          <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Senior UX Designer (Sole Owner)</span></div>
+          <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">UX Owner</span></div>
           <div class="meta-item"><span class="meta-label">Company</span><span class="meta-value">AT&amp;T — Customer Connect</span></div>
           <div class="meta-item"><span class="meta-label">Timeline</span><span class="meta-value">2024–2025</span></div>
           <div class="meta-item"><span class="meta-label">Team</span><span class="meta-value">Content Design, Engineering, Product, QA</span></div>
@@ -102,7 +104,7 @@
       </div>
     </section>
 
-    <section class="tight"><div class="container"><div class="sticky-type outline-text">03</div></div></section>
+    <section class="tight"><div class="container"><div class="sticky-type outline-text">CASE 03</div></div></section>
 
     <section>
       <div class="container">
@@ -116,6 +118,7 @@
       <div class="container">
         <h2 class="section-title">My Role</h2>
         <p>I was the sole UX designer assigned to this initiative — no dedicated design lead on it, no second designer to divide the account-type and channel combinations with. I worked directly with content design on system language and with identity and backend engineering on what was actually enforceable server-side, but the failure-state mapping, flow architecture, and trade-off decisions were mine to make.</p>
+        <p>Several patterns from this work — push-notification states, fallback messaging — went beyond one-off screens: I proposed them as new components into our shared Salesforce Lightning design system, so other teams could build on them directly.</p>
       </div>
     </section>
 
@@ -132,13 +135,13 @@
         <p>We deliberately chose not to surface a live failed-attempt counter — handled as standard backend behavior rather than a visible threshold an attacker could work against.</p>
 
         <div class="artifact-grid">
+            <div>
+                <div class="artifact has-image"><img src="authentication/L0.png" alt="L0"></div>
+                <p class="artifact-caption"><strong>FCC L0</strong> — passcode as default</p>
+            </div>
           <div>
-            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
-            <p class="artifact-caption"><strong>FCC L0</strong> — [caption]</p>
-          </div>
-          <div>
-            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
-            <p class="artifact-caption"><strong>Waterfall Authentication</strong> — [caption]</p>
+              <div class="artifact has-image"><img src="authentication/waterfall.png" alt="waterfall"></div>
+            <p class="artifact-caption"><strong>Waterfall</strong> — passcode and push notification in dropdown, OTP added if passcode is incorrect</p>
           </div>
         </div>
       </div>
@@ -148,30 +151,31 @@
       <div class="container">
         <h2 class="section-title">Owning Every Failure State</h2>
         <p class="artifact-intro">Before I designed a single error screen, I mapped every state the authentication flow could enter on my own — sent, shown, consent allowed or denied, authentication success or failure, authorization granted or denied, timed out. Nobody assigned me that map; half of those states didn't have a UX owner until I claimed them. Success was the easy screen. These weren't — and some, like passcode reset, had to ship twice: once for wireless accounts, then again, separately, for unified accounts.</p>
+        <p class="artifact-intro">Passcode reset alone covered seven distinct use cases — forgotten passcodes, blocked accounts, expired sessions, and more. I collapsed all seven into one repeatable structure: <strong style="color:#fff; font-weight:400;">Initialize → Verify → Reset</strong>. For the cancelled-account edge case — no usable identity signal, the riskiest gap in the whole system — the fallback that finally closed it was SSN verification, gated to appear only when no other method was available.</p>
 
         <div class="artifact-grid single">
           <div>
-            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
-            <p class="artifact-caption"><strong>Authentication State Map</strong> — [caption]</p>
+              <div class="artifact has-image"><img src="authentication/usecases.png" alt="L0"></div>
+              <p class="artifact-caption"><strong>Authentication State Map</strong> — Seven distinct use cases emerged, covering everything from forgotten passcodes to account lockouts</p>
           </div>
         </div>
 
         <div class="artifact-grid">
           <div>
-            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
+              <div class="artifact has-image"><img src="authentication/pusherror.png" alt="L0"></div>
             <p class="artifact-caption"><strong>Push Notification Errors</strong> — [caption]</p>
           </div>
           <div>
-            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
+              <div class="artifact has-image"><img src="authentication/incorrectpass.png" alt="incorrect passcode"></div>
             <p class="artifact-caption"><strong>Failed Passcode Attempts</strong> — [caption]</p>
           </div>
           <div>
-            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
+              <div class="artifact has-image"><img src="authentication/auth-passreset.png" alt="passcode reset"></div>
             <p class="artifact-caption"><strong>Passcode Reset — IVR, Handset Authenticated</strong> — [caption]</p>
           </div>
           <div>
-            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
-            <p class="artifact-caption"><strong>FCC Cancelled Accounts</strong> — [caption]</p>
+              <div class="artifact has-image"><img src="authentication/cancelled.png" alt="cancelled"></div>
+              <p class="artifact-caption"><strong>FCC Cancelled Accounts</strong> — [caption]</p>
           </div>
         </div>
       </div>
@@ -183,18 +187,14 @@
         <p class="artifact-intro">Call center, retail, and chat each have different constraints — different latency, different UI real estate, different teams owning the surface. The authentication logic stayed identical across all three; only its expression changed. The Sprinklr integration below is the clearest proof: two authentication systems collapsed into one login for the customer, after years of contract and integration hurdles other teams hadn't been able to clear.</p>
 
         <div class="artifact-grid">
-          <div>
-            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
-            <p class="artifact-caption"><strong>OTP — Chat Interim Solution</strong> — [caption]</p>
-          </div>
-          <div>
-            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
-            <p class="artifact-caption"><strong>FCC Chat</strong> — [caption]</p>
-          </div>
-          <div>
-            <div class="artifact"><span class="artifact-tag">Artifact</span></div>
-            <p class="artifact-caption"><strong>Seamless Integration — Sprinklr + ACC</strong> — [caption]</p>
-          </div>
+            <div>
+                <div class="artifact has-image"><img src="authentication/chatotp.png" alt="otp authentication via chat"></div>
+                <p class="artifact-caption"><strong>OTP — Chat Interim Solution</strong> — [caption]</p>
+            </div>
+            <div>
+                <div class="artifact has-image"><img src="authentication/onlinepass.png" alt="onlinepass"></div>
+                <p class="artifact-caption"><strong>FCC Chat</strong> — [caption]</p>
+            </div>
         </div>
       </div>
     </section>
@@ -207,8 +207,9 @@
           <li>Independently mapped and designed for every failure state in the authentication flow — denied consent, timeout, exceeded attempts, unverifiable email — before any of them had a UX owner.</li>
           <li>Aligned unique dev requirements across six applications inside a fixed federal deadline; the first mandated release passed pre-launch verification with zero defects, and business stakeholders called it one of the fastest release-to-production turnarounds they'd seen.</li>
           <li>The redesigned authorization flow was processing authentication events in the millions within days of launch — under compliance, legal, and AVP-level sign-off on every release.</li>
+          <li>By my own estimate, the reduction in repeat calls and manual escalations translates to roughly 1.98M minutes of call-handling time saved annually — on the order of $3.6M in estimated cost savings.</li>
         </ul>
-        <p class="caveat">Fraud and account-takeover metrics aren't mine to disclose. What's shown here is delivery scope, system volume, defect rate, and sign-off level.</p>
+        <p class="caveat">FCC-related fraud and account-takeover figures are kept confidential and can't be disclosed. The call-handling time and cost-savings estimate above is my own calculation, not a company-confirmed figure.</p>
       </div>
     </section>
 
@@ -216,6 +217,7 @@
       <div class="container">
         <h2 class="section-title">Reflection</h2>
         <p>Compliance work is graded on what you forgot, not what you shipped. This project taught me to design the whole state machine up front — not just the path I hoped the customer would take.</p>
+        <p class="caveat">Given the regulatory deadline, alignment ran through six rounds of cross-functional review with compliance, legal, and content — not formal usability testing. A trade I'd defend given the timeline, but a real one, not an invisible one.</p>
       </div>
     </section>
   </main>

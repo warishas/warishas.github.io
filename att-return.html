@@ -25,20 +25,20 @@
   .eyebrow { font-family: var(--syne); color: var(--accent); font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-bottom: 24px; }
   #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 160px; padding-bottom: 80px; }
   .hero-title { font-size: clamp(3.2rem, 7vw, 6.4rem); margin-bottom: 40px; }
-  .hero-sub { font-size: 1.5rem; font-weight: 300; color: #999; max-width: 720px; margin-bottom: 60px; }
+  .hero-sub { font-size: 1.5rem; font-weight: 300; color: #999; margin-bottom: 60px; }
   .meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; border-top: 1px solid var(--gray); padding-top: 30px; }
   .meta-item .meta-label { font-family: var(--syne); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #666; display: block; margin-bottom: 8px; }
   .meta-item .meta-value { font-size: 1rem; font-weight: 400; }
   h2.section-title { font-family: var(--inter); font-size: clamp(2rem, 4vw, 3rem); text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 40px; line-height: 1; }
   h3.block-title { font-family: var(--syne); font-size: 1.3rem; text-transform: uppercase; letter-spacing: -0.01em; margin: 40px 0 16px; color: var(--accent); }
-  p { font-size: 1.05rem; font-weight: 300; color: #ccc; margin-bottom: 20px; max-width: 720px; }
-  p.lede { font-size: 1.3rem; color: #eee; max-width: 780px; }
+  p { font-size: 1.05rem; font-weight: 300; color: #ccc; margin-bottom: 20px; }
+  p.lede { font-size: 1.3rem; color: #eee; }
   code.tok { font-family: var(--inter); background: #1a1a1a; padding: 2px 6px; }
-  ul.cs-list { list-style: none; margin: 20px 0; max-width: 720px; }
+  ul.cs-list { list-style: none; margin: 20px 0; }
   ul.cs-list li { font-size: 1.05rem; font-weight: 300; color: #ccc; padding-left: 28px; position: relative; margin-bottom: 14px; }
   ul.cs-list li::before { content: "—"; position: absolute; left: 0; color: var(--accent); }
   .divider { height: 1px; background: var(--gray); width: 100%; margin: 60px 0; }
-  .quote-block { border-left: 2px solid var(--accent); padding: 10px 0 10px 30px; margin: 40px 0; max-width: 700px; }
+  .quote-block { border-left: 2px solid var(--accent); padding: 10px 0 10px 30px; margin: 40px 0; }
   .quote-block p { font-size: 1.4rem; font-style: italic; color: #fff; font-weight: 300; margin-bottom: 8px; }
   .quote-block span { font-size: 0.8rem; color: #666; font-family: var(--syne); text-transform: uppercase; letter-spacing: 0.05em; }
   .q3-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 40px 0; }
@@ -55,7 +55,63 @@
   .tradeoff .side:last-of-type { border-bottom: none; }
   .tradeoff .side .who { font-family: var(--syne); font-size: 0.7rem; text-transform: uppercase; color: var(--accent); letter-spacing: 0.05em; display: block; margin-bottom: 6px; }
   .tradeoff .side p { margin-bottom: 0; font-size: 0.98rem; color: #ccc; max-width: none; }
-  .caveat { font-size: 0.85rem; color: #666; font-style: italic; max-width: 700px; margin-top: -8px; margin-bottom: 20px; }
+  .caveat { font-size: 0.85rem; color: #666; font-style: italic; margin-top: -8px; margin-bottom: 20px; }
+  figure.artifact { margin: 40px 0; }
+  .artifact-frame { border: 1px dashed #3a3a3a; background: #131313; aspect-ratio: 16 / 10; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 24px; overflow: hidden; }
+  .artifact-frame.has-image { border: none; background: none; padding: 0; aspect-ratio: auto; align-items: flex-start; }
+  .artifact-frame .artifact-num { font-family: var(--syne); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; }
+  .artifact-frame .artifact-fill { font-size: 0.8rem; color: #555; text-transform: uppercase; letter-spacing: 0.05em; max-width: 320px; }
+  figure.artifact figcaption { font-size: 0.85rem; color: #999; font-weight: 300; font-style: italic; margin-top: 12px; }
+  .artifact-images { display: flex; flex-direction: column; gap: 16px; width: 100%; align-items: stretch; }
+  .artifact-images img { width: 100%; height: auto; max-width: 100%; max-height: 760px; object-fit: contain; cursor: zoom-in; }
+  .artifact-images.carousel { flex-direction: row; align-items: flex-start; gap: 14px; }
+  .carousel-main { flex: 1; min-width: 0; background: #131313; }
+  .carousel-main img { width: 100%; height: auto; max-height: 760px; object-fit: contain; cursor: zoom-in; display: block; }
+  .carousel-thumbs { display: flex; flex-direction: column; gap: 10px; width: 110px; flex-shrink: 0; }
+  .carousel-thumb { border: 1px solid var(--gray); background: #131313; padding: 0; cursor: pointer; overflow: hidden; border-radius: 4px; opacity: 0.55; transition: opacity 0.2s ease, border-color 0.2s ease; }
+  .carousel-thumb img { width: 100%; height: 74px; object-fit: cover; display: block; cursor: pointer; }
+  .carousel-thumb:hover { opacity: 0.85; }
+  .carousel-thumb.active { opacity: 1; border-color: var(--accent); }
+  .lightbox-overlay { position: fixed; inset: 0; background: #0a0a0a; display: flex; align-items: center; justify-content: center; padding: 40px; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.2s ease; }
+  .lightbox-overlay.active { opacity: 1; visibility: visible; }
+  .lightbox-img-wrap { position: relative; display: flex; align-items: center; justify-content: center; max-width: 100%; max-height: 100%; }
+  .lightbox-overlay img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; cursor: zoom-in; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+  .lightbox-img-wrap.zoom-active img { cursor: zoom-out; }
+  .lightbox-close { position: absolute; top: 24px; right: 32px; color: #fff; font-size: 2rem; font-weight: 300; line-height: 1; cursor: pointer; background: none; border: none; z-index: 2001; }
+  .lightbox-hint { position: absolute; bottom: -32px; left: 50%; transform: translateX(-50%); color: #777; font-size: 0.75rem; font-weight: 300; white-space: nowrap; }
+  .lightbox-lens { position: absolute; width: 220px; height: 220px; border-radius: 50%; border: 2px solid var(--accent); box-shadow: 0 0 0 2000px rgba(0,0,0,0.6), 0 0 24px rgba(255,62,0,0.5); pointer-events: none; background-repeat: no-repeat; display: none; }
+  .lightbox-img-wrap.zoom-active .lightbox-lens.active { display: block; }
+
+  /* Interactive step diagram — hover/focus to expand */
+  .artifact-frame.has-diagram { border: none; background: #111; aspect-ratio: auto; padding: 44px 28px; }
+  .step-diagram { display: flex; align-items: stretch; justify-content: center; width: 100%; gap: 0; }
+  .lc-step { flex: 1 1 90px; min-width: 0; min-height: 78px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: #1a1a1a; border: 1px solid var(--gray); border-radius: 10px; padding: 14px 10px; text-align: center; position: relative; cursor: default; transition: flex-grow 0.35s ease, min-height 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease; }
+  .lc-step .lc-index { font-family: var(--syne); font-size: 0.65rem; letter-spacing: 0.08em; color: var(--accent); }
+  .lc-step .lc-label { font-size: 0.7rem; font-weight: 300; color: #ccc; line-height: 1.3; }
+  .lc-step .lc-desc { font-size: 0.68rem; font-weight: 300; color: #999; line-height: 1.45; max-height: 0; opacity: 0; overflow: hidden; margin-top: 0; transition: max-height 0.35s ease, opacity 0.25s ease, margin-top 0.35s ease; }
+  .lc-step:hover, .lc-step:focus-visible { flex-grow: 2.4; min-height: 168px; border-color: var(--accent); box-shadow: 0 0 24px rgba(255,62,0,0.35); background: #1f1f1f; z-index: 5; outline: none; }
+  .lc-step:hover .lc-desc, .lc-step:focus-visible .lc-desc { max-height: 200px; opacity: 1; margin-top: 8px; }
+  .lc-connector { flex: 0 0 30px; position: relative; align-self: center; height: 2px; background: var(--gray); margin: 0 2px; }
+  .lc-connector::after, .lc-connector::before { content: ""; position: absolute; top: 50%; transform: translateY(-50%); border-style: solid; }
+  .lc-connector::after { right: -1px; border-width: 4px 0 4px 6px; border-color: transparent transparent transparent var(--gray); }
+  .lc-connector::before { left: -1px; border-width: 4px 6px 4px 0; border-color: transparent var(--gray) transparent transparent; }
+  @media (max-width: 767px) {
+    .step-diagram { flex-direction: column; }
+    .lc-step { padding: 12px; }
+    .lc-step:hover, .lc-step:focus-visible { flex-grow: 0; min-height: 168px; }
+    .lc-connector { align-self: center; width: 2px; height: 24px; flex: 0 0 24px; }
+    .lc-connector::after { right: 50%; top: auto; bottom: -1px; transform: translateX(50%) rotate(90deg); }
+    .lc-connector::before { left: 50%; top: -1px; bottom: auto; transform: translateX(-50%) rotate(90deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lc-step { transition: none; }
+    .lc-step .lc-desc { transition: none; }
+  }
+  .stat-summary { display: flex; gap: 16px; width: 100%; justify-content: center; flex-wrap: wrap; }
+  .stat-card { flex: 1 1 140px; border: 1px solid var(--gray); border-radius: 10px; padding: 22px 14px; text-align: center; background: #1a1a1a; }
+  .stat-card .stat-num { display: block; font-family: var(--syne); font-size: 1.5rem; color: var(--accent); margin-bottom: 8px; line-height: 1.1; }
+  .stat-card .stat-label { font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-pattern { margin: 22px 0 0; font-size: 0.9rem; color: #ccc; font-style: italic; max-width: none; text-align: center; }
   .flow-steps { display: flex; flex-wrap: wrap; gap: 0; align-items: center; margin: 40px 0; }
   .flow-step { font-family: var(--syne); font-size: 0.85rem; text-transform: uppercase; border: 1px solid var(--gray); padding: 14px 20px; }
   .flow-arrow { color: var(--accent); padding: 0 14px; font-size: 1.2rem; }
@@ -82,6 +138,12 @@
     .logo { font-size: 1.2rem; } .nav-links { gap: 16px; } .nav-links a { font-size: 0.7rem; }
     #hero { padding-top: 120px; } .meta-grid { grid-template-columns: 1fr 1fr; }
     .compare-grid, .q3-grid, .impact-grid { grid-template-columns: 1fr; }
+    .stat-summary { flex-direction: column; }
+    .artifact-images.carousel { flex-direction: column; }
+    .carousel-thumbs { flex-direction: row; width: auto; overflow-x: auto; }
+    .carousel-thumb { flex: 0 0 90px; }
+    .carousel-thumb img { height: 60px; }
+    .lightbox-lens { width: 150px; height: 150px; }
     .sticky-type { font-size: 4rem; } .footer-meta { flex-direction: column; align-items: flex-start; }
     .blob { display: none; } section { padding: 70px 0; }
   }
@@ -106,27 +168,56 @@
       <div class="container">
         <span class="eyebrow">Case Study / 01 — Systems &amp; Research</span>
         <h1 class="huge-type hero-title">Device Return<br>Journey</h1>
-        <p class="hero-sub">Six return programs, seven backend systems, one frontline agent trying to answer a customer's question. I owned UX for Device Protection and Warranty returns inside AT&T's Customer Connect platform — reframed the problem around a single question the interface had never actually answered, and initiated the research that proved the reframe was right.</p>
+        <p class="hero-sub">Six return programs, seven backend systems, one agent trying to answer a customer's question. I owned UX for device returns across call-center desktop and in-store tablet, and initiated the research that proved a reframe was the right call.</p>
         <div class="meta-grid">
-          <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Senior UX Designer</span></div>
-          <div class="meta-item"><span class="meta-label">Company</span><span class="meta-value">AT&T — Customer Connect</span></div>
-          <div class="meta-item"><span class="meta-label">Timeline</span><span class="meta-value">2024 – 2025</span></div>
-          <div class="meta-item"><span class="meta-label">Team</span><span class="meta-value">PM · Eng · Research · Content Design</span></div>
+          <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">UX Designer</span></div>
+          <div class="meta-item"><span class="meta-label">Company</span><span class="meta-value">Telecommunications</span></div>
+          <div class="meta-item"><span class="meta-label">Timeline</span><span class="meta-value">2024</span></div>
+          <div class="meta-item"><span class="meta-label">Team</span><span class="meta-value">Product · Business · Retail · User Research </span></div>
         </div>
       </div>
     </section>
 
-    <section class="tight"><div class="container"><div class="sticky-type outline-text">01</div></div></section>
+    <section class="tight"><div class="container"><div class="sticky-type outline-text">CASE 01</div></div></section>
 
     <section>
       <div class="container">
         <h2 class="section-title">The Problem</h2>
-        <p class="lede">Frontline experts had no single, journey-aware view of a wireless return — and the interface answered a question customers weren't actually asking.</p>
-        <p>An expert helping a customer with a returned phone had to leave the Equipment tab, hunt across Order and Returns views, and sometimes swivel to other systems entirely just to piece together what had happened. Buyer's Remorse, Trade-In, Next Up, Device Protection, and Warranty returns each carry their own rules, statuses, and completion definitions — but the interface treated them identically. The same generic fields appeared whether or not they applied, and backend values like <code class="tok">cash-carry</code> or <code class="tok">DF/INBOUND</code> went untranslated, forcing experts to interpret engineering language mid-call.</p>
-        <p>My scope was Device Protection and Warranty — two of the highest-friction journeys, since a claim can be operationally settled before a generic tracker would ever say "Received."</p>
+        <p class="lede">Frontline experts had no single, return-type aware view of a wireless return. The interface that existed answered a different question than the one customers were asking.</p>
+        <p>An expert helping with a returned phone had to leave the Equipment tab, hunt across Order and Returns views, and sometimes swivel to other systems entirely. Every return type carried different rules and completion definitions, but the interface treated them identically — same generic fields regardless of relevance, untranslated backend values like <code class="tok">cash-carry</code> and <code class="tok">DF/INBOUND</code> left for experts to interpret mid-call. This case study focuses on Device Protection and Warranty, the highest-friction returns.</p>
+        <figure class="artifact">
+          <div class="artifact-frame has-diagram">
+            <div class="step-diagram" role="img" aria-label="The swivel before redesign: Equipment tab, Order view, Returns view, and other systems, none aware of the others.">
+              <div class="lc-step" tabindex="0">
+                <span class="lc-index">Equipment Tab</span>
+                <span class="lc-label">Where the expert starts</span>
+                <span class="lc-desc">The device shows up here, but return status doesn't live on this tab — it's the entry point, not the answer.</span>
+              </div>
+              <div class="lc-connector"></div>
+              <div class="lc-step" tabindex="0">
+                <span class="lc-index">Order View</span>
+                <span class="lc-label">Original order detail</span>
+                <span class="lc-desc">Payment and order history, disconnected from whatever the current return status actually is.</span>
+              </div>
+              <div class="lc-connector"></div>
+              <div class="lc-step" tabindex="0">
+                <span class="lc-index">Returns View</span>
+                <span class="lc-label">The return record itself</span>
+                <span class="lc-desc">A separate screen from both Equipment and Order — with its own untranslated backend values.</span>
+              </div>
+              <div class="lc-connector"></div>
+              <div class="lc-step" tabindex="0">
+                <span class="lc-index">Other Systems</span>
+                <span class="lc-label">Last resort</span>
+                <span class="lc-desc">Reached only when the first three screens didn't have the answer — the swivel the redesign was meant to remove.</span>
+              </div>
+            </div>
+          </div>
+          <figcaption>The fragmented starting point: no single view was aware of the others, so an expert reconstructed return status by hand, one tab at a time.</figcaption>
+        </figure>
 
         <h3 class="block-title">The question underneath the problem</h3>
-        <p>Every symptom I heard from experts — overwhelming screens, unexplained fields, confusion about revisions — traced back to one missing answer: does the customer still owe AT&T a device, or not? I reframed the redesign around three questions the interface needed to answer, in order, before showing anything else:</p>
+        <p>Every symptom traced back to one missing answer: does the customer still owe AT&T a device, or not? I reframed the redesign around three questions the interface needed to answer, in order, before showing anything else:</p>
         <div class="q3-grid">
           <div class="q3-card"><span class="q-num">01</span><p>Does the customer still owe a device?</p></div>
           <div class="q3-card"><span class="q-num">02</span><p>What evidence explains the current status?</p></div>
@@ -138,11 +229,11 @@
     <section>
       <div class="container">
         <h2 class="section-title">My Role &amp; Approach</h2>
-        <p>I owned the return experience for Device Protection and Warranty end to end, with day-to-day autonomy and light oversight from the platform's design lead. Two decisions shaped how I worked, and both are ones I'd defend to a hiring panel.</p>
-        <h3 class="block-title">I refused to design from assumptions</h3>
-        <p>An in-store handoff and a mailed exchange look identical to a customer, but they're structurally different orders with different obligations. Rather than guess what experts needed in the moment, I made the case to product and business stakeholders that we needed to validate the proposed design with the people who'd use it, before development locked it in.</p>
-        <h3 class="block-title">I initiated the research, rather than waiting for it</h3>
-        <p>Research wasn't a standing part of this workstream. I brought the UX research team in myself, scoped the study with researcher Angie DeFord, and used the findings to settle open design debates with data instead of opinion.</p>
+        <p class="lede">I owned the return experience for Device Protection and Warranty end to end, with day-to-day autonomy and light design-lead oversight.</p>
+        <ul class="cs-list">
+          <li><strong>Refused to design from assumptions.</strong> An in-store handoff and a mailed exchange look identical to a customer but carry different obligations — I wasn't willing to guess.</li>
+          <li><strong>Initiated the research myself.</strong> I reached out to the research team directly and walked them through the design alongside my PM and business partner, who were already aligned, then scoped the study with researcher Angie DeFord.</li>
+        </ul>
       </div>
     </section>
 
@@ -150,20 +241,32 @@
       <div class="container">
         <h2 class="section-title">Research I Initiated</h2>
         <p class="lede">Device Protection &amp; Warranty Order Research — with UX Researcher Angie DeFord</p>
-        <p>I scoped a focus-group study to pressure-test the proposed Order and Returns tabs across three realistic scenarios: an initial insurance claim, a first revision (device not received, new order created), and a second revision (a repeat non-receipt). Nine frontline experts participated, spanning Mobility Loyalty, Sales &amp; Service, CX Labs, and the Centralized Support Desk.</p>
+        <p>A focus-group study pressure-testing the proposed Order and Returns tabs across three scenarios — an initial claim, a first revision, and a second revision — with nine frontline experts across Mobility Loyalty, Sales &amp; Service, CX Labs, and the Centralized Support Desk.</p>
         <h3 class="block-title">What we heard</h3>
         <ul class="cs-list">
-          <li>Experts could identify an open insurance claim quickly once labels like "Insurance" and "Device Protection" were visible, and the CTN helped them confirm which line was affected.</li>
-          <li>Once a second or third revision existed, experts could tell something had changed, but not <em>why</em> — several said they'd fall back to reading call notes to reconstruct the story, exactly the swivel behavior the redesign was meant to remove.</li>
-          <li>The information-dense return screen was appreciated for completeness but called "overwhelming" by more than one participant — density without hierarchy was making the page harder to scan, not easier.</li>
-          <li>Some fields had no clear owner in the expert's mental model. Nobody could explain where a "Refund Amount" figure came from, and "Claim ID" was recognized as an Asurion-side identifier irrelevant to their workflow.</li>
-          <li>Certain details were genuinely load-bearing: the RMA number was named directly as one of the most useful fields on the page, particularly for lost-equipment cases.</li>
+          <li>Experts identified an open insurance claim quickly once labels like "Insurance" and "Device Protection" were visible.</li>
+          <li>Past the first revision, experts could tell something changed but not <em>why</em> — several fell back to reading call notes, the exact swivel the redesign was meant to remove.</li>
+          <li>The dense return screen was called "overwhelming" by more than one participant — density without hierarchy, not information itself, was the problem.</li>
+          <li>Some fields had no clear owner in the expert's mental model: nobody could explain "Refund Amount," and "Claim ID" was recognized as an Asurion-side identifier irrelevant to their workflow.</li>
+          <li>Other details were genuinely load-bearing — RMA number was named directly as one of the most useful fields, especially for lost-equipment cases.</li>
         </ul>
         <div class="quote-block">
           <p>"You have to section this stuff — you can't just have it as a list."</p>
           <span>Research Participant, Device Protection Study</span>
         </div>
-        <p>That line reframed the direction: the fix wasn't more explanatory text, it was restructuring the page around the scenario the expert was actually in — grouping fields by claim stage instead of by data source, and cutting fields no one could explain.</p>
+        <p>That line set the direction: restructure around the scenario the expert is in, not the data source, and cut fields no one could explain.</p>
+        <figure class="artifact">
+          <div class="artifact-frame has-image">
+            <div class="artifact-images carousel">
+              <div class="carousel-main"><img src="returns/research1.png" alt="single line view"></div>
+              <div class="carousel-thumbs">
+                <button class="carousel-thumb active" data-src="returns/research1.png" data-alt="single line view" aria-label="Show single line view"><img src="returns/research1.png" alt="single line view thumbnail"></button>
+                <button class="carousel-thumb" data-src="returns/research2.png" data-alt="multi line view" aria-label="Show multi line view"><img src="returns/research2.png" alt="multi line view thumbnail"></button>
+              </div>
+            </div>
+          </div>
+          <figcaption>The three scenarios tested with frontline experts: an initial insurance claim, a first revision, and a second revision — each pressure-testing the proposed Order and Returns tabs against a real claim history.</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -171,11 +274,10 @@
       <div class="container">
         <h2 class="section-title">The Design Decision That Mattered Most</h2>
         <p class="lede">Organize the interface around customer responsibility, not backend structure.</p>
-        <p>The source systems modeled an in-store handoff, a shipped exchange, an RMA, and internal reverse-logistics movement as different technical objects. My job was to collapse that into the one question an expert actually needed answered: is the customer still on the hook for this device?</p>
-        <p>A store might accept a device from a customer and later ship it internally to a warehouse. From the customer's side, their obligation ended the moment they handed it over — but a naive design would keep showing return-tracking detail for that internal movement, implying the customer still owed something they didn't. I deliberately separated <strong style="color:#fff; font-weight:400;">customer return accountability</strong> from <strong style="color:#fff; font-weight:400;">internal inventory movement</strong>, and made sure internal logistics events were labeled as internal — never surfaced in a way that could make an expert tell a customer they still owed a device they'd already returned.</p>
+        <p>The source systems modeled an in-store handoff, a shipped exchange, an RMA, and internal reverse-logistics movement as different technical objects. I collapsed that into the one question an expert needed answered: is the customer still on the hook? A store might accept a device and later ship it internally to a warehouse — the customer's obligation ended at handoff, but a naive design would keep showing tracking detail that implied otherwise. I separated <strong style="color:#fff; font-weight:400;">customer return accountability</strong> from <strong style="color:#fff; font-weight:400;">internal inventory movement</strong>, so internal logistics events could never be misread as an open customer obligation.</p>
 
         <h3 class="block-title">The tradeoff I had to resolve</h3>
-        <p>Device Protection and Warranty could be considered operationally complete the moment a carrier scanned pickup — but a generic tracker still implied "Received" was required to close the loop. Meanwhile, shipment events like Drop Off and Returned were genuinely valuable evidence when a customer later disputed sending a device back.</p>
+        <p>Device Protection and Warranty is operationally complete the moment a carrier scans pickup — but a generic tracker still implied "Received" was required. Shipment events were still valuable evidence when a customer disputed a return.</p>
         <div class="tradeoff">
           <div class="side"><span class="who">Simplify</span><p>Remove the secondary shipment timeline entirely for Device Protection and Warranty — it doesn't reflect how those journeys actually close out, and it risks confusing experts with a milestone that isn't required.</p></div>
           <div class="side"><span class="who">Preserve</span><p>Keep the full shipment history visible in every case, because Drop Off and Returned events are exactly what an expert needs when a customer disputes the return.</p></div>
@@ -183,7 +285,17 @@
         </div>
 
         <h3 class="block-title">Where I chose to hold the line</h3>
-        <p>Not every idea made it in. When the team considered surfacing raw Order Type and Order Action values directly in Order History, I pushed to pause it — the underlying values included ambiguous, unmapped strings like <code class="tok">Modify.change…</code> that wouldn't mean anything to an expert without translation first. More data isn't automatically more useful information; I'd rather ship less and have every field on the screen mean something than ship more and make experts guess.</p>
+        <p>When the team considered surfacing raw Order Type/Action values in Order History, I pushed to pause it — values like <code class="tok">Modify.change…</code> meant nothing without translation. I'd rather ship less and have every field mean something than ship more and make experts guess.</p>
+        <figure class="artifact">
+            <div class="artifact-images carousel">
+                <div class="carousel-main"><img src="returns/warranty.png" alt="single line view"></div>
+                <div class="carousel-thumbs">
+                    <button class="carousel-thumb active" data-src="returns/warranty.png" data-alt="single line view" aria-label="Show single line view"><img src="returns/warranty.png" alt="single line view thumbnail"></button>
+                    <button class="carousel-thumb" data-src="returns/warranty2.png" data-alt="multi line view" aria-label="Show multi line view"><img src="returns/warranty2.png" alt="multi line view thumbnail"></button>
+                </div>
+            </div>
+          <figcaption>The split that resolved the tradeoff: a primary status communicating whether the customer's obligation is complete, with internal logistics events labeled as internal and never implying an active customer obligation.</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -191,7 +303,7 @@
       <div class="container">
         <h2 class="section-title">The Solution</h2>
         <h3 class="block-title">Translate the backend into plain language</h3>
-        <p>Fulfillment values that meant nothing to an expert — <code class="tok">cash-carry</code>, <code class="tok">CC</code>, <code class="tok">ship</code>, <code class="tok">DF</code> — became two plain labels experts could act on immediately. I worked with content designer Laura Landgren to get this language right, since the words on the screen carried as much weight as the layout around them.</p>
+        <p>Fulfillment values like <code class="tok">cash-carry</code>, <code class="tok">CC</code>, <code class="tok">ship</code>, <code class="tok">DF</code> became two plain labels experts could act on. Worked with content designer Laura Landgren to get the language right.</p>
         <div class="compare-grid">
           <div class="compare-col">
             <h4>In-Store Return</h4>
@@ -216,10 +328,23 @@
         </div>
 
         <h3 class="block-title">Fix the navigation, not just the page</h3>
-        <p>I added return and exchange visibility directly to the Equipment tab so an expert could jump straight into the relevant Returns view instead of hunting for it — the most-cited pain point going into the study. Related order revisions were grouped together so an expert didn't have to manually reconstruct which orders belonged to the same claim.</p>
+        <p>Added return/exchange visibility directly to the Equipment tab — the most-cited pain point in the study. Related order revisions were grouped so experts didn't reconstruct them manually.</p>
+        <figure class="artifact">
+          <div class="artifact-frame has-image">
+            <div class="artifact-images carousel">
+              <div class="carousel-main"><img src="returns/warranty-return-status-crop.png" alt="redesigned warranty return status view"></div>
+              <div class="carousel-thumbs">
+                <button class="carousel-thumb active" data-src="returns/warranty-return-status-crop.png" data-alt="redesigned warranty return status view" aria-label="Show return status view"><img src="returns/warranty-return-status-crop.png" alt="return status thumbnail"></button>
+                <button class="carousel-thumb" data-src="returns/warranty-reprint-label-crop.png" data-alt="reprint label with sample preview" aria-label="Show reprint label state"><img src="returns/warranty-reprint-label-crop.png" alt="reprint label thumbnail"></button>
+              </div>
+            </div>
+          </div>
+          <figcaption>The shipped Warranty return view: plain-language status stepper in place of raw backend state, and a reprint-label action with a sample preview so an expert can confirm the label before it's regenerated.</figcaption>
+        </figure>
+        <p>The same accountability/logistics split generalized cleanly — it was later applied to Trade In and Same Day Delivery returns without needing a second version of the underlying model.</p>
 
         <h3 class="block-title">Make validation part of the process, not an afterthought</h3>
-        <p>Coming out of this project, I proposed making frontline validation a formal checkpoint rather than an optional step designers reach for when there's time:</p>
+        <p>I proposed making frontline validation a formal checkpoint, not an optional step:</p>
         <div class="flow-steps">
           <div class="flow-step">Design</div><span class="flow-arrow">→</span>
           <div class="flow-step">Frontline Checkpoint</div><span class="flow-arrow">→</span>
@@ -227,28 +352,42 @@
           <div class="flow-step">Feasibility Review</div><span class="flow-arrow">→</span>
           <div class="flow-step">Development</div>
         </div>
-        <p>Moving expert validation earlier means design changes get caught while they're still cheap — before engineering has built against an assumption that turns out to be wrong.</p>
+        <p>Catching changes here means they're still cheap — before engineering builds against a wrong assumption.</p>
       </div>
     </section>
 
     <section>
       <div class="container">
         <h2 class="section-title">Grounded in Existing Research, Too</h2>
-        <p>Alongside the study I initiated, I drew on an existing AT&T employee persona framework — built by the UX Research team from 75+ interviews, 60 survey responses, and dozens of hours of retail and call-center observation — to understand how experts operate across their broader day. That research consistently surfaced a pattern I designed directly against: employees work across too many disconnected systems, and every extra swivel erodes both efficiency and their confidence on a live call. I didn't conduct that research, but analyzing it against my own findings gave me a second, independent signal that consolidation and plain-language status were the right problems to solve.</p>
+        <p>I also drew on an existing AT&T persona framework — built from 75+ interviews, 60 survey responses, and dozens of hours of observation — to see how experts operate across their broader day. It consistently surfaced a pattern I designed directly against: too many disconnected systems, with every extra swivel eroding efficiency and confidence on a live call. I didn't run that research, but cross-referencing it against my own gave me a second, independent signal that consolidation was the right problem to solve.</p>
+        <figure class="artifact">
+          <div class="artifact-frame has-diagram">
+            <div class="stat-summary">
+              <div class="stat-card"><span class="stat-num">75+</span><span class="stat-label">Interviews</span></div>
+              <div class="stat-card"><span class="stat-num">60</span><span class="stat-label">Survey Responses</span></div>
+              <div class="stat-card"><span class="stat-num">Dozens of Hrs</span><span class="stat-label">Retail &amp; Call-Center Observation</span></div>
+            </div>
+            <p class="stat-pattern">Consistent pattern: too many disconnected systems — every extra swivel erodes efficiency and confidence on a live call.</p>
+          </div>
+          <figcaption>My synthesis of the existing AT&amp;T persona framework's scope and headline finding — not a reproduction of the source document.</figcaption>
+        </figure>
       </div>
     </section>
 
     <section>
       <div class="container">
         <h2 class="section-title">Collaboration</h2>
-        <div class="team-row">
-          <div class="team-chip me">Warisha — UX Design (Owner)</div>
-          <div class="team-chip">Angie DeFord — UX Research</div>
-          <div class="team-chip">Laura Landgren — Content Design</div>
-          <div class="team-chip">Product &amp; Business Stakeholders</div>
-          <div class="team-chip">OrderGraph / Backend Eng</div>
-        </div>
-        <p>This shipped through sustained coordination across the Customer Connect platform team, the OrderGraph backend team responsible for the underlying data model, and the research and content design partners above. Because the return logic touched real customer-facing consequences — refunds, non-return fees, RMA deadlines — I worked closely with business stakeholders to keep the interface honest about status, rather than optimizing for a cleaner-looking screen at the cost of accuracy.</p>
+        <p>Shipped through sustained coordination across the Customer Connect platform team, the OrderGraph backend team, and research/content partners. Because return logic touched real consequences — refunds, non-return fees, RMA deadlines — I worked closely with business stakeholders to keep the interface honest, not just cleaner-looking.</p>
+        <figure class="artifact">
+            <div class="artifact-images carousel">
+                <div class="carousel-main"><img src="returns/top.png" alt="single line view"></div>
+                <div class="carousel-thumbs">
+                    <button class="carousel-thumb active" data-src="returns/top.png" data-alt="single line view" aria-label="Show single line view"><img src="returns/top.png" alt="single line view thumbnail"></button>
+                    <button class="carousel-thumb" data-src="returns/bottom.png" data-alt="multi line view" aria-label="Show multi line view"><img src="returns/bottom.png" alt="multi line view thumbnail"></button>
+                </div>
+            </div>
+          <figcaption>Design, research, content, and backend engineering working a return-status edge case together.</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -270,18 +409,24 @@
           </div>
         </div>
         <ul class="cs-list">
-          <li>Experts described the new flow as easier to navigate and expected it to meaningfully cut click time, especially for new hires still building system fluency.</li>
-          <li>Several asked to be included in the eventual pilot — a strong, if informal, vote of confidence from the people closest to the problem.</li>
-          <li>Conditional field display removed the specific confusion the research surfaced: RMA information no longer appears on returns where no RMA exists, and unexplained fields like the mystery "Refund Amount" were cut.</li>
+          <li>Experts called the new flow easier to navigate and expected it to meaningfully cut click time, especially for new hires.</li>
+          <li>Several asked to join the eventual pilot — an informal but strong vote of confidence.</li>
+          <li>Conditional field display fixed the confusion research surfaced: no RMA info on returns without one, and the unexplained "Refund Amount" field cut entirely.</li>
         </ul>
         <p class="caveat">Two internal dollar-benefit estimates existed for the broader returns initiative this work supported ($20M and $6M annually, tied to different scoping assumptions); as of my last review, neither had been finance-vetted, so I'm not quoting either as a personal result here.</p>
+        <figure class="artifact">
+            <div class="artifact-images">
+                <img src="returns/data.png" alt="cancel view">
+            </div>
+          <figcaption>The finance-partnered model this redesign was tied to, spanning several million annual Device Return contacts — shown directionally pending finance sign-off on exact figures.</figcaption>
+        </figure>
       </div>
     </section>
 
     <section>
       <div class="container">
         <h2 class="section-title">Reflection</h2>
-        <p>The instinct to bring in research wasn't process for its own sake — it was that I didn't trust my own assumptions about what "overwhelming" meant to someone who reads this screen fifty times a day. And the instinct to separate customer accountability from backend structure wasn't a stylistic choice — it was the one reframe that made every other decision on this project obvious once I'd made it. That's the kind of judgment I want a team to be able to hand me a messy, high-stakes system and trust me to find.</p>
+        <p>Bringing in research wasn't process for its own sake — I didn't trust my own assumptions about what "overwhelming" meant to someone who reads this screen fifty times a day. And separating customer accountability from backend structure wasn't a stylistic choice — it was the one reframe that made every other decision on this project obvious. That's the judgment I want a team to trust me with on a messy, high-stakes system.</p>
       </div>
     </section>
   </main>
@@ -300,6 +445,15 @@
       </div>
     </div>
   </footer>
+
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+    <div class="lightbox-img-wrap" id="lightbox-img-wrap">
+      <img id="lightbox-img" src="" alt="">
+      <div class="lightbox-lens" id="lightbox-lens"></div>
+      <span class="lightbox-hint" id="lightbox-hint">Click image to zoom in</span>
+    </div>
+  </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -322,6 +476,98 @@
           if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
         });
       });
+
+      var lightbox = document.getElementById('lightbox');
+      var lightboxImg = document.getElementById('lightbox-img');
+      var lightboxClose = document.getElementById('lightbox-close');
+      var lightboxWrap = document.getElementById('lightbox-img-wrap');
+      var lightboxLens = document.getElementById('lightbox-lens');
+      var lightboxHint = document.getElementById('lightbox-hint');
+      var zoomActive = false;
+      var ZOOM_FACTOR = 2.5;
+
+      function openLightbox(src, alt) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || '';
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        zoomActive = false;
+        lightboxWrap.classList.remove('zoom-active');
+        lightboxLens.classList.remove('active');
+        lightboxHint.style.display = '';
+      }
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        zoomActive = false;
+        lightboxWrap.classList.remove('zoom-active');
+        lightboxLens.classList.remove('active');
+      }
+
+      function updateLens(clientX, clientY) {
+        var imgRect = lightboxImg.getBoundingClientRect();
+        var wrapRect = lightboxWrap.getBoundingClientRect();
+        var xInImg = Math.max(0, Math.min(clientX - imgRect.left, imgRect.width));
+        var yInImg = Math.max(0, Math.min(clientY - imgRect.top, imgRect.height));
+        var lensSize = lightboxLens.offsetWidth;
+        var lensX = (imgRect.left - wrapRect.left) + xInImg;
+        var lensY = (imgRect.top - wrapRect.top) + yInImg;
+        lightboxLens.style.left = (lensX - lensSize / 2) + 'px';
+        lightboxLens.style.top = (lensY - lensSize / 2) + 'px';
+        lightboxLens.style.backgroundImage = 'url(' + lightboxImg.src + ')';
+        lightboxLens.style.backgroundSize = (imgRect.width * ZOOM_FACTOR) + 'px ' + (imgRect.height * ZOOM_FACTOR) + 'px';
+        lightboxLens.style.backgroundPosition = (-(xInImg * ZOOM_FACTOR - lensSize / 2)) + 'px ' + (-(yInImg * ZOOM_FACTOR - lensSize / 2)) + 'px';
+      }
+
+      lightboxImg.addEventListener('click', function (e) {
+        e.stopPropagation();
+        zoomActive = !zoomActive;
+        lightboxWrap.classList.toggle('zoom-active', zoomActive);
+        lightboxHint.style.display = zoomActive ? 'none' : '';
+        if (zoomActive) {
+          lightboxLens.classList.add('active');
+          updateLens(e.clientX, e.clientY);
+        } else {
+          lightboxLens.classList.remove('active');
+        }
+      });
+      lightboxWrap.addEventListener('mousemove', function (e) {
+        if (zoomActive) updateLens(e.clientX, e.clientY);
+      });
+      lightboxWrap.addEventListener('mouseleave', function () {
+        lightboxLens.classList.remove('active');
+      });
+      lightboxWrap.addEventListener('mouseenter', function () {
+        if (zoomActive) lightboxLens.classList.add('active');
+      });
+      lightboxImg.addEventListener('touchmove', function (e) {
+        if (zoomActive && e.touches[0]) {
+          e.preventDefault();
+          updateLens(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: false });
+
+      document.querySelectorAll('.artifact-frame img').forEach(function (img) {
+        if (img.closest('.carousel-thumb')) return;
+        img.addEventListener('click', function () { openLightbox(img.src, img.alt); });
+      });
+
+      document.querySelectorAll('.carousel-thumbs').forEach(function (thumbGroup) {
+        var mainImg = thumbGroup.parentElement.querySelector('.carousel-main img');
+        thumbGroup.querySelectorAll('.carousel-thumb').forEach(function (thumb) {
+          thumb.addEventListener('click', function () {
+            var src = thumb.getAttribute('data-src');
+            var alt = thumb.getAttribute('data-alt') || '';
+            mainImg.src = src;
+            mainImg.alt = alt;
+            thumbGroup.querySelectorAll('.carousel-thumb').forEach(function (t) { t.classList.remove('active'); });
+            thumb.classList.add('active');
+          });
+        });
+      });
+      lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+      lightboxClose.addEventListener('click', closeLightbox);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLightbox(); });
     });
   </script>
 </body>
