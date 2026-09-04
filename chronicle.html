@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
+  window.addEventListener('pageshow', function () {
+    window.scrollTo(0, 0);
+  });
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chronicle</title>
@@ -420,6 +429,44 @@
     overflow: hidden;
   }
   .screen-inner svg { display: block; width: 100%; }
+  .artifact-images { display: flex; flex-direction: column; gap: 16px; width: 100%; align-items: stretch; }
+  .artifact-images img { width: 100%; height: auto; max-width: 100%; max-height: 760px; object-fit: contain; cursor: zoom-in; }
+  .artifact-images.carousel { flex-direction: row; align-items: flex-start; gap: 14px; }
+  .carousel-main { flex: 1; min-width: 0; background: #131313; }
+  .carousel-main img { width: 100%; height: auto; max-height: 760px; object-fit: contain; cursor: zoom-in; display: block; }
+  .carousel-thumbs { display: flex; flex-direction: column; gap: 10px; width: 110px; flex-shrink: 0; }
+  .carousel-thumb { border: 1px solid var(--gray); background: #131313; padding: 0; cursor: pointer; overflow: hidden; border-radius: 4px; opacity: 0.55; transition: opacity 0.2s ease, border-color 0.2s ease; }
+  .carousel-thumb img { width: 100%; height: 74px; object-fit: cover; display: block; cursor: pointer; }
+  .carousel-thumb:hover { opacity: 0.85; }
+  .carousel-thumb.active { opacity: 1; border-color: var(--accent); }
+  @media (max-width: 767px) {
+    .artifact-images.carousel { flex-direction: column; }
+    .carousel-thumbs { flex-direction: row; width: auto; overflow-x: auto; }
+    .carousel-thumb { flex: 0 0 90px; }
+    .carousel-thumb img { height: 60px; }
+  }
+  /* From below the "Chronicle" title through the end of Reflections (above
+     the footer's "More Work" link): use Inter instead of Syne everywhere.
+     --serif, --syne, and --mono all resolve to Syne elsewhere in this file,
+     so all three are redirected to --sans (Inter) here. Custom properties
+     inherit, so this cascades to every descendant automatically. */
+  #hero .hero-title ~ *,
+  .award-banner,
+  #context,
+  #research,
+  #definition,
+  #design,
+  #early-iteration,
+  #final-design,
+  #ethics,
+  #inclusive-design,
+  section:not([id]),
+  #outcome,
+  #reflections {
+    --serif: var(--sans);
+    --syne: var(--sans);
+    --mono: var(--sans);
+  }
 </style>
 </head>
 <body>
@@ -451,23 +498,19 @@
             <div class="meta-grid reveal" style="transition-delay:0.2s;">
                 <div class="meta-item">
                     <span class="meta-label">Client</span>
-                    <span class="meta-value">Dr. Lingga Adidharma<br>UW Dept. of Otolaryngology &<br>Head and Neck Surgery</span>
+                    <span class="meta-value">UW Dept. of Otolaryngology</span>
                 </div>
                 <div class="meta-item">
                     <span class="meta-label">My Role</span>
-                    <span class="meta-value">Design Lead — IA, Interaction,<br>Visual Design, Engineer Handoff,<br>Supporting Research</span>
+                    <span class="meta-value">Design Lead <br>Supporting Research</span>
                 </div>
                 <div class="meta-item">
-                    <span class="meta-label">Team</span>
-                    <span class="meta-value">Design Lead · 1 Designer<br>1 PM · 2 Researchers</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Timeline</span>
-                    <span class="meta-value">6 months</span>
+                    <span class="meta-label">Design Team</span>
+                    <span class="meta-value">Designer, PM, User Research</span>
                 </div>
                 <div class="meta-item">
                     <span class="meta-label">Deliverables</span>
-                    <span class="meta-value">0→1 product: research to engineer-ready specs<br>Design system + annotated Figma handoff<br>Investor-ready prototype for pre-startup pitch</span>
+                    <span class="meta-value">0→1 product<br>Investor-ready prototype for patent pending algorithm</span>
                 </div>
             </div>
 
@@ -766,7 +809,16 @@
                     }
 
                     .skb-slide img {
+                        display: block;
+                        width: 100%;
+                        height: auto;
+                        max-width: 100%;
                         border-radius: 8px 8px 0 0;
+                    }
+
+                    .skb-slides {
+                        width: 100%;
+                        overflow: hidden;
                     }
 
                     .skb-caption {
@@ -2295,24 +2347,17 @@
     <section>
         <div class="container">
             <h2 class="section-title">Handoff</h2>
-            <p class="lede">The final design was far simplier that the concept I fell in love with and got client buy-in on however, it was the right decision given the timeline and engineering power available to actually ship it. By scoping down, the team was able to see it through.</p>
-            <ul class="cs-list">
-                <li><strong>One page with 10 amend types.</strong> Amending address, phone number, device details, plans, billing, and all other requirements can now be done from one page. </li>
-                <li><strong>Single-line as MVP 1</strong> Scope was always multiline but I pushed to sequence single-line first so we could build on existing sales-flow patterns and align with the sales team ahead of multiline</li>
-                <li><strong>Built multiline - an MVP 2 experience - in parallel </strong>so that the design could scale as multiline depended on initiatives that weren't ready yet. Considering both experiences to cut engineering rework later.</li>
-                <li><strong>One cancel CTA instead of two.</strong> Partial cancel and full cancel were combined into once CTA by building a single line experience that could easily scale to multiline with little engineering rework. </li>
-            </ul>
+            <p class="lede">The final design was far simplier that the concept I wanted to build and got client buy-in on however, the simpler approach was the right decision given the timeline and engineering power available to actually ship it. By scoping down, the team was able to see it through.</p>
             <figure class="artifact">
                 <div class="artifact-frame has-image">
-                    <span class="artifact-num">Final Screens</span>
                     <div class="artifact-images carousel">
-                        <div class="carousel-main"><img src="chronicle/.png" alt=""></div>
+                        <div class="carousel-main"><img src="chronicle/clip-manager-overview.png" alt=""></div>
                         <div class="carousel-thumbs">
                             <button class="carousel-thumb active" data-src="chronicle/clip-manager-overview.png" data-alt="" aria-label=""><img src="chronicle/clip-manager-overview.png" alt="thumbnail"></button>
-                            <button class="carousel-thumb active" data-src="chronicle/clip-selection.png" data-alt="" aria-label=""><img src="chronicle/clip-selection.png" alt="thumbnail"></button>
-                            <button class="carousel-thumb active" data-src="chronicle/clips-proposed-tooltip.png" data-alt="" aria-label=""><img src="chronicle/clips-proposed-tooltip.png" alt="thumbnail"></button>
-                            <button class="carousel-thumb active" data-src="chronicle/clips-proposed-clean.png" data-alt="" aria-label=""><img src="chronicle/clips-proposed-clean.png" alt="thumbnail"></button>
-                            <button class="carousel-thumb active" data-src="chronicle/ai-generated-content-modal.png" data-alt="" aria-label=""><img src="chronicle/ai-generated-content-modal.png" alt="thumbnail"></button>
+                            <button class="carousel-thumb" data-src="chronicle/clip-selection.png" data-alt="" aria-label=""><img src="chronicle/clip-selection.png" alt="thumbnail"></button>
+                            <button class="carousel-thumb" data-src="chronicle/clips-proposed-tooltip.png" data-alt="" aria-label=""><img src="chronicle/clips-proposed-tooltip.png" alt="thumbnail"></button>
+                            <button class="carousel-thumb" data-src="chronicle/clips-proposed-clean.png" data-alt="" aria-label=""><img src="chronicle/clips-proposed-clean.png" alt="thumbnail"></button>
+                            <button class="carousel-thumb" data-src="chronicle/ai-generated-content-modal.png" data-alt="" aria-label=""><img src="chronicle/ai-generated-content-modal.png" alt="thumbnail"></button>
                         </div>
                     </div>
                 </div>
@@ -2406,11 +2451,6 @@
             <div class="footer-divider"></div>
             <div class="footer-meta">
                 <div>Updated April 2026</div>
-                <div class="footer-links">
-                    <a href="https://www.figma.com/design/GclhjG83fevzx4ozKHrGNj/SCRUBS---Design-Doc?m=auto&t=KTMVNHloXukTDLFQ-1" target="_blank" rel="noopener">Figma Designs ↗</a>
-                    <a href="https://www.figma.com/board/U4QwVe3HQATr8eE11iEi8G/SCRUBS-FULL-Working-Jam?t=KTMVNHloXukTDLFQ-6" target="_blank" rel="noopener">FigJam ↗</a>
-                    <a href="https://www.figma.com/design/Xbo8EUMfrBT2m9I0hwtzOI/Chronicle---Wires-to-Final?m=auto&t=KTMVNHloXukTDLFQ-6" target="_blank" rel="noopener">Wireframe → Final ↗</a>
-                </div>
                 <div>© 2026 Warisha Soomro</div>
             </div>
         </div>
@@ -2631,5 +2671,20 @@
             }, { threshold: 0.1 });
             obs.observe(outcomeItems[0].parentElement);
         }</script>
+    <script>
+        document.querySelectorAll('.carousel-thumbs').forEach(function (thumbGroup) {
+            var mainImg = thumbGroup.parentElement.querySelector('.carousel-main img');
+            thumbGroup.querySelectorAll('.carousel-thumb').forEach(function (thumb) {
+                thumb.addEventListener('click', function () {
+                    var src = thumb.getAttribute('data-src');
+                    var alt = thumb.getAttribute('data-alt') || '';
+                    mainImg.src = src;
+                    mainImg.alt = alt;
+                    thumbGroup.querySelectorAll('.carousel-thumb').forEach(function (t) { t.classList.remove('active'); });
+                    thumb.classList.add('active');
+                });
+            });
+        });
+    </script>
 </body>
 </html>

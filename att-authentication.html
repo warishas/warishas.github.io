@@ -73,6 +73,9 @@
     .blob { display: none; } section { padding: 60px 0; }
   }
   @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+  /* Body sections (everything between #hero and the contact footer) use Inter only */
+  main > section:not(#hero),
+  main > section:not(#hero) * { font-family: var(--inter) !important; }
 </style>
 </head>
 <body>
