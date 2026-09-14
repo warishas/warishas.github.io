@@ -30,6 +30,11 @@
 
   a, button { cursor: pointer; }
 
+  /* Safety net: class rules below (.hero-img, .project-image, .comp-image)
+     set their own explicit heights and win on specificity, so this only
+     protects images that don't have a dedicated sizing rule. */
+  img { max-width: 100%; }
+
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--accent); }
@@ -146,7 +151,7 @@
     nav { padding: 20px; flex-direction: column; gap: 15px; background: rgba(14,14,14,0.95); }
     .logo { font-size: 1.2rem; }
     .nav-links { gap: 20px; }
-    .nav-links a { font-size: 0.75rem; }
+    .nav-links a { font-size: 0.75rem; padding: 10px 2px; display: inline-block; }
     .huge-type { font-size: clamp(3rem, 15vw, 6rem); }
     .hero-img { width: 90%; height: 400px; }
     .parallax-text[data-speed="2"] { padding-left: 20px !important; }
@@ -215,6 +220,15 @@
   @media (max-width: 767px) and (orientation: landscape) {
     #hero { height: 140vh; }
     .hero-img { height: 300px; }
+  }
+
+  /* Catches landscape phones by height, not width — many modern phones
+     (e.g. iPhone Pro Max, most Android flagships) are 800px+ wide in
+     landscape and never matched the max-width:767px rule above. */
+  @media (max-height: 500px) and (orientation: landscape) {
+    #hero { height: auto; min-height: 100vh; }
+    .hero-img { height: 260px; }
+    section { min-height: auto; padding: 50px 0; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -369,7 +383,7 @@
                   <a class="cs-link" href="att-return.html">View Case Study →</a>
               </div>
               <div class="project-media">
-                  <img src="images/teal.png" alt="Device Return Journey case study" class="project-image">
+                  <img src="images/teal.png" alt="Device Return Journey case study" class="project-image" loading="lazy">
                   <div class="floating-label huge-type outline-text" style="font-size: 8rem;">RETURNS</div>
               </div>
           </div>
@@ -384,7 +398,7 @@
                   <a class="cs-link" href="att-amend.html">View Case Study →</a>
               </div>
               <div class="project-media">
-                  <img src="images/amends.png" alt="Amend case study" class="project-image">
+                  <img src="images/amends.png" alt="Amend case study" class="project-image" loading="lazy">
                   <div class="floating-label huge-type outline-text" style="font-size: 8rem; right: auto; left: -100px;">EDIT</div>
               </div>
           </div>
@@ -403,7 +417,7 @@
                   <a class="cs-link" href="att-authentication.html">View Case Study →</a>
               </div>
               <div class="project-media">
-                  <img src="images/resetpass.svg" alt="Verify case study" class="project-image">
+                  <img src="images/resetpass.svg" alt="Verify case study" class="project-image" loading="lazy">
                   <div class="floating-label huge-type outline-text" style="font-size: 8rem;">TRUST</div>
               </div>
           </div>
@@ -418,7 +432,7 @@
                   <a class="cs-link" href="chronicle.html">View Case Study →</a>
               </div>
               <div class="project-media">
-                  <img src="images/chronicle.png" alt="Chronicle case study" class="project-image">
+                  <img src="images/chronicle.png" alt="Chronicle case study" class="project-image" loading="lazy">
                   <div class="floating-label huge-type outline-text" style="font-size: 8rem; right: auto; left: -100px;">OR</div>
               </div>
           </div>
@@ -429,10 +443,10 @@
       <section>
           <div class="container composition">
               <div class="comp-item-1">
-                  <img src="images/vgray.png" class="comp-image" alt="Layer 1">
+                  <img src="images/vgray.png" class="comp-image" alt="Layer 1" loading="lazy">
               </div>
               <div class="comp-item-2">
-                  <img src="images/vmulticolor.png" class="comp-image" alt="Layer 2">
+                  <img src="images/vmulticolor.png" class="comp-image" alt="Layer 2" loading="lazy">
               </div>
               <div class="comp-item-3">
                   <div class="philosophy-box">
