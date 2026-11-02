@@ -139,7 +139,7 @@
 
         <div class="artifact-grid">
             <div>
-                <div class="artifact has-image"><img src="authentication/L0.png" alt="L0"></div>
+                <div class="artifact has-image"><img src="authentication/L0.png" alt="Default authentication screen with passcode first"></div>
                 <p class="artifact-caption"><strong>FCC L0</strong> — passcode as default</p>
             </div>
           <div>
@@ -158,27 +158,27 @@
 
         <div class="artifact-grid single">
           <div>
-              <div class="artifact has-image"><img src="authentication/usecases.png" alt="L0"></div>
+              <div class="artifact has-image"><img src="authentication/usecases.png" alt="Authentication state map of seven passcode use cases"></div>
               <p class="artifact-caption"><strong>Authentication State Map</strong> — Seven distinct use cases emerged, covering everything from forgotten passcodes to account lockouts</p>
           </div>
         </div>
 
         <div class="artifact-grid">
           <div>
-              <div class="artifact has-image"><img src="authentication/pusherror.png" alt="L0"></div>
-            <p class="artifact-caption"><strong>Push Notification Errors</strong> — [caption]</p>
+              <div class="artifact has-image"><img src="authentication/pusherror.png" alt="Push notification error states"></div>
+            <p class="artifact-caption"><strong>Push Notification Errors</strong> — denied consent and timeout each get their own state, so an agent always has a next step</p>
           </div>
           <div>
-              <div class="artifact has-image"><img src="authentication/incorrectpass.png" alt="incorrect passcode"></div>
-            <p class="artifact-caption"><strong>Failed Passcode Attempts</strong> — [caption]</p>
+              <div class="artifact has-image"><img src="authentication/incorrectpass.png" alt="Failed passcode attempt screen"></div>
+            <p class="artifact-caption"><strong>Failed Passcode Attempts</strong> — failure is handled without exposing a live attempt counter</p>
           </div>
           <div>
-              <div class="artifact has-image"><img src="authentication/auth-passreset.png" alt="passcode reset"></div>
-            <p class="artifact-caption"><strong>Passcode Reset — IVR, Handset Authenticated</strong> — [caption]</p>
+              <div class="artifact has-image"><img src="authentication/auth-passreset.png" alt="Passcode reset flow for IVR, handset authenticated"></div>
+            <p class="artifact-caption"><strong>Passcode Reset — IVR, Handset Authenticated</strong> — the Initialize → Verify → Reset structure in practice</p>
           </div>
           <div>
-              <div class="artifact has-image"><img src="authentication/cancelled.png" alt="cancelled"></div>
-              <p class="artifact-caption"><strong>FCC Cancelled Accounts</strong> — [caption]</p>
+              <div class="artifact has-image"><img src="authentication/cancelled.png" alt="SSN verification for cancelled accounts"></div>
+              <p class="artifact-caption"><strong>FCC Cancelled Accounts</strong> — SSN verification, shown only when no other method is available</p>
           </div>
         </div>
       </div>
@@ -192,11 +192,11 @@
         <div class="artifact-grid">
             <div>
                 <div class="artifact has-image"><img src="authentication/chatotp.png" alt="otp authentication via chat"></div>
-                <p class="artifact-caption"><strong>OTP — Chat Interim Solution</strong> — [caption]</p>
+                <p class="artifact-caption"><strong>OTP — Chat Interim Solution</strong> — one-time passcode verification in chat while the single-login integration was completed</p>
             </div>
             <div>
-                <div class="artifact has-image"><img src="authentication/onlinepass.png" alt="onlinepass"></div>
-                <p class="artifact-caption"><strong>FCC Chat</strong> — [caption]</p>
+                <div class="artifact has-image"><img src="authentication/onlinepass.png" alt="FCC chat authentication with a single customer login"></div>
+                <p class="artifact-caption"><strong>FCC Chat</strong> — two authentication systems collapsed into one customer login through the Sprinklr integration</p>
             </div>
         </div>
       </div>
