@@ -44,6 +44,24 @@
   .amend-chip { border: 1px solid var(--gray); padding: 20px 14px; text-align: center; }
   .amend-chip .n { font-family: var(--syne); font-size: 0.75rem; color: var(--accent); text-transform: uppercase; display: block; margin-bottom: 6px; }
   .amend-chip .d { font-size: 0.85rem; color: #bbb; }
+  /* PONR eligibility matrix */
+  .ponr-wrap { margin: 40px 0 12px; overflow-x: auto; }
+  .ponr-matrix { width: 100%; min-width: 680px; border-collapse: collapse; font-size: 0.9rem; table-layout: fixed; }
+  .ponr-matrix thead th:not(:first-child) { width: 19.5%; }
+  .ponr-matrix caption { text-align: left; font-family: var(--syne); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); padding-bottom: 14px; }
+  .ponr-matrix th, .ponr-matrix td { border: 1px solid var(--gray); padding: 14px 12px; text-align: left; vertical-align: top; }
+  .ponr-matrix thead th { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #888; background: #131313; }
+  .ponr-matrix thead th .step { display: block; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+  .ponr-matrix tbody th { font-weight: 600; color: #eee; width: 22%; }
+  .ponr-matrix td { color: #ccc; font-weight: 300; }
+  .ponr-matrix .ok { color: #fff; background: rgba(255,255,255,0.04); }
+  .ponr-matrix .ok::before { content: "✓ "; color: var(--accent); font-weight: 600; }
+  .ponr-matrix .locked { color: #5c5c5c; }
+  .ponr-matrix .locked::before { content: "— "; }
+  .ponr-matrix .exception { color: #fff; border: 1px solid var(--accent); }
+  .ponr-matrix .exception::before { content: "! "; color: var(--accent); font-weight: 600; }
+  .ponr-legend { display: flex; flex-wrap: wrap; gap: 24px; font-size: 0.8rem; color: #888; margin: 0 0 40px; }
+  .ponr-legend b { color: var(--accent); font-weight: 600; }
   .transcript { border: 1px solid var(--gray); padding: 30px; margin: 40px 0; background: #131313; }
   .transcript .line { margin-bottom: 16px; font-size: 0.95rem; }
   .transcript .who { font-family: var(--syne); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); display: block; margin-bottom: 4px; }
@@ -182,12 +200,34 @@
           after which a given field can no longer be changed without becoming a different kind of transaction entirely.
         <p>I designed the interface so this constraint was visible and enforced, not just documented in a spec: eligible fields shown in an active state and ineligable changes in a disabled state.
           Eligibility is checked in real time against the order's actual status.</p>
-        <div class="amend-grid">
-          <div class="amend-chip"><span class="n">Phone number (CTN)</span><div class="d">amendable before activation</div></div>
-          <div class="amend-chip"><span class="n">AutoPay enrollment</span><div class="d">no PONR checkpoint</div></div>
-          <div class="amend-chip"><span class="n">Delivery address</span><div class="d">amendable before the item drops to the warehouse</div></div>
-          <div class="amend-chip"><span class="n">Add-ons &amp; promotions</span><div class="d">amendable "for any order still in a pending state"</div></div>
-          <div class="amend-chip"><span class="n">Rate plan</span><div class="d">amendable prior to backend order completion</div></div>
+        <p>Each change type has its own point of no return, so one order can be partly editable and partly locked at the same moment. This matrix is the rule set the interface enforces:</p>
+        <div class="ponr-wrap">
+          <table class="ponr-matrix">
+            <caption>What an agent can change, by order status</caption>
+            <thead>
+              <tr>
+                <th scope="col">Change type</th>
+                <th scope="col"><span class="step">1</span>Pending</th>
+                <th scope="col"><span class="step">2</span>Released to warehouse</th>
+                <th scope="col"><span class="step">3</span>Device shipped</th>
+                <th scope="col"><span class="step">4</span>Line activated</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Delivery address</th><td class="ok">Editable</td><td class="locked">Locked</td><td class="locked">Locked</td><td class="locked">Locked</td></tr>
+              <tr><th scope="row">Device</th><td class="ok">Editable</td><td class="ok">Editable</td><td class="locked">Locked</td><td class="locked">Locked</td></tr>
+              <tr><th scope="row">Phone number (CTN)</th><td class="ok">Editable</td><td class="ok">Editable</td><td class="ok">Editable</td><td class="locked">Locked</td></tr>
+              <tr><th scope="row">Rate plan</th><td class="ok">Editable</td><td class="ok">Editable</td><td class="ok">Editable</td><td class="ok">Until order completes</td></tr>
+              <tr><th scope="row">Add-ons &amp; promotions</th><td class="ok">Editable</td><td class="ok">Editable</td><td class="ok">Editable</td><td class="ok">While order is pending</td></tr>
+              <tr><th scope="row">AutoPay</th><td class="ok">Editable</td><td class="ok">Editable</td><td class="ok">Editable</td><td class="ok">Editable</td></tr>
+              <tr><th scope="row">Cancel order or line</th><td class="ok">Allowed</td><td class="ok">Allowed</td><td class="exception">Exception: port confirmed, line not live</td><td class="locked">Locked</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ponr-legend">
+          <span><b>✓</b> Editable: shown as an active edit button</span>
+          <span><b>—</b> Locked: past this change's point of no return, shown disabled</span>
+          <span><b>!</b> Exception: only cancellation is allowed; every other field stays locked</span>
         </div>
         <figure class="artifact">
             <div class="artifact-frame has-image">
