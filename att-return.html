@@ -119,6 +119,58 @@
   .impact-col { border: 1px solid var(--gray); padding: 28px; }
   .impact-col h4 { font-family: var(--syne); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888; margin-bottom: 16px; }
   .impact-col.validated h4 { color: var(--accent); }
+  /* Savings model, rendered as HTML */
+  .savings-model { border: 1px solid var(--gray); background: #131313; padding: 36px 32px; margin: 40px 0 12px; }
+  .savings-model .sm-title { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; display: block; }
+  .sm-equation { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1.15fr; align-items: stretch; gap: 12px; }
+  .sm-term { border: 1px solid var(--gray); background: #1a1a1a; border-radius: 10px; padding: 20px 14px; display: flex; flex-direction: column; justify-content: center; }
+  .sm-term .sm-val { font-size: 1.6rem; font-weight: 600; color: #fff; line-height: 1.1; margin-bottom: 8px; font-variant-numeric: tabular-nums; }
+  .sm-term .sm-label { font-size: 0.72rem; color: #999; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.4; }
+  .sm-term .sm-note { font-size: 0.78rem; color: #777; margin-top: 6px; }
+  .sm-term.result { border-color: var(--accent); background: rgba(255,62,0,0.06); }
+  .sm-term.result .sm-val { color: var(--accent); font-size: 2.1rem; }
+  .sm-op { align-self: center; font-size: 1.4rem; color: #666; font-weight: 300; }
+  .sm-foot { font-size: 0.85rem; color: #888; margin: 24px 0 0; max-width: none; }
+  @media (max-width: 767px) {
+    .sm-equation { grid-template-columns: 1fr; }
+    .sm-op { justify-self: center; }
+    .savings-model { padding: 24px 18px; }
+  }
+  /* Visual summaries that replace long paragraphs */
+  .fact-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 32px 0 40px; }
+  .fact { border: 1px solid var(--gray); border-radius: 10px; background: #141414; padding: 20px 16px; }
+  .fact .fact-num { display: block; font-size: 2rem; font-weight: 600; color: var(--accent); line-height: 1; margin-bottom: 10px; font-variant-numeric: tabular-nums; }
+  .fact .fact-label { font-size: 0.72rem; color: #999; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.4; }
+  .cs-table-wrap { overflow-x: auto; margin: 32px 0 12px; }
+  .cs-table { width: 100%; min-width: 640px; border-collapse: collapse; table-layout: fixed; font-size: 0.92rem; }
+  .cs-table th, .cs-table td { border: 1px solid var(--gray); padding: 14px 14px; text-align: left; vertical-align: top; }
+  .cs-table thead th { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #888; background: #131313; }
+  .cs-table tbody th { color: #fff; font-weight: 600; }
+  .cs-table td { color: #bbb; font-weight: 300; }
+  .cs-table td.resp { color: #fff; }
+  .cs-table td.resp::before { content: "→ "; color: var(--accent); }
+  .model-split { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: stretch; margin: 32px 0 12px; }
+  .model-col { border: 1px solid var(--gray); border-radius: 10px; padding: 24px; background: #141414; display: flex; flex-direction: column; gap: 10px; }
+  .model-col h4 { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: #888; margin-bottom: 4px; }
+  .model-col.after h4 { color: var(--accent); }
+  .model-item { border: 1px solid var(--gray); border-radius: 6px; padding: 10px 12px; font-size: 0.9rem; color: #bbb; }
+  .model-item.primary { border-color: var(--accent); color: #fff; }
+  .model-item small { display: block; color: #777; font-size: 0.78rem; margin-top: 4px; }
+  .model-arrow { align-self: center; color: var(--accent); font-size: 1.6rem; }
+  .token-map { display: grid; grid-template-columns: 200px auto minmax(0, 320px); justify-content: start; gap: 16px 20px; align-items: center; margin: 28px 0 36px; }
+  .token-set { display: flex; flex-wrap: wrap; gap: 8px; }
+  .token-set code.tok { font-size: 0.85rem; padding: 6px 10px; color: #888; border: 1px solid var(--gray); }
+  .token-label { border: 1px solid var(--accent); border-radius: 6px; padding: 10px 14px; color: #fff; font-size: 0.95rem; }
+  .token-arrow { color: var(--accent); font-size: 1.2rem; }
+  .scope-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 8px; }
+  .scope-chip { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; border: 1px solid var(--gray); padding: 8px 14px; color: #bbb; }
+  .scope-chip.first { border-color: var(--accent); color: var(--accent); }
+  .team-chip small { display: block; text-transform: none; letter-spacing: 0; color: #777; font-size: 0.72rem; margin-top: 2px; }
+  @media (max-width: 767px) {
+    .fact-strip { grid-template-columns: 1fr 1fr; }
+    .model-split, .token-map { grid-template-columns: 1fr; }
+    .model-arrow, .token-arrow { justify-self: center; transform: rotate(90deg); }
+  }
   .team-row { display: flex; flex-wrap: wrap; gap: 16px; margin: 30px 0; }
   .team-chip { font-family: var(--syne); font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--gray); padding: 10px 18px; letter-spacing: 0.02em; }
   .team-chip.me { border-color: var(--accent); color: var(--accent); }
@@ -187,7 +239,13 @@
       <div class="container">
         <h2 class="section-title">The Problem</h2>
         <p class="lede">Frontline experts had no single, return-type aware view of a wireless return. The interface that existed answered a different question than the one customers were asking.</p>
-        <p>An expert helping with a returned phone had to leave the Equipment tab, hunt across Order and Returns views, and sometimes swivel to other systems entirely. Every return type carried different rules and completion definitions, but the interface treated them identically — same generic fields regardless of relevance, untranslated backend values like <code class="tok">cash-carry</code> and <code class="tok">DF/INBOUND</code> left for experts to interpret mid-call. This case study focuses on Device Protection and Warranty, the highest-friction returns.</p>
+        <div class="fact-strip">
+          <div class="fact"><span class="fact-num">6</span><span class="fact-label">Return programs, each with its own rules</span></div>
+          <div class="fact"><span class="fact-num">7</span><span class="fact-label">Backend systems behind one answer</span></div>
+          <div class="fact"><span class="fact-num">4</span><span class="fact-label">Places an expert might search for one return</span></div>
+          <div class="fact"><span class="fact-num">2</span><span class="fact-label">Platforms: call-center desktop, in-store tablet</span></div>
+        </div>
+        <p>Every return type looked identical in the interface, with raw backend values like <code class="tok">cash-carry</code> and <code class="tok">DF/INBOUND</code> left to interpret mid-call. This case study focuses on Device Protection and Warranty, the highest-friction returns.</p>
         <figure class="artifact">
           <div class="artifact-frame has-diagram">
             <div class="step-diagram" role="img" aria-label="The swivel before redesign: Equipment tab, Order view, Returns view, and other systems, none aware of the others.">
@@ -220,7 +278,7 @@
         </figure>
 
         <h3 class="block-title">The question underneath the problem</h3>
-        <p>Every symptom traced back to one missing answer: does the customer still owe AT&T a device, or not? I reframed the redesign around three questions the interface needed to answer, in order, before showing anything else:</p>
+        <p>Every symptom traced back to one missing answer. I reframed the redesign around three questions, answered in order:</p>
         <div class="q3-grid">
           <div class="q3-card"><span class="q-num">01</span><p>Does the customer still owe a device?</p></div>
           <div class="q3-card"><span class="q-num">02</span><p>What evidence explains the current status?</p></div>
@@ -233,10 +291,16 @@
       <div class="container">
         <h2 class="section-title">My Role &amp; Approach</h2>
         <p class="lede">I owned the return experience for Device Protection and Warranty end to end, with day-to-day autonomy and light design-lead oversight.</p>
-        <ul class="cs-list">
-          <li><strong>Refused to design from assumptions.</strong> An in-store handoff and a mailed exchange look identical to a customer but carry different obligations — I wasn't willing to guess.</li>
-          <li><strong>Initiated the research myself.</strong> I reached out to the research team directly and walked them through the design alongside my PM and business partner, who were already aligned, then scoped the study with researcher Angie DeFord.</li>
-        </ul>
+        <p>An in-store handoff and a mailed exchange look identical to a customer but carry different obligations, so I wasn't willing to guess. I brought in the research team myself and scoped the study with researcher Angie DeFord.</p>
+        <div class="team-row">
+          <div class="team-chip me">UX — Me<small>Owner; initiated the research</small></div>
+          <div class="team-chip">Research<small>Angie DeFord</small></div>
+          <div class="team-chip">Content Design<small>Laura Landgren</small></div>
+          <div class="team-chip">Product &amp; Business</div>
+          <div class="team-chip">Retail</div>
+          <div class="team-chip">Customer Connect Platform</div>
+          <div class="team-chip">OrderGraph Backend</div>
+        </div>
       </div>
     </section>
 
@@ -244,20 +308,29 @@
       <div class="container">
         <h2 class="section-title">Research I Initiated</h2>
         <p class="lede">Device Protection &amp; Warranty Order Research — with UX Researcher Angie DeFord</p>
-        <p>A focus-group study pressure-testing the proposed Order and Returns tabs across three scenarios — an initial claim, a first revision, and a second revision — with nine frontline experts across Mobility Loyalty, Sales &amp; Service, CX Labs, and the Centralized Support Desk.</p>
-        <h3 class="block-title">What we heard</h3>
-        <ul class="cs-list">
-          <li>Experts identified an open insurance claim quickly once labels like "Insurance" and "Device Protection" were visible.</li>
-          <li>Past the first revision, experts could tell something changed but not <em>why</em> — several fell back to reading call notes, the exact swivel the redesign was meant to remove.</li>
-          <li>The dense return screen was called "overwhelming" by more than one participant — density without hierarchy, not information itself, was the problem.</li>
-          <li>Some fields had no clear owner in the expert's mental model: nobody could explain "Refund Amount," and "Claim ID" was recognized as an Asurion-side identifier irrelevant to their workflow.</li>
-          <li>Other details were genuinely load-bearing — RMA number was named directly as one of the most useful fields, especially for lost-equipment cases.</li>
-        </ul>
+        <div class="fact-strip">
+          <div class="fact"><span class="fact-num">9</span><span class="fact-label">Frontline experts</span></div>
+          <div class="fact"><span class="fact-num">4</span><span class="fact-label">Teams: Mobility Loyalty, Sales &amp; Service, CX Labs, Support Desk</span></div>
+          <div class="fact"><span class="fact-num">3</span><span class="fact-label">Scenarios: initial claim, first and second revision</span></div>
+          <div class="fact"><span class="fact-num">2</span><span class="fact-label">Proposed tabs tested: Order and Returns</span></div>
+        </div>
+        <h3 class="block-title">What we heard, and what changed</h3>
+        <div class="cs-table-wrap">
+          <table class="cs-table">
+            <thead><tr><th scope="col" style="width:24%">Signal</th><th scope="col" style="width:42%">What experts did</th><th scope="col" style="width:34%">Design response</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Clear labels</th><td>Spotted an open insurance claim quickly once "Insurance" and "Device Protection" were visible</td><td class="resp">Kept program labels up front</td></tr>
+              <tr><th scope="row">Revisions</th><td>Past the first revision, could tell something changed but not why; fell back to call notes</td><td class="resp">Grouped related order revisions</td></tr>
+              <tr><th scope="row">Density</th><td>Called the return screen "overwhelming": density without hierarchy</td><td class="resp">Sectioned by scenario, not data source</td></tr>
+              <tr><th scope="row">Unowned fields</th><td>Nobody could explain "Refund Amount"; "Claim ID" was an Asurion-side identifier</td><td class="resp">Cut "Refund Amount" entirely</td></tr>
+              <tr><th scope="row">Load-bearing fields</th><td>Named RMA number one of the most useful fields, especially for lost equipment</td><td class="resp">RMA shown only on returns that have one</td></tr>
+            </tbody>
+          </table>
+        </div>
         <div class="quote-block">
           <p>"You have to section this stuff — you can't just have it as a list."</p>
           <span>Research Participant, Device Protection Study</span>
         </div>
-        <p>That line set the direction: restructure around the scenario the expert is in, not the data source, and cut fields no one could explain.</p>
         <figure class="artifact">
           <div class="artifact-frame has-image">
             <div class="artifact-images carousel">
@@ -277,18 +350,33 @@
       <div class="container">
         <h2 class="section-title">The Design Decision That Mattered Most</h2>
         <p class="lede">Organize the interface around customer responsibility, not backend structure.</p>
-        <p>The source systems modeled an in-store handoff, a shipped exchange, an RMA, and internal reverse-logistics movement as different technical objects. I collapsed that into the one question an expert needed answered: is the customer still on the hook? A store might accept a device and later ship it internally to a warehouse — the customer's obligation ended at handoff, but a naive design would keep showing tracking detail that implied otherwise. I separated <strong style="color:#fff; font-weight:400;">customer return accountability</strong> from <strong style="color:#fff; font-weight:400;">internal inventory movement</strong>, so internal logistics events could never be misread as an open customer obligation.</p>
+        <div class="model-split" role="img" aria-label="Before: four backend objects shown to the expert. After: one primary customer accountability status, with internal inventory movement as labeled secondary evidence.">
+          <div class="model-col">
+            <h4>Before: how the backend modeled it</h4>
+            <div class="model-item">In-store handoff</div>
+            <div class="model-item">Shipped exchange</div>
+            <div class="model-item">RMA</div>
+            <div class="model-item">Internal reverse logistics</div>
+          </div>
+          <span class="model-arrow" aria-hidden="true">→</span>
+          <div class="model-col after">
+            <h4>After: what the expert needs</h4>
+            <div class="model-item primary">Customer return accountability<small>Primary: is the customer still on the hook?</small></div>
+            <div class="model-item">Internal inventory movement<small>Secondary, labeled internal; never read as a customer obligation</small></div>
+          </div>
+        </div>
+        <p>A store might accept a device and ship it to a warehouse later. The customer's obligation ended at handoff, so tracking detail after that point can't imply otherwise.</p>
 
         <h3 class="block-title">The tradeoff I had to resolve</h3>
-        <p>Device Protection and Warranty is operationally complete the moment a carrier scans pickup — but a generic tracker still implied "Received" was required. Shipment events were still valuable evidence when a customer disputed a return.</p>
+        <p>Device Protection and Warranty close the moment a carrier scans pickup, but a generic tracker still implied "Received" was required.</p>
         <div class="tradeoff">
-          <div class="side"><span class="who">Simplify</span><p>Remove the secondary shipment timeline entirely for Device Protection and Warranty — it doesn't reflect how those journeys actually close out, and it risks confusing experts with a milestone that isn't required.</p></div>
-          <div class="side"><span class="who">Preserve</span><p>Keep the full shipment history visible in every case, because Drop Off and Returned events are exactly what an expert needs when a customer disputes the return.</p></div>
-          <div class="side"><span class="who">Resolution</span><p>I separated the two needs instead of picking one: a primary status communicates whether the customer's obligation is complete, using each journey's real completion logic — no "Received" milestone where it doesn't apply, no rejection state where rejection isn't part of the process. Supporting shipment evidence stays available underneath for the dispute cases that actually need it.</p></div>
+          <div class="side"><span class="who">Simplify</span><p>Remove the shipment timeline for these journeys; it shows a milestone that isn't required.</p></div>
+          <div class="side"><span class="who">Preserve</span><p>Keep full shipment history; Drop Off and Returned events are what an expert needs in a dispute.</p></div>
+          <div class="side"><span class="who">Resolution</span><p>Both. A primary status uses each journey's real completion logic, and shipment evidence stays underneath for disputes.</p></div>
         </div>
 
         <h3 class="block-title">Where I chose to hold the line</h3>
-        <p>When the team considered surfacing raw Order Type/Action values in Order History, I pushed to pause it — values like <code class="tok">Modify.change…</code> meant nothing without translation. I'd rather ship less and have every field mean something than ship more and make experts guess.</p>
+        <p>I pushed to pause raw Order Type/Action values like <code class="tok">Modify.change…</code> in Order History. I'd rather ship less and have every field mean something than ship more and make experts guess.</p>
         <figure class="artifact">
             <div class="artifact-images carousel">
                 <div class="carousel-main"><img src="returns/warranty.png" alt="single line view"></div>
@@ -306,7 +394,15 @@
       <div class="container">
         <h2 class="section-title">The Solution</h2>
         <h3 class="block-title">Translate the backend into plain language</h3>
-        <p>Fulfillment values like <code class="tok">cash-carry</code>, <code class="tok">CC</code>, <code class="tok">ship</code>, <code class="tok">DF</code> became two plain labels experts could act on. Worked with content designer Laura Landgren to get the language right.</p>
+        <p>With content designer Laura Landgren, I turned raw fulfillment values into two labels experts could act on.</p>
+        <div class="token-map" role="img" aria-label="Backend values cash-carry and CC become In-Store Return; ship and DF become Mail-In Return.">
+          <div class="token-set"><code class="tok">cash-carry</code><code class="tok">CC</code></div>
+          <span class="token-arrow" aria-hidden="true">→</span>
+          <div class="token-label">In-Store Return</div>
+          <div class="token-set"><code class="tok">ship</code><code class="tok">DF</code></div>
+          <span class="token-arrow" aria-hidden="true">→</span>
+          <div class="token-label">Mail-In Return</div>
+        </div>
         <div class="compare-grid">
           <div class="compare-col">
             <h4>In-Store Return</h4>
@@ -344,10 +440,16 @@
           </div>
           <figcaption>The shipped Warranty return view: plain-language status stepper in place of raw backend state, and a reprint-label action with a sample preview so an expert can confirm the label before it's regenerated.</figcaption>
         </figure>
-        <p>The same accountability/logistics split generalized cleanly — it was later applied to Trade In and Same Day Delivery returns without needing a second version of the underlying model.</p>
+        <p>The accountability/logistics split generalized without a second version of the model:</p>
+        <div class="scope-row">
+          <span class="scope-chip first">Device Protection</span>
+          <span class="scope-chip first">Warranty</span>
+          <span class="scope-chip">Trade In</span>
+          <span class="scope-chip">Same Day Delivery</span>
+        </div>
 
         <h3 class="block-title">Make validation part of the process, not an afterthought</h3>
-        <p>I proposed making frontline validation a formal checkpoint, not an optional step:</p>
+        <p>I proposed frontline validation as a formal checkpoint, so changes are caught while they're still cheap:</p>
         <div class="flow-steps">
           <div class="flow-step">Design</div><span class="flow-arrow">→</span>
           <div class="flow-step">Frontline Checkpoint</div><span class="flow-arrow">→</span>
@@ -355,14 +457,13 @@
           <div class="flow-step">Feasibility Review</div><span class="flow-arrow">→</span>
           <div class="flow-step">Development</div>
         </div>
-        <p>Catching changes here means they're still cheap — before engineering builds against a wrong assumption.</p>
       </div>
     </section>
 
     <section>
       <div class="container">
         <h2 class="section-title">Grounded in Existing Research, Too</h2>
-        <p>I also drew on an existing AT&T persona framework — built from 75+ interviews, 60 survey responses, and dozens of hours of observation — to see how experts operate across their broader day. It consistently surfaced a pattern I designed directly against: too many disconnected systems, with every extra swivel eroding efficiency and confidence on a live call. I didn't run that research, but cross-referencing it against my own gave me a second, independent signal that consolidation was the right problem to solve.</p>
+        <p>I cross-referenced my study with an existing AT&amp;T persona framework I didn't run, a second, independent signal that consolidation was the right problem.</p>
         <figure class="artifact">
           <div class="artifact-frame has-diagram">
             <div class="stat-summary">
@@ -380,7 +481,7 @@
     <section>
       <div class="container">
         <h2 class="section-title">Collaboration</h2>
-        <p>Shipped through sustained coordination across the Customer Connect platform team, the OrderGraph backend team, and research/content partners. Because return logic touched real consequences — refunds, non-return fees, RMA deadlines — I worked closely with business stakeholders to keep the interface honest, not just cleaner-looking.</p>
+        <p>Return logic touched refunds, non-return fees and RMA deadlines, so I worked closely with business stakeholders to keep the interface honest, not just cleaner-looking.</p>
         <figure class="artifact">
             <div class="artifact-images carousel">
                 <div class="carousel-main"><img src="returns/top.png" alt="single line view"></div>
@@ -408,7 +509,7 @@
           </div>
           <div class="impact-col">
             <h4>Modeled — Business Case</h4>
-            <p style="margin-bottom:0;">This redesign was tied to a finance-partnered handle-time and savings model spanning several million annual Device Return contacts. <!-- WS: insert the exact figures here once you've confirmed (a) they come from a verified internal source you can point to directly, not a third-party summary, and (b) you're cleared to disclose exact internal financial figures externally. Until then, keep this directional. --></p>
+            <p style="margin-bottom:0;">A projected 203-second cut per Device Return contact across 3.6M+ annual calls. The full model is below.</p>
           </div>
         </div>
         <ul class="cs-list">
@@ -418,10 +519,20 @@
         </ul>
         <p class="caveat">Two internal dollar-benefit estimates existed for the broader returns initiative this work supported ($20M and $6M annually, tied to different scoping assumptions); as of my last review, neither had been finance-vetted, so I'm not quoting either as a personal result here.</p>
         <figure class="artifact">
-            <div class="artifact-images">
-                <img src="returns/data.png" alt="cancel view">
+          <div class="savings-model" role="group" aria-label="Annual savings model: 3,613,799 annual calls times 3.38 minutes saved times $0.3806 per minute equals $4.65 million in projected annual savings.">
+            <span class="sm-title">Projected annual savings · Device Return call type</span>
+            <div class="sm-equation">
+              <div class="sm-term"><span class="sm-val">3,613,799</span><span class="sm-label">Annual calls</span></div>
+              <span class="sm-op" aria-hidden="true">×</span>
+              <div class="sm-term"><span class="sm-val">3.38 min</span><span class="sm-label">Handle time saved per call</span><span class="sm-note">≈ 203 seconds</span></div>
+              <span class="sm-op" aria-hidden="true">×</span>
+              <div class="sm-term"><span class="sm-val">$0.3806</span><span class="sm-label">Cost per minute</span><span class="sm-note">Finance-approved rate</span></div>
+              <span class="sm-op" aria-hidden="true">=</span>
+              <div class="sm-term result"><span class="sm-val">$4.65M</span><span class="sm-label">Projected annual savings</span></div>
             </div>
-          <figcaption>The finance-partnered model this redesign was tied to, spanning several million annual Device Return contacts — shown directionally pending finance sign-off on exact figures.</figcaption>
+            <p class="sm-foot">A moderate handle-time reduction applied to the full Device Return call volume. Projected from the business case, not measured after launch.</p>
+          </div>
+          <figcaption>The finance-partnered model this redesign was tied to: annual calls × minutes saved × cost per minute.</figcaption>
         </figure>
       </div>
     </section>
